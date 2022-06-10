@@ -1,0 +1,40 @@
+
+.login-logo{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.container {
+    background: rgb(255, 255, 255);
+    width: 100%;
+    height:100vh;
+    min-height:100vh;   
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+ }
+ 
+ .centered-div {
+    width: 50vh;
+    height: 70vh;
+    margin: 5px;
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+ }  
+
+ .login-form{
+    padding: 2px;
+    text-align: left;
+ }
+ .align-center{
+    align-items: center;
+    text-align: center;
+}
+
+.validation-error{
+    text-align: center;
+    color: rgb(231, 31, 31);
+    margin: 0;
+}

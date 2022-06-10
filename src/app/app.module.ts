@@ -1,30 +1,45 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AntDesignModule } from './ng-ant/ant-design.module';
+import { LoginComponent } from './login/login.component';
+import { BaseComponent } from './base/base.component';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { NgolistComponent } from './pages/ngolist/ngolist.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { BreadcrumbComponent } from './common-features/breadcrumb/breadcrumb.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    BaseComponent,
+    WelcomeComponent,
+    NgolistComponent,
+    DashboardComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AntDesignModule,
+    ReactiveFormsModule,
+    
+    
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  exports :[ ],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

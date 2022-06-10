@@ -1,0 +1,41 @@
+// @import '../../theme.less';
+
+[nz-menu] {
+    width: 240px;
+  }
+
+.top-nav-bar{
+
+    height: 50px;
+    width: 100%;
+    background-color: #12AD2B;
+    padding: 5px;
+}
+.scroll{
+    overflow: scroll;
+    height: 90%;
+    overflow-x: hidden;
+}
+
+
+.pages-menu {
+  width: calc( 210px);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 50px;
+  right: 0;
+  flex: 1;
+  // background: $gray-100;
+  background-color: rgb(255, 255, 255);
+}
+.pages {
+    width: calc(100% - 210px   );
+    height: auto;
+    position: absolute;
+    left: 210px;
+    bottom: 0;
+    top: 50px;
+    background-color: rgb(255, 255, 255);
+  }
+
