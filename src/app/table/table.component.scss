@@ -1,0 +1,127 @@
+section {
+    margin-top: 3px;
+    .buttons {
+        padding: 0 15px;
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: end;
+        align-items: center;
+        .search {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            margin-bottom: 10px;
+            nz-input-group {
+                // height: 56px;
+                // border: none;
+                // outline: none;
+                // padding: 8px;
+                // margin-left: 15px;
+            }
+        }
+        button {
+            margin-left: 10px;
+        }
+    }
+}
+.pagination-container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+thead{
+    background: #2d3e50;
+    // color: white;
+}
+.mobile {
+    display: none;
+}
+.table_container {
+    padding: 0px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    .row {
+        width: 100%;
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            li {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 15px;
+                margin-bottom: 3px;
+                strong {
+                    font-weight: 500;
+                }
+                span {
+                    width: 50%;
+                }
+            }
+        }
+        .action_button {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            button {
+                width: 35px;
+                height: 35px;
+                margin-top: 5px;
+                border-radius: 50%;
+            }
+        }
+    }
+}
+
+@media (max-width: 886px) {
+    .desktop {
+        display: none !important;
+    }
+    .mobile {
+        display: block;
+    }
+    section {
+        .buttons {
+            flex-direction: column;
+            .search {
+                flex-direction: column;
+                width: 100%;
+                nz-select {
+                    width: 100% !important;
+                }
+                nz-input-group {
+                    width: 100% !important;
+                    margin: 10px 0 0 !important;
+                }
+                nz-range-picker {
+                    width: 100% !important;
+                    margin: 10px 0 0 !important;
+                }
+            }
+            .header_buttons {
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+                margin: 10px 0 0;
+            }
+        }
+    }
+}
+@media (max-width: 576px) {
+    section {
+        .buttons {
+            padding: 0 10px;
+        }
+    }
+    .table_container {
+        padding: 0 10px;
+    }
+    .pagination-container {
+        padding: 15px 5px !important;
+    }
+}

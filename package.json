@@ -19,9 +19,13 @@
     "@angular/platform-browser": "~11.0.5",
     "@angular/platform-browser-dynamic": "~11.0.5",
     "@angular/router": "~11.0.5",
+    "moment": "^2.29.3",
     "ng-zorro-antd": "^11.4.2",
+    "ngx-pagination": "^5.1.1",
+    "ngx-spinner": "^11.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "xlsx": "^0.17.1",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

@@ -7,3 +7,135 @@
     padding-top: 5px;
     font-weight: bold;
   }
+  table {
+    width: 100%;
+    &.excel {
+      border: 1px solid #eaeaec;
+      border-collapse: collapse;
+  
+      td, th {
+        border: 1px solid #eaeaec;
+        border-collapse: collapse;
+        padding: 12px;
+      }
+    }
+    &.claims_table {
+      tbody {
+          tr {
+              td {
+                max-width: 350px;
+                cursor: default;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              }
+          }
+      }
+    }
+    &.table {
+      border: none;
+      &.pdf {
+        th {
+          font-weight: 600 !important;
+        }
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      tr:nth-child(odd) {
+        background-color: #fff;
+      }
+      thead {
+        tr {
+          background-color: #f2f2f2 !important;
+        }
+      }
+      &.roles_table {
+        tr {
+          position: relative;
+        }
+        th {
+          padding: 12px;
+          text-align: center;
+          &.role_head {
+            position: sticky;
+            left: 0;
+            z-index: 20;
+            background: inherit;
+          }
+        }
+        td {
+          padding: 12px 6px;
+          text-align: center;
+          &.role_name {
+            position: sticky;
+            left: 0;
+            z-index: 20;
+            background: inherit;
+          }
+          &.role_header {
+            font-weight: 600;
+            text-align: left;
+          }
+          i {
+            font-size: 15px;
+            &.check {
+              color: green;
+            }
+            &.close {
+              color: red;
+            }
+          }
+        }
+      }
+    }
+  }
+  th {
+    div {
+      float: right;
+      display: flex;
+      flex-direction: column;
+      // margin-top: 4px;
+      i {
+        font-size: 10.5px;
+        width: 8px;
+        height: 8px;
+        color: #dee2e6 !important;
+      }
+    }
+  }
+  td,
+  th {
+    border: none;
+    text-align: left;
+    padding: 8px;
+    p {
+      cursor: pointer;
+      user-select: none;
+      margin: 0;
+      &.file {
+        color: #0072ff;
+      }
+      &.active {
+        color: green;
+      }
+      &.inactive {
+        color: red;
+      }
+    }
+    a,
+    a:hover {
+      color: rgb(57, 57, 57);
+      text-decoration: underline;
+      text-transform: capitalize;
+      cursor: pointer !important;
+    }
+    a.file_download {
+      text-decoration: none !important;
+      color: #1890ff !important;
+    }
+    &.check {
+      text-align: center;
+    }
+  }
+  

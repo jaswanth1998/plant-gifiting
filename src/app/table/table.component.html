@@ -1,0 +1,131 @@
+
+
+<section *ngIf="showFilters"> 
+    <div class="buttons">
+        <div class="search">
+            <!-- <nz-select *ngIf="monthFilter" class="select margin" [style.width]="'180px'" nzPlaceHolder="Select Month" [(ngModel)]="selectedMonth" (ngModelChange)="monthFilterCgange($event)">
+                <ng-container *ngFor="let month of months">
+                    <nz-option [nzLabel]="month" [nzValue]="month"></nz-option>
+                </ng-container>
+            </nz-select> -->
+            <!-- <nz-select class="select margin" [style.width]="showDateFilter ? '200px' : '230px'" nzPlaceHolder="Filter" [(ngModel)]="searchBy">
+                <ng-container *ngFor="let header of headers">
+                    <nz-option *ngIf="header.filter && header.checked" [nzLabel]="header.label" [nzValue]="header.filterKey ? header.filterKey : header.key"></nz-option>
+                </ng-container>
+            </nz-select> -->
+            <!-- <nz-input-group [nzPrefix]="suffixIconSearch" [style.width]="showDateFilter ? '250px' : '300px'" style="height: 38px;">
+                <input type="text" nz-input [(ngModel)]="searchValue" (keyup.enter)="filterData()" />
+            </nz-input-group> -->
+            <!-- <ng-template #suffixIconSearch>
+                <i nz-icon nzType="search" style="font-size: 18px;"></i>
+            </ng-template> -->
+            <!-- <nz-range-picker *ngIf="showDateFilter" [(ngModel)]="date" (ngModelChange)="onDateChange($event)" style="margin-left: 15px;height: 40px;"></nz-range-picker> -->
+        </div>
+        <div class="header_buttons">
+            <!-- <button class="desktop" nz-button *ngIf="showExport" (click)="exportToExcel()">Export</button>
+            <button class="mobile" nz-button *ngIf="showExport" nzType="primary" (click)="exportToExcel()">Export</button> -->
+            <ng-container *ngFor="let button of headerButtons">
+                <button class="desktop" nz-button (click)="buttonClick(button)">{{button.label}}</button>
+            </ng-container>
+            <ng-container *ngFor="let button of headerButtons" >
+                <button class="mobile" *ngIf="button.show" nz-button nzType="primary" (click)="buttonClick(button)">{{button.label}}</button>
+            </ng-container>
+            <!-- <button nz-button><i nz-icon nzType="setting" nzTheme="fill"></i></button> -->
+            <button
+                nz-button
+                nz-dropdown
+                [nzDropdownMenu]="menu"
+            >
+                <i nz-icon nzType="setting" nzTheme="fill"></i></button
+            >
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+                <ng-container *ngFor="let header of headers">
+                <li nz-menu-item>
+                    <label nz-checkbox [(ngModel)]="header.checked">{{ header.label }}</label>
+                </li>
+                </ng-container>
+            </ul>
+            </nz-dropdown-menu>
+        </div>
+    </div>
+</section>
+<br>
+<div class="desktop" style="display: block;overflow-x: auto;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="check" *ngIf="!showCheckbox">S.No</th>
+                <th class="check" *ngIf="showCheckbox"><label nz-checkbox [ngModel]="false" (ngModelChange)="onCheckChange($event)"></label></th>
+                <ng-container *ngFor="let header of headers">
+                    <th (click)="sort(header)" *ngIf="header.checked" style="white-space: nowrap;padding-right: 20px;position: relative;">
+                        {{header.label}}
+                        <div *ngIf="header.sortable" style="position: absolute;top: 10px;right: 10px;">
+                            <i nz-icon nzType="caret-up" nzTheme="outline"></i>
+                            <i nz-icon nzType="caret-down" nzTheme="outline"></i>
+                        </div>
+                    </th>
+                </ng-container>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="filteredData?.length">
+                <tr *ngFor="let i = index;let d of filteredData | paginate: { itemsPerPage: !addPagination ? filteredData?.length : 10, currentPage: page, totalItems: filteredData?.length }">
+                    <td class="check" *ngIf="!showCheckbox">{{(+page * 10) - (10 - (i + 1))}}</td>
+                    <td class="check" *ngIf="showCheckbox"><label nz-checkbox [(ngModel)]="d.checked"></label></td>
+                    <ng-container *ngFor="let header of headers">
+                        <td *ngIf="header.checked && header.key != 'actions' && !header.html" [ngStyle]="(header.addStyles && d.styles) && d.styles">{{header.sub_key ? ((d[header.key][header.sub_key] || d[header.key][header.sub_key] == 0) ? d[header.key][header.sub_key] : '-') : ((d[header.key] || d[header.key] == 0) ? d[header.key] : '-')}}</td>
+                        <td *ngIf="header.checked && header.key != 'actions' && header.html" [ngStyle]="(header.addStyles && d.styles) && d.styles" [innerHtml]="(d[header.key] || d[header.key] == 0) ? d[header.key] : '-'" (click)="onEmitter(header.label, d)"></td>
+                        <td *ngIf="header.checked && header.key == 'actions'" style="margin-left: 10px;"  nz-dropdown [nzDropdownMenu]="menu" style="width: 100px;">
+                            <i nz-icon nzType="ellipsis" nzTheme="outline"
+                                style="font-size: 18px;margin-left: 10px;cursor: pointer;"></i>
+                        </td>
+                        <nz-dropdown-menu #menu="nzDropdownMenu">
+                            <ul nz-menu nzSelectable>
+                                <ng-container *ngFor="let control of d['staticControls']">
+                                    <li nz-menu-item *ngIf="control.show"
+                                        [nzDanger]="control.label == 'Delete'" (click)="action(control.label, d)">
+                                        {{control.label}}
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </nz-dropdown-menu>
+                    </ng-container>
+                </tr>
+            </ng-container>
+            <ng-container *ngIf="!filteredData?.length">
+                <tr><td [colSpan]="headers.length + 1" style="text-align: center;font-weight: 500;box-shadow: 1px 1px 6px rgba(0, 0, 0, .1);border-bottom: 2px solid #f0f0f0;">No Data Found</td></tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+<div class="mobile">
+    <div class="table_container">
+        <div class="card row" *ngFor="let i = index;let d of filteredData | paginate: { itemsPerPage: !addPagination ? filteredData?.length : 10, currentPage: page, totalItems: filteredData?.length }">
+            <ul>
+                <ng-container *ngFor="let header of headers">
+                    <li *ngIf="header.checked && header.key != 'actions' && !header.html"><strong>{{header.label}}:</strong> <span [ngStyle]="(header.addStyles && d.styles) && d.styles">{{d[header.key] ? d[header.key] : '-'}}</span></li>
+                    <li *ngIf="header.checked && header.key != 'actions' && header.html"><strong>{{header.label}}:</strong> <span [ngStyle]="(header.addStyles && d.styles) && d.styles" [innerHtml]="d[header.key] ? d[header.key] : '-'" (click)="onEmitter(header.label, d)"></span></li>
+                </ng-container>
+            </ul>
+            <div class="action_button">
+                <button nz-button nzType="primary" nz-dropdown [nzDropdownMenu]="menu"><i nz-icon nzType="unordered-list" nzTheme="outline"></i></button>
+                <nz-dropdown-menu #menu="nzDropdownMenu">
+                    <ul nz-menu nzSelectable style="width: 140px;">
+                        <ng-container *ngFor="let control of d['staticControls']">
+                            <li nz-menu-item *ngIf="control.show"
+                                [nzDanger]="control.label == 'Delete'" (click)="action(control.label, d)">
+                                {{control.label}}
+                            </li>
+                        </ng-container>
+                    </ul>
+                </nz-dropdown-menu>
+            </div>
+            <!-- <div>
+            </div> -->
+        </div>
+    </div>
+</div>
+<div class="pagination-container" *ngIf="addPagination && showPagination && total > 10">
+    <pagination-controls class="pagination" (pageChange)="page = $event"></pagination-controls>
+</div>
