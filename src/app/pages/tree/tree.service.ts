@@ -9,7 +9,7 @@ export class TreeService {
   constructor(private apiService : ApiService) { }
 
    public getTreeList(){
-    return this.apiService.post('trees/getTreeDetails','na');
+    return this.apiService.get('trees/getTreeDetails','na');
   }
 
   public getTreeListByID(id){
