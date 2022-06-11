@@ -13,6 +13,8 @@ export class CommonDrawerComponent implements OnInit {
   TreeForm : FormGroup;
   @Input() title = 'Add tree'
 
+  oneImageUploadFlag = false;
+  multipleImageUploadFlag = false;
   constructor(private drawerRef: NzDrawerRef<string>) {}
 
   ngOnInit(): void {
@@ -44,10 +46,16 @@ export class CommonDrawerComponent implements OnInit {
 
   onImagesSelected(event:any){
     console.log(event.target.files);
+    alert()
+  }
+
+  uploadmultipleImages(){
+
   }
 
   onOneImageSelected(event:any){
     console.log(event.target.files);
+    this.oneImageUploadFlag = true;
   }
 
 }

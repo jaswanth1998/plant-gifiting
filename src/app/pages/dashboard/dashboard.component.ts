@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NzDrawerService } from 'ng-zorro-antd/drawer';
-import { CommonDrawerComponent } from 'src/app/common/common-drawer/common-drawer.component';
 
 @Component({
   selector: 'app-dashboard',
