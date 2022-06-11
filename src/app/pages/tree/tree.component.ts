@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NzDrawerService } from 'ng-zorro-antd/drawer';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { CommonDrawerComponent } from 'src/app/common/common-drawer/common-drawer.component';
-import { ApiService } from 'src/app/services/api.service';
+import { TreeService } from './tree.service';
 
 @Component({
   selector: 'app-tree',
@@ -10,7 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class TreeComponent implements OnInit {
 
- 
+  confirmModal?: NzModalRef; 
   public HeaderButtons: any[] = [
     {
       label: 'Upload',
@@ -21,22 +22,45 @@ export class TreeComponent implements OnInit {
   ];
   public tableHeaders: any[] = [
     {
-      label: 'Policy Number',
-      key: 'policy_number',
+      label: 'image',
+      key: 'icon',
+      checked: true,
+      sortable: true,
+      sortDir: 'desc',
+      filter: true,
+    },
+    {
+      label: 'Tree name',
+      key: 'treeName',
       checked: true,
       sortable: true,
       sortDir: 'desc',
     },
     {
-      label: 'Start Date',
-      key: 'start_date',
+      label: 'Is live',
+      key: 'isLive',
       checked: true,
       sortable: true,
       sortDir: 'desc',
     },
     {
-      label: 'Tpa List',
-      key: 'tpaList',
+      label: 'Primary tag',
+      key: 'primaryTag',
+      checked: true,
+      sortable: true,
+      sortDir: 'desc',
+    },
+    {
+      label: 'Secondary tag',
+      key: 'secondaryTag',
+      checked: true,
+      sortable: true,
+      sortDir: 'desc',
+      filter: true,
+    },
+    {
+      label: 'Tree Introduction',
+      key: 'treeIntroduction',
       checked: true,
       sortable: true,
       sortDir: 'desc',
@@ -48,28 +72,59 @@ export class TreeComponent implements OnInit {
       checked: true,
       sortable: false,
       static: true,
-      controls: [{ label: 'Edit' }, { label: 'Delete' }],
+      controls: [{ label: 'View' },{ label: 'Edit' }, { label: 'Delete' }],
     },
   ];
   public tableData: any[] = [
     {
-      "policy_number": "304000411",
-      "start_date": "2021-03-31",
-      "end_date": "2022-03-30T00:00:00+05:30",
-      "tpaList": 25
-      },
-      {
-      "policy_number": "304000428",
-      "start_date": "2021-04-09",
-      "end_date": "2022-04-08T00:00:00+05:30",
-      "tpaList": 25
-      }
+      "_id": "62a41c467c2554a008ea5d16",
+      "treeName": "tree namee",
+      "primaryTag": [
+          "test"
+      ],
+      "secondaryTag": [
+          "testsecondayTag"
+      ],
+      "icon": "url",
+      "images": [
+          "urls1",
+          "urls2",
+          "urls3"
+      ],
+      "isLive": "true",
+      "treeIntroduction": "treeIntroduction",
+      "__v": 0
+  },
+  {
+      "_id": "62a41f477c2554a008ea5d19",
+      "treeName": "test",
+      "primaryTag": [
+          "test"
+      ],
+      "secondaryTag": [
+          "testsecondayTag"
+      ],
+      "icon": "url",
+      "images": [
+          "urls1",
+          "urls2",
+          "urls3"
+      ],
+      "isLive": "true",
+      "treeIntroduction": "treeIntroduction",
+      "__v": 0
+  }
   ];
   public dataTablePage = 1;
   responseData: string;
-  constructor(private drawerService: NzDrawerService,  private apiService : ApiService) { }
+  constructor(
+  private drawerService: NzDrawerService, 
+  private treeService : TreeService,
+  private modal: NzModalService) { }
 
   ngOnInit(): void {
+
+    this.getTreeTableData();
   }
 
 
@@ -90,10 +145,6 @@ export class TreeComponent implements OnInit {
 
     drawerRef.afterClose.subscribe(data => {
       console.log(data);
-
-      this.apiService.successToast();
-      this.apiService.errorToast();
-
       if (typeof data === 'string') {
         this.responseData = data;
       }
@@ -103,7 +154,23 @@ export class TreeComponent implements OnInit {
 
 
   async dataTableActions(event) {
-    console.log(event);
+    console.log(event.label);
+
+    if(event.label === 'View'){
+
+    }else if (event.label === 'Edit'){
+
+    }else if (event.label === 'Delete'){
+
+      this.confirmModal = this.modal.confirm({
+        nzTitle: 'Do you Want to delete '+event.data.treeName,
+        nzOnOk: () => {
+          console.log('delete record ')
+          this.treeService.deleteTree(event.data._id);
+        }
+          
+      })
+    }
   }
 
   dataTableHeaderActions(event) {
@@ -118,4 +185,10 @@ export class TreeComponent implements OnInit {
     //   this.showStatementTable = true;
     // }, 500);
   }
+
+
+  getTreeTableData(){
+   console.log(this.treeService.getTreeList());
+  }
+
 }
