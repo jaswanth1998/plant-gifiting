@@ -1,5 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { environment } from 'src/environments/environment';
 import { CommonService } from './common.service';
 
@@ -15,7 +16,8 @@ export class ApiService {
 
   constructor(
     private http: HttpClientModule,
-    private commonService: CommonService) { }
+    private commonService: CommonService,
+    private message: NzMessageService) { }
 
   public post(url, body, headers?){
     // this.spinner.show();
@@ -24,6 +26,14 @@ export class ApiService {
     }, 5000 );
   //  api call
 
+  }
+
+  successToast(msg = 'Operation success'){
+    this.message.create('success', msg);
+  }
+
+  errorToast(msg = 'Operation failed'){
+    this.message.create('error', msg);
   }
 
   public loginPost(url, body, headers?) {

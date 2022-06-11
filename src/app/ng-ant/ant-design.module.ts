@@ -9,6 +9,13 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+
 
 @NgModule({
   declarations: [],
@@ -20,7 +27,13 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     NzSpaceModule,
     NzMenuModule,
     NzIconModule,
-    NzBreadCrumbModule
+    NzBreadCrumbModule,
+    NzModalModule,
+    NzSliderModule,
+    NzLayoutModule,
+    NzDividerModule,
+    NzDrawerModule,
+    NzMessageModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US } ],
   exports :[
@@ -31,7 +44,13 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     NzSpaceModule,
     NzMenuModule,
     NzIconModule,
-    NzBreadCrumbModule
+    NzBreadCrumbModule,
+    NzModalModule,
+    NzSliderModule,
+    NzLayoutModule,
+    NzDividerModule,
+    NzDrawerModule,
+    NzMessageModule
   
   ]
 })

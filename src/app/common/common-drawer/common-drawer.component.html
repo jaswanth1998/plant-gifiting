@@ -1,0 +1,56 @@
+
+
+<!-- tree add form -->
+<div class="form-min-width">
+  <form  [formGroup]="TreeForm" (ngSubmit)="treeSubmit()"   >
+    <div nz-row  class="login-form" >
+        <div nz-col class="gutter-row" ><div class="inner-box">
+            <label > Tree name *</label>
+            <input nz-input placeholder="Tree name" type="text" class="form-control" formControlName="treename" name="treename"  />
+            <!-- <div  class="validation-error">  <p> {{ showEmailErrors() }}</p></div> -->
+        </div></div>
+
+        <div nz-col class="gutter-row" ><div class="inner-box">
+            <label >  Primary tag * </label>
+            <input  nz-input placeholder="Primarytag" type="text" class="form-control" formControlName="primarytag" name="primarytag"  />
+            <!-- <div  class="validation-error" > <p> {{ showPwErrors() }}</p></div> -->
+        </div></div>
+
+      <div nz-col class="gutter-row" ><div class="inner-box">
+          <label >  Secondary tag * </label>
+          <input  nz-input placeholder="secondary tag" type="text" class="form-control" formControlName="secondarytag" name="secondarytag"  />
+          <!-- <div  class="validation-error" > <p> {{ showPwErrors() }}</p></div> -->
+      </div></div>
+
+      <div nz-col class="gutter-row" ><div class="inner-box">
+        <label >  Tree image * </label>
+        <br>
+        <input  (change)="onOneImageSelected($event)" placeholder="Select image" type="file" accept="image/png, image/gif, image/jpeg" class="form-control" formControlName="treeimage" name="treeimage"  />
+        <!-- <div  class="validation-error" > <p> {{ showPwErrors() }}</p></div> -->
+    </div></div>
+
+    <div nz-col class="gutter-row" ><div class="inner-box">
+      <label >  Extra image * </label>
+      <br>
+      <input (change)="onImagesSelected($event)" placeholder="Select image" type="file" accept="image/png, image/gif, image/jpeg" class="form-control" formControlName="treeimage" name="treeimage" multiple />
+      <!-- <div  class="validation-error" > <p> {{ showPwErrors() }}</p></div> -->
+  </div></div>
+
+      <div nz-col class="gutter-row" ><div class="inner-box">
+        <label >  Tree introduction * </label>
+        <textarea  nz-input placeholder="Tree introduction"  class="form-control" formControlName="treeintro" name="treeintro"  ></textarea>
+        <!-- <div  class="validation-error" > <p> {{ showPwErrors() }}</p></div> -->
+    </div></div>
+
+
+    <br>
+
+        <div nz-col class="gutter-row align-center"  ><div class="inner-box">
+          <button nz-button nzType="primary" nzBlock  type="submit"  
+          [disabled]="!TreeForm.valid" >ADD</button>
+          </div></div>
+
+
+  </div>
+
+  <!-- tree add form -->

@@ -13,13 +13,14 @@ import { BaseComponent } from './base/base.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { NgolistComponent } from './pages/ngolist/ngolist.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { BreadcrumbComponent } from './common-features/breadcrumb/breadcrumb.component';
 import { TableComponent } from './table/table.component';
 
 import {NgxPaginationModule} from 'ngx-pagination'; 
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { CommonDrawerComponent } from './common/common-drawer/common-drawer.component';
+import { TreeComponent } from './pages/tree/tree.component';
 
 registerLocaleData(en);
 
@@ -31,8 +32,9 @@ registerLocaleData(en);
     WelcomeComponent,
     NgolistComponent,
     DashboardComponent,
-    BreadcrumbComponent,
     TableComponent,
+    CommonDrawerComponent,
+    TreeComponent,
   
   ],
   imports: [

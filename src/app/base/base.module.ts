@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule  } from '@angular/router';
 import { BaseComponent } from './base.component';
-import { NgolistComponent } from '../pages/ngolist/ngolist.component';
-import { DashboardComponent } from '../pages/dashboard/dashboard.component';
-import { RouterGuardService } from './router-guard.service';
+
+
 
 const routes: Routes = [
   {
@@ -29,6 +28,14 @@ const routes: Routes = [
         loadChildren: () =>
         import('../pages/ngolist/ngolist.module').then((m)=>{
           return m.NgolistModule
+           }),
+        // canActivate: [RouterGuardService]
+      },
+      {
+        path: 'tree',
+        loadChildren: () =>
+        import('../pages/tree/tree.module').then((m)=>{
+          return m.TreeModule
            }),
         // canActivate: [RouterGuardService]
       }

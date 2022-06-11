@@ -22,7 +22,7 @@ export class TableComponent implements OnInit {
   @Input('dir') dir: any;
   @Input('showFilters') showFilters: boolean = true;
   @Input('page') page: any = 1;
-  @Input('showExport') showExport: boolean = false;
+  @Input('showExport') showExport: boolean = true;
   @Input('showCheckbox') showCheckbox: boolean = false;
   @Input('showDateFilter') showDateFilter: boolean = false;
   @Input('dateFilterColumn') dateFilterColumn: any = 'createdOn';

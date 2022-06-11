@@ -1,0 +1,31 @@
+<div class="breadcrumb">
+    <nz-breadcrumb>
+        <nz-breadcrumb-item>
+          <i nz-icon nzType="home"></i>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+          <a>
+            <i nz-icon nzType="layout"></i>
+            <span>Tree</span>
+          </a>
+        </nz-breadcrumb-item>
+      </nz-breadcrumb>
+</div>
+
+<hr>
+
+<h1>{{responseData}}</h1>
+
+<app-table
+        
+        [headerButtons]="HeaderButtons"
+        [headers]="tableHeaders"
+        [tableData]="tableData"
+        [defaultColumn]="'customer_name'"
+        [dir]="'asc'"
+        [page]="dataTablePage"
+        (actions)="dataTableActions($event)"
+        (headerActions)="dataTableHeaderActions($event)"
+></app-table>
+
+

@@ -1,63 +1,61 @@
-
+<!-- 
 <div class="top-nav-bar">
 
     <a class="navbar-brand" href="#">
-        <!-- <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png" width="120" height="40" > -->
     </a>
 
 
 
-</div>
+</div> -->
+
+<nz-layout>
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null" class="fullScreen">
+    <div class="logo" > <strong> 🎁-🌳 </strong> </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-submenu nzTitle="Home" nzIcon="gift">
+        <ul>
+          <li nz-menu-item><a routerLink="/lanch/dashboard"> Dashboard</a></li>
+          <li nz-menu-item><a routerLink="/lanch/ngolist"> NGO list </a></li>
+          <li nz-menu-item><a routerLink="/lanch/tree"> Tree </a></li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Team" nzIcon="team">
+        <ul>
+          <li nz-menu-item>Team 1</li>
+          <li nz-menu-item>Team 2</li>
+        </ul>
+      </li>
+      <li nz-menu-item>
+        <i nz-icon nzType="file"></i>
+        <span>File</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <i
+        class="trigger"
+        nz-icon
+        [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="isCollapsed = !isCollapsed"
+      ></i>
+    </nz-header>
+    <nz-content>
+      <!-- <nz-breadcrumb>
+        <nz-breadcrumb-item>User</nz-breadcrumb-item>
+        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+      </nz-breadcrumb> -->
+      <div class="inner-content">
+        
+        <router-outlet></router-outlet>
+
+      </div>
+    </nz-content>
+    <nz-footer>Plant gifting made in india with ❤</nz-footer>
+  </nz-layout>
+</nz-layout>
 
 
-<div class="scroll pages-menu " >
-    <ul nz-menu nzMode="inline" >
-        <li nz-submenu nzTitle="Gift Planting " nzIcon="gift" nzOpen>
-          <ul>
-            <li nz-menu-group nzTitle="Operations">
-              <ul>
-                <li nz-menu-item nzSelected> <a routerLink="/lanch/dashboard"  > Dashboard</a> </li>
-                <li nz-menu-item><a routerLink="/lanch/ngolist"  > ngo list </a>  </li>
-              </ul>
-            </li>
-            <!-- <li nz-menu-group nzTitle="Item 2">
-              <ul>
-                <li nz-menu-item>Option 3</li>
-                <li nz-menu-item>Option 4</li>
-              </ul>
-            </li> -->
-          </ul>
-        </li>
-        <li nz-submenu nzTitle="Navigation Two" nzIcon="appstore">
-          <ul>
-            <li nz-menu-item >  sampe</li>
-            <li nz-menu-item>Option 6</li>
-            <!-- <li nz-submenu nzTitle="Submenu">
-              <ul>
-                <li nz-menu-item>Option 7</li>
-                <li nz-menu-item>Option 8</li>
-                <li nz-submenu nzTitle="Submenu">
-                  <ul>
-                    <li nz-menu-item>Option 9</li>
-                    <li nz-menu-item>Option 10</li>
-                  </ul>
-                </li>
-              </ul>
-            </li> -->
-          </ul>
-        </li>
-        <li nz-submenu nzTitle="Navigation Three" nzIcon="setting">
-          <ul>
-            <li nz-menu-item>Option 11</li>
-            <li nz-menu-item>Option 12</li>
-            <li nz-menu-item>Option 13</li>
-          </ul>
-        </li>
-      </ul>
-    
-    
-</div>
-
-<div class="pages" >
-  <router-outlet></router-outlet>
-</div>
+<!-- <div class="pages" >
+  
+</div> -->
