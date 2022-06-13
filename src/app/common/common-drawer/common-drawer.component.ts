@@ -14,12 +14,14 @@ export class CommonDrawerComponent implements OnInit {
   @Input() category = '';
 
   TreeForm : FormGroup;
+  NGOForm : FormGroup
+
 
   isLive = false;
 
   oneImageUploadFlag = false;
   multipleImageUploadFlag = false;
-  form: string;
+
   constructor(private drawerRef: NzDrawerRef<string>) {}
 
   ngOnInit(): void {
@@ -27,9 +29,6 @@ export class CommonDrawerComponent implements OnInit {
     console.log(this.value, this.category ,this.button );
 
     if(this.category === 'tree'){
-
-     this.form = 'tree';
-     
 
       this.TreeForm = new FormGroup({
         treeName : new FormControl(this.value.treeName, [
@@ -61,7 +60,43 @@ export class CommonDrawerComponent implements OnInit {
       else{
         this.isLive = false;
       }
+    }
 
+    if(this.category === 'NGO'){
+
+      this.NGOForm = new FormGroup({
+        ngoName : new FormControl(this.value.ngoName, [
+          Validators.required,
+        ]),
+        description : new FormControl(this.value.description, [
+          Validators.required,
+        ]),
+        address : new FormControl(this.value.address, [
+          Validators.required,
+        ]),
+        spocName : new FormControl(this.value.spocName, [
+          Validators.required,
+        ]),
+        email: new FormControl(this.value.email, [
+          Validators.required,
+          Validators.email
+        ]),
+        phoneNumber : new FormControl(this.value.phoneNumber, [
+          Validators.required, 
+          Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")
+
+        ])
+      });
+
+      if( this.value.isLive === "false"){
+        this.isLive = false;
+      }
+      else if( this.value.isLive === "true"){
+        this.isLive = true;
+      }
+      else{
+        this.isLive = false;
+      }
     }
   }
 
@@ -69,24 +104,39 @@ export class CommonDrawerComponent implements OnInit {
     this.drawerRef.close({});
   }
   treeSubmit(){
-   
-    let formData = this.TreeForm.value;
-    formData['isLive'] = this.isLive;
-    formData['icon'] = 'https://floweraura-blog-img.s3.ap-south-1.amazonaws.com/Plants+Dec-19-Dec-20/foliage-plants-for-your-home-garden-cover-image.jpg';
-    formData['images'] = ["https://www.ugaoo.com/knowledge-center/wp-content/uploads/2018/01/shutterstock_329291891-850x525.jpg",
-                          "https://cdn.britannica.com/42/91642-050-332E5C66/Keukenhof-Gardens-Lisse-Netherlands.jpg",
-                          "https://cdn.britannica.com/22/154422-050-94661645/Italian-Garden-Butchart-Gardens-Victoria-Vancouver-Island.jpg"
-                        ];
-    if(this.value){
-      formData['_id'] = this.value['_id'];
-    }                    
-    
-    console.log(formData);
-  
-    this.drawerRef.close(formData);
-
+    if(this.NGOForm.valid){
+      let formData = this.TreeForm.value;
+      formData['isLive'] = this.isLive;
+      formData['icon'] = 'https://floweraura-blog-img.s3.ap-south-1.amazonaws.com/Plants+Dec-19-Dec-20/foliage-plants-for-your-home-garden-cover-image.jpg';
+      formData['images'] = ["https://www.ugaoo.com/knowledge-center/wp-content/uploads/2018/01/shutterstock_329291891-850x525.jpg",
+                            "https://cdn.britannica.com/42/91642-050-332E5C66/Keukenhof-Gardens-Lisse-Netherlands.jpg",
+                            "https://cdn.britannica.com/22/154422-050-94661645/Italian-Garden-Butchart-Gardens-Victoria-Vancouver-Island.jpg"
+                          ];
+      if(this.value){
+        formData['_id'] = this.value['_id'];
+      }                    
+      console.log(formData);
+      this.drawerRef.close(formData);
+    }else{
+      alert("invalid data not able to proceed");
+    } 
   }
 
+  NGOSubmit(){
+    if(this.NGOForm.valid){
+      console.log(this.NGOForm.value);
+      let formData = this.NGOForm.value;
+      if(this.value){
+        formData['_id'] = this.value['_id'];
+      }
+      this.drawerRef.close(formData);
+    }else{
+      alert("invalid data not able to proceed");
+
+    }
+
+
+  }
   onImagesSelected(event:any){
     console.log(event.target.files);
     // alert()
@@ -99,6 +149,46 @@ export class CommonDrawerComponent implements OnInit {
   onOneImageSelected(event:any){
     console.log(event.target.files);
     this.oneImageUploadFlag = true;
+  }
+
+  showreqError(form,field){
+    const formfield = form.get(field);
+    if (formfield.touched && !formfield.valid) {
+      if (formfield.errors.required) {
+        return 'Field is required';
+      }
+      if (formfield.errors.email) {
+        return 'Invalid Emai';
+      }
+
+    }
+
+  }
+
+  showreqandemilError(form,field){
+    const formfield = form.get(field);
+    if (formfield.touched && !formfield.valid) {
+      if (formfield.errors.required) {
+        return 'Field is required';
+      }
+      if (formfield.errors.email) {
+        return 'Invalid Emai';
+      }
+      // regex 
+    }
+  }
+
+  showreqerrandPhoneerror(form,field){
+    const formfield = form.get(field);
+    if (formfield.touched && !formfield.valid) {
+      if (formfield.errors.required) {
+        return 'Field is required';
+      }
+      if (formfield.error.pattern) {
+        return 'Invalid '+field + 'field';
+      }
+      // regex 
+    }
   }
 
 }

@@ -1,18 +1,31 @@
-
 <div class="breadcrumb">
-    <nz-breadcrumb>
-        <nz-breadcrumb-item>
-          <i nz-icon nzType="home"></i>
-        </nz-breadcrumb-item>
-        <nz-breadcrumb-item>
-          <a>
-            <i nz-icon nzType="gift"></i>
-            <span><a routerLink="/lanch/dashboard"  > Dashboard</a></span>
-          </a>
-        </nz-breadcrumb-item>
-        <nz-breadcrumb-item>NGO list view </nz-breadcrumb-item>
-      </nz-breadcrumb>
+  <nz-breadcrumb>
+      <nz-breadcrumb-item>
+        <i nz-icon nzType="home"></i>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>
+        <a>
+          <i nz-icon nzType="layout"></i>
+          <span>NGOs</span>
+        </a>
+      </nz-breadcrumb-item>
+    </nz-breadcrumb>
 </div>
+
 <hr>
-<br>
+
+<div  *ngIf="dataTable" >
+
+
+<app-table  
+      [headerButtons]="HeaderButtons"
+      [headers]="tableHeaders"
+      [tableData]="tableData"
+      [defaultColumn]="'customer_name'"
+      [dir]="'asc'"
+      [page]="dataTablePage"
+      (actions)="dataTableActions($event)"
+      (headerActions)="dataTableHeaderActions($event)"
+></app-table>
+</div>
 

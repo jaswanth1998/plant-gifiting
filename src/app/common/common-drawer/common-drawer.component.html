@@ -1,12 +1,10 @@
 
-
 <!-- tree add form -->
-<div class="form-min-width">
+<div class="form-min-width"   *ngIf="category === 'tree' ">
   <div class="center">
     Publish status
     <nz-switch class="" [(ngModel)]="isLive"></nz-switch>
   </div>
-
 
   <form  [formGroup]="TreeForm" (ngSubmit)="treeSubmit()"   >
 
@@ -15,47 +13,106 @@
         <div nz-col class="gutter-row" ><div class="inner-box">
             <label > Tree name *</label>
             <input nz-input placeholder="Tree name" type="text" class="form-control" formControlName="treeName" name="treename"  />
-            <!-- <div  class="validation-error">  <p> {{ showEmailErrors() }}</p></div> -->
+            <div  class="validation-error">  <p> {{  showreqError(TreeForm,'treeName') }}</p></div>
         </div></div>
 
         <div nz-col class="gutter-row" ><div class="inner-box">
             <label >  Primary tag * </label>
             <input  nz-input placeholder="Primarytag" type="text" class="form-control" formControlName="primaryTag" name="primarytag"  />
-            <!-- <div  class="validation-error" > <p> {{ showPwErrors() }}</p></div> -->
-        </div></div>
+            <div  class="validation-error" > <p> {{  showreqError(TreeForm,'primaryTag') }}</p></div>
+         </div></div>
 
-      <div nz-col class="gutter-row" ><div class="inner-box">
+        <div nz-col class="gutter-row" ><div class="inner-box">
           <label >  Secondary tag * </label>
           <input  nz-input placeholder="secondary tag" type="text" class="form-control" formControlName="secondaryTag" name="secondarytag"  />
-          <!-- <div  class="validation-error" > <p> {{ showPwErrors() }}</p></div> -->
-      </div></div>
+          <div  class="validation-error" > <p> {{  showreqError(TreeForm,'secondaryTag') }}</p></div>
+         </div></div>
 
-      <div nz-col class="gutter-row" ><div class="inner-box">
-        <label >  Tree image * </label>
-        <br>
-        <input  (change)="onOneImageSelected($event)" placeholder="Select image" type="file" accept="image/png, image/gif, image/jpeg" class="form-control" formControlName="icon" name="treeimage"  />
-        <!-- <div  class="validation-error" > <p> {{ showPwErrors() }}</p></div> -->
-    </div></div>
-
-    <div nz-col class="gutter-row" ><div class="inner-box">
-      <label >  Extra image * </label>
-      <br>
-      <input (change)="onImagesSelected($event)" placeholder="Select image" type="file" accept="image/png, image/gif, image/jpeg" class="form-control" formControlName="images" name="treeimages" multiple />
-      <!-- <div  class="validation-error" > <p> {{ showPwErrors() }}</p></div> -->
-  </div></div>
-
-      <div nz-col class="gutter-row" ><div class="inner-box">
-        <label >  Tree introduction * </label>
-        <textarea  nz-input placeholder="Tree introduction"  class="form-control" formControlName="treeIntroduction" name="treeintro"  ></textarea>
-        <!-- <div  class="validation-error" > <p> {{ showPwErrors() }}</p></div> -->
-    </div></div>
-    <br>
-        <div nz-col class="gutter-row align-center"  ><div class="inner-box">
-          <button nz-button nzType="primary" nzBlock  type="submit"  
-          [disabled]="!TreeForm.valid" >{{button}}</button>
+         <div nz-col class="gutter-row" ><div class="inner-box">
+          <label >  Tree image * </label>
+          <br>
+          <input  (change)="onOneImageSelected($event)" placeholder="Select image" type="file" accept="image/png, image/gif, image/jpeg" class="form-control" formControlName="icon" name="treeimage"  />
+          <!-- <div  class="validation-error" > <p> {{ showreqError(TreeForm,'icon') }}</p></div> -->
           </div></div>
 
+          <div nz-col class="gutter-row" ><div class="inner-box">
+            <label >  Extra image * </label>
+            <br>
+            <input (change)="onImagesSelected($event)" placeholder="Select image" type="file" accept="image/png, image/gif, image/jpeg" class="form-control" formControlName="images" name="treeimages" multiple />
+            <!-- <div  class="validation-error" > <p> {{ showreqError(TreeForm,'treeimage') }}</p></div> -->
+        </div></div>
 
-  </div>
-
+          <div nz-col class="gutter-row" ><div class="inner-box">
+            <label >  Tree introduction * </label>
+            <textarea  nz-input placeholder="Tree introduction"  class="form-control" formControlName="treeIntroduction" name="treeintro"  ></textarea>
+            <div  class="validation-error" > <p> {{ showreqError(TreeForm,'treeIntroduction') }}</p></div>
+        </div></div>
+        <br>
+            <div nz-col class="gutter-row align-center"  ><div class="inner-box">
+              <button nz-button nzType="primary" nzBlock  type="submit"  
+              [disabled]="!TreeForm.valid" >{{button}}</button>
+              </div></div>
+      </div>
+  </form>
+</div>
   <!-- tree add form -->
+
+
+
+
+  <!-- ngo add form -->
+  
+  <div class="form-min-width"   *ngIf="category === 'NGO' ">
+  
+
+    <form  [formGroup]="NGOForm" (ngSubmit)="NGOSubmit()"   >
+  
+  
+      <div nz-row  class="login-form" >
+          <div nz-col class="gutter-row" ><div class="inner-box">
+              <label > NGO name *</label>
+              <input nz-input placeholder="NGO name" type="text" class="form-control" formControlName="ngoName" name="ngoName"  />
+              <div  class="validation-error">  <p> {{ showreqError(NGOForm,'ngoName') }}</p></div>
+          </div></div>
+  
+          <div nz-col class="gutter-row" ><div class="inner-box">
+              <label >  Point of contact * </label>
+              <input  nz-input placeholder="SPOC Name" type="text" class="form-control" formControlName="spocName" name="spocName"  />
+              <div  class="validation-error" > <p> {{ showreqError(NGOForm,'spocName') }}</p></div>
+          </div></div>
+  
+          <div nz-col class="gutter-row" ><div class="inner-box">
+              <label >  Phone Number * </label>
+              <input  nz-input placeholder="PhoneNumber" type="text" class="form-control" formControlName="phoneNumber" name="phoneNumber"  />
+              <div  class="validation-error" > <p> {{ showreqerrandPhoneerror(NGOForm,'phoneNumber') }}</p></div>
+          </div></div>
+  
+          <div nz-col class="gutter-row" ><div class="inner-box">
+            <label >  Email * </label>
+            <input  nz-input placeholder="Email" type="text" class="form-control" formControlName="email" name="email"  />
+            <div  class="validation-error" > <p> {{ showreqandemilError(NGOForm,'email') }}</p></div>
+          </div></div>
+
+          <div nz-col class="gutter-row" ><div class="inner-box">
+            <label >  NGO Description * </label>
+            <textarea  nz-input placeholder="NGO Description"  class="form-control" formControlName="description" name="description"  ></textarea>
+            <div  class="validation-error" > <p> {{ showreqError(NGOForm,'description') }}</p></div>
+          </div></div>
+ 
+            <div nz-col class="gutter-row" ><div class="inner-box">
+              <label >  NGO Address * </label>
+              <textarea  nz-input placeholder="NGO Address"  class="form-control" formControlName="address" name="address"  ></textarea>
+              <div  class="validation-error" > <p> {{ showreqError(NGOForm,'address') }}</p></div>
+           </div></div>
+
+      <br>
+          <div nz-col class="gutter-row align-center"  ><div class="inner-box">
+            <button nz-button nzType="primary" nzBlock  type="submit"  
+            [disabled]="!NGOForm?.valid" >{{button}}</button>
+            </div></div>
+  
+    </div>
+ </form> 
+ </div>
+    <!-- ngo add form -->
+
