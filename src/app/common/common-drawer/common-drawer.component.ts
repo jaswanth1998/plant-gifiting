@@ -104,7 +104,7 @@ export class CommonDrawerComponent implements OnInit {
     this.drawerRef.close({});
   }
   treeSubmit(){
-    if(this.NGOForm.valid){
+    if(this.TreeForm.valid){
       let formData = this.TreeForm.value;
       formData['isLive'] = this.isLive;
       formData['icon'] = 'https://floweraura-blog-img.s3.ap-south-1.amazonaws.com/Plants+Dec-19-Dec-20/foliage-plants-for-your-home-garden-cover-image.jpg';
