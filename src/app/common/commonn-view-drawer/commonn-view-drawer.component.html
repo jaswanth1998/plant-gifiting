@@ -1,0 +1,24 @@
+
+
+<!-- tree add form -->
+<div class="form-min-width">
+    
+    <div #TreeView *ngIf="value">
+
+        <img [src]="value.icon" class="view-icon" alt="">
+
+        <h1> {{value.treeName}}  </h1> 
+        <h3> Primary tag : <strong> {{value.primaryTag}} </strong></h3>
+        <h3> Scondary tag : <strong>{{ value.secondaryTag }}</strong></h3>
+        <span *ngIf="value.isLive"> Status : Active ✅ </span> <span *ngIf="!value.isLive"> Status : Inactive 🚫 </span>
+        <p> Tree Introduction : <strong> {{value.treeIntroduction}} </strong> </p>
+        <div *ngFor="let img of value.images ">
+
+            <img [src]="img" alt="" class="additinalimgs">
+
+        </div>
+    </div>
+
+</div>
+  
+    <!-- tree add form -->

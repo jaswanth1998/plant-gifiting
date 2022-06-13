@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NzDrawerService } from 'ng-zorro-antd/drawer';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { timeout } from 'rxjs/operators';
 import { CommonDrawerComponent } from 'src/app/common/common-drawer/common-drawer.component';
+import { CommonnViewDrawerComponent } from 'src/app/common/commonn-view-drawer/commonn-view-drawer.component';
+import { CommonService } from 'src/app/services/common.service';
 import { TreeService } from './tree.service';
 
 @Component({
@@ -13,22 +16,14 @@ export class TreeComponent implements OnInit {
 
   confirmModal?: NzModalRef; 
   public HeaderButtons: any[] = [
-    {
-      label: 'Upload',
-    },
+    // {
+    //   label: 'Upload',
+    // },
     {
       label: 'Add',
     },
   ];
   public tableHeaders: any[] = [
-    {
-      label: 'image',
-      key: 'icon',
-      checked: true,
-      sortable: true,
-      sortDir: 'desc',
-      filter: true,
-    },
     {
       label: 'Tree name',
       key: 'treeName',
@@ -75,90 +70,122 @@ export class TreeComponent implements OnInit {
       controls: [{ label: 'View' },{ label: 'Edit' }, { label: 'Delete' }],
     },
   ];
-  public tableData: any[] = [
-    {
-      "_id": "62a41c467c2554a008ea5d16",
-      "treeName": "tree namee",
-      "primaryTag": [
-          "test"
-      ],
-      "secondaryTag": [
-          "testsecondayTag"
-      ],
-      "icon": "url",
-      "images": [
-          "urls1",
-          "urls2",
-          "urls3"
-      ],
-      "isLive": "true",
-      "treeIntroduction": "treeIntroduction",
-      "__v": 0
-  },
-  {
-      "_id": "62a41f477c2554a008ea5d19",
-      "treeName": "test",
-      "primaryTag": [
-          "test"
-      ],
-      "secondaryTag": [
-          "testsecondayTag"
-      ],
-      "icon": "url",
-      "images": [
-          "urls1",
-          "urls2",
-          "urls3"
-      ],
-      "isLive": "true",
-      "treeIntroduction": "treeIntroduction",
-      "__v": 0
-  }
-  ];
+  public tableData = undefined;
   public dataTablePage = 1;
-  responseData: string;
+  dataTable = false;
+  isUpdate = false;
   constructor(
   private drawerService: NzDrawerService, 
   private treeService : TreeService,
-  private modal: NzModalService) { }
+  private modal: NzModalService,
+  private commonService: CommonService,) { }
 
   ngOnInit(): void {
-
     this.getTreeTableData();
   }
 
 
-  openDrawer(){
-    const drawerRef = this.drawerService.create<CommonDrawerComponent, { value: string }, string>({
-      nzTitle: 'Add Tree',
+  openNeworEditTreeDrawer(data = {}, title = "Add Tree",  button = 'Add tree'){
+    const editdrawerRef = this.drawerService.create<CommonDrawerComponent, { value: Object, button : string, category : string }, Object>({
+      nzTitle: title,
       // nzFooter: 'Footer',
       nzWidth : '550px',
       nzContent: CommonDrawerComponent,
       nzContentParams: {
-        value: 'Create new plant'
+          value : data,
+          category : 'tree',
+          button : button
       }
     });
 
-    drawerRef.afterOpen.subscribe(() => {
+
+    editdrawerRef.afterOpen.subscribe(() => {
       console.log('Drawer(Component) open');
     });
 
-    drawerRef.afterClose.subscribe(data => {
+    editdrawerRef.afterClose.subscribe((data :any) => {
+      console.log(data);
+      if (typeof data === 'object') {
+        // this.responseData = data;
+        console.log(data);
+
+        if(this.isUpdate){
+          // this.commonService.showProcessingToastOn();
+          this.treeService.updateTree(data._id,data).subscribe((response: any) =>{
+            console.log(response);
+            // this.commonService.showProcessingToastOff();
+            this.commonService.successToast("Tree updated successfully");
+            setTimeout(() => {
+              this.getTreeTableData()
+            }, 1000);
+            ;
+            },
+            (error)=>{
+              console.log(error)
+              this.commonService.showProcessingToastOff();
+              this.commonService.errorToast(error.message)
+            })
+        }
+        else{
+          // this.commonService.showProcessingToastOn();
+          this.treeService.addNewTree(data).subscribe((response: any) =>{
+            console.log(response);
+            // this.commonService.showProcessingToastOff();
+            this.commonService.successToast("Tree added successfully");
+            setTimeout(() => {
+              this.getTreeTableData();
+            }, 1000);
+            
+            },
+            (error)=>{
+              console.log(error)
+              // this.commonService.showProcessingToastOff();
+              this.commonService.errorToast(error.message)
+            })
+          }
+     }
+    });
+  }
+
+  openViewTreeDrawer(treeObj){
+    const viewdrawerRef = this.drawerService.create<CommonnViewDrawerComponent, { value: Object, title : string,  category : string  }, string>({
+      nzTitle: 'Tree view',
+      // nzFooter: 'Footer',
+      nzWidth : '550px',
+      nzContent: CommonnViewDrawerComponent,
+      nzContentParams: {
+        value: treeObj,
+        title : 'tree',
+        category : 'tree-view'
+      }
+    });
+
+
+    viewdrawerRef.afterOpen.subscribe(() => {
+      console.log('Drawer(Component) open');
+    });
+
+    viewdrawerRef.afterClose.subscribe(data => {
       console.log(data);
       if (typeof data === 'string') {
-        this.responseData = data;
+        // this.responseData = data;
       }
     });
   }
 
 
-
   async dataTableActions(event) {
     console.log(event.label);
+    console.log(event);
 
-    if(event.label === 'View'){
+    if(event.label === 'View'){ 
+
+      this.openViewTreeDrawer(event.data)
 
     }else if (event.label === 'Edit'){
+
+      this.isUpdate = true;
+      this.openNeworEditTreeDrawer(event.data, 'Update Tree', 'Update Tree');
 
     }else if (event.label === 'Delete'){
 
@@ -166,16 +193,38 @@ export class TreeComponent implements OnInit {
         nzTitle: 'Do you Want to delete '+event.data.treeName,
         nzOnOk: () => {
           console.log('delete record ')
-          this.treeService.deleteTree(event.data._id);
+          this.deleteTree(event.data._id);
+          
         }
           
-      })
+      });
     }
   }
 
+
+ async deleteTree(id){
+  this.commonService.showProcessingToastOn();
+    (await this.treeService.deleteTree(id)).subscribe((response: any) =>{
+      console.log(response);
+      this.commonService.showProcessingToastOff();
+      this.commonService.successToast("Tree deleted successfully");
+      setTimeout(() => {
+        this.getTreeTableData()
+      }, 1000);
+      },
+      (error)=>{
+        console.log(error)
+        this.commonService.showProcessingToastOff();
+        this.commonService.errorToast(error.message)
+      });
+  }
+
+  
   dataTableHeaderActions(event) {
-    console.log(event,'pop oon ');
-    this.openDrawer();
+    console.log(event);
+    if(event.label === 'Add'){
+    this.openNeworEditTreeDrawer();
+    }
   }
 
   reloadAccStatementTable(page?) {
@@ -187,8 +236,32 @@ export class TreeComponent implements OnInit {
   }
 
 
-  getTreeTableData(){
-   console.log(this.treeService.getTreeList());
-  }
+ async getTreeTableData(){
+    this.commonService.showProcessingToastOn();
+    (await this.treeService.getTreeList()).subscribe((response: any) =>{
+    console.log(response)
+    this.tableData = response.data;
+    
+    this.commonService.showProcessingToastOff();
+    this.refreshDatatable();
+    },
+    (error)=>{
+      console.log(error)
+      // this.commonService.showProcessingToastOff();
+      this.commonService.errorToast(error.message)
+    })
 
 }
+
+refreshDatatable(){
+  this.dataTable = false;
+  setTimeout(() => {
+   this.dataTable = true;
+  }, 100);
+ }
+}
+
+function subscribe(arg0: (response: any) => void) {
+  throw new Error('Function not implemented.');
+}
+

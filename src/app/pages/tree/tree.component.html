@@ -14,9 +14,10 @@
 
 <hr>
 
-<h1>{{responseData}}</h1>
+<div  *ngIf="dataTable" >
 
-<app-table   
+
+<app-table  
         [headerButtons]="HeaderButtons"
         [headers]="tableHeaders"
         [tableData]="tableData"
@@ -26,5 +27,5 @@
         (actions)="dataTableActions($event)"
         (headerActions)="dataTableHeaderActions($event)"
 ></app-table>
-
+</div>
 

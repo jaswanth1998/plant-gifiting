@@ -4,26 +4,29 @@ import { ApiService } from 'src/app/services/api.service';
 @Injectable({
   providedIn: 'root'
 })
-export class TreeService {
+export class TreeService extends ApiService {
 
-  constructor(private apiService : ApiService) { }
 
-   public getTreeList(){
-    return this.apiService.get('trees/getTreeDetails','na');
+  async getTreeList(){
+    return this.get('trees/getTreeDetails', {});
   }
 
   public getTreeListByID(id){
-    return this.apiService.get('getTreesById/'+id, {});
+    return this.get('getTreesById/'+id, {});
   }
 
-  public addNewTree(){
+  public addNewTree(body){
+    return this.post('trees/addTreeDetils', body);
+  }
 
+  public updateTree(id,body){
+    return this.post('trees/updateTreeData/'+id, body);
   }
 
 
   public deleteTree(objId){
-    console.log(objId)
-    this.apiService.post('bla bal','bla bla');
+    console.log(objId);
+    return this.get('trees/deleteTreesByID/'+objId,{});
 
   }
 

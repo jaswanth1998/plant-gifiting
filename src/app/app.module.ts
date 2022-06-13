@@ -21,6 +21,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { CommonDrawerComponent } from './common/common-drawer/common-drawer.component';
 import { TreeComponent } from './pages/tree/tree.component';
+import { CommonnViewDrawerComponent } from './common/commonn-view-drawer/commonn-view-drawer.component';
 
 registerLocaleData(en);
 
@@ -35,6 +36,7 @@ registerLocaleData(en);
     TableComponent,
     CommonDrawerComponent,
     TreeComponent,
+    CommonnViewDrawerComponent,
   
   ],
   imports: [
