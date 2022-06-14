@@ -85,8 +85,8 @@ export class TreeComponent implements OnInit {
   }
 
 
-  openNeworEditTreeDrawer(data = {}, title = "Add Tree",  button = 'Add tree'){
-    const editdrawerRef = this.drawerService.create<CommonDrawerComponent, { value: Object, button : string, category : string }, Object>({
+  openNeworEditTreeDrawer(data = {}, title = "Add Tree",  button = 'Add tree', isNew = true){
+    const editdrawerRef = this.drawerService.create<CommonDrawerComponent, { value: Object, button : string, category : string, isNew : boolean }, Object>({
       nzTitle: title,
       // nzFooter: 'Footer',
       nzWidth : '550px',
@@ -94,7 +94,8 @@ export class TreeComponent implements OnInit {
       nzContentParams: {
           value : data,
           category : 'tree',
-          button : button
+          button : button,
+          isNew : isNew
       }
     });
 
@@ -185,7 +186,7 @@ export class TreeComponent implements OnInit {
     }else if (event.label === 'Edit'){
 
       this.isUpdate = true;
-      this.openNeworEditTreeDrawer(event.data, 'Update Tree', 'Update Tree');
+      this.openNeworEditTreeDrawer(event.data, 'Update Tree', 'Update Tree', false);
 
     }else if (event.label === 'Delete'){
 
@@ -223,6 +224,7 @@ export class TreeComponent implements OnInit {
   dataTableHeaderActions(event) {
     console.log(event);
     if(event.label === 'Add'){
+      this.isUpdate = false;
     this.openNeworEditTreeDrawer();
     }
   }

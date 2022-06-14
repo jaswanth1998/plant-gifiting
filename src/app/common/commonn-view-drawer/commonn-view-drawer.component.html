@@ -42,3 +42,20 @@
 </div>
   
  <!-- ngo view -->
+
+  <!-- event view -->
+ <div class="form-min-width" *ngIf="category === 'event-view' ">
+    
+    <div #eventView *ngIf="value">
+
+        <h1> <strong>  {{value.eventName}} </strong> </h1> 
+        <span *ngIf="value.isLive.toLowerCase() === 'yes'"> Status : <strong> Active ✅ </strong> </span> <span *ngIf="value.isLive.toLowerCase() === 'no'" > Status : <strong> Inactive 🚫</strong>  </span>
+
+        <img [src]="value.eventImage" class="view-icon" alt="">
+
+
+    </div>
+
+</div>
+
+ <!-- event view -->

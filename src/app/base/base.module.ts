@@ -38,8 +38,26 @@ const routes: Routes = [
           return m.TreeModule
            }),
         // canActivate: [RouterGuardService]
+      },
+      {
+        path: 'events',
+        loadChildren: () =>
+        import('../pages/events/events-routing.module').then((m)=>{
+          return m.EventsRoutingModule
+           }),
+        // canActivate: [RouterGuardService]
+      },
+      {
+        path: 'ecard',
+        loadChildren: () =>
+        import('../pages/ecard/Ecard-routing.module').then((m)=>{
+          return m.EcardRoutingModule
+           }),
+        // canActivate: [RouterGuardService]
       }
+      
     ]
+    
   }
 ];
 

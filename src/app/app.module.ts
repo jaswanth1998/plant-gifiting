@@ -22,6 +22,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { CommonDrawerComponent } from './common/common-drawer/common-drawer.component';
 import { TreeComponent } from './pages/tree/tree.component';
 import { CommonnViewDrawerComponent } from './common/commonn-view-drawer/commonn-view-drawer.component';
+import { EventsComponent } from './pages/events/events.component';
+import { EcardComponent } from './pages/ecard/ecard.component';
 
 registerLocaleData(en);
 
@@ -37,6 +39,8 @@ registerLocaleData(en);
     CommonDrawerComponent,
     TreeComponent,
     CommonnViewDrawerComponent,
+    EventsComponent,
+    EcardComponent,
   
   ],
   imports: [

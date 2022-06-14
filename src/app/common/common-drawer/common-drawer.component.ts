@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzDrawerRef } from 'ng-zorro-antd/drawer';
-
+import { EventService } from '../../pages/events/event-service.service';
 @Component({
   selector: 'app-common-drawer',
   templateUrl: './common-drawer.component.html',
@@ -12,19 +12,24 @@ export class CommonDrawerComponent implements OnInit {
   @Input() value : any ;
   @Input() button = ''
   @Input() category = '';
+  @Input() isNew = true;
 
   TreeForm : FormGroup;
   NGOForm : FormGroup
+  EvetForm : FormGroup;
+  EcardForm : FormGroup;
 
 
   isLive = false;
 
   oneImageUploadFlag = false;
   multipleImageUploadFlag = false;
+  EventsList: any;
+  selectedEvent = "";
+  constructor(private drawerRef: NzDrawerRef<string>,
+              private EventService : EventService) {}
 
-  constructor(private drawerRef: NzDrawerRef<string>) {}
-
-  ngOnInit(): void {
+ async ngOnInit(): Promise<void> {
 
     console.log(this.value, this.category ,this.button );
 
@@ -37,9 +42,7 @@ export class CommonDrawerComponent implements OnInit {
         primaryTag : new FormControl(this.value.primaryTag, [
           Validators.required,
         ]),
-        secondaryTag : new FormControl(this.value.primaryTag, [
-          Validators.required,
-        ]),
+        secondaryTag : new FormControl(this.value.primaryTag, []),
         icon : new FormControl(null, [
           // Validators.required,
         ]),
@@ -98,6 +101,90 @@ export class CommonDrawerComponent implements OnInit {
         this.isLive = false;
       }
     }
+
+
+    if(this.category === 'event'){
+
+      this.EvetForm = new FormGroup({
+        eventName : new FormControl(this.value.eventName, [
+          Validators.required,
+        ]),
+        eventImage : new FormControl(null, [
+        //  
+        ]),
+      });
+
+      if(this.isNew === true){
+        this.isLive = false;
+      }
+      else{
+        if( this.value.isLive.toLowerCase() === "no"){
+          this.isLive = false;
+        }
+        else if( this.value.isLive.toLowerCase() === "yes"){
+          this.isLive = true;
+        }
+        else{
+          this.isLive = false;
+        }
+      }                 
+    }
+
+    if(this.category === 'ecard'){
+
+
+
+      if(this.isNew === true){
+        this.isLive = false;
+        this.EcardForm = new FormGroup({
+          ecardName : new FormControl(this.value.ecardName, [
+            Validators.required,
+          ]),
+          html : new FormControl(this.value.html, [
+            Validators.required,
+          ])
+        });
+      }
+      else{
+
+        this.EcardForm = new FormGroup({
+          ecardName : new FormControl(this.value.ecardName, [
+            Validators.required,
+          ]),
+          html : new FormControl(this.value.html, [
+            Validators.required,
+          ]),
+          openFor : new FormControl(this.value.openFor, [
+            Validators.required,
+          ])
+
+        });
+        
+        if( this.value.isLive.toLowerCase() === "no"){
+          this.isLive = false;
+        }
+        else if( this.value.isLive.toLowerCase() === "yes"){
+          this.isLive = true;
+        }
+        else{
+          this.isLive = false;
+        }
+        
+        (await this.EventService.getEventList()).subscribe((response: any) =>{
+          console.log(response)
+          this.EventsList = response.data;
+
+          },
+          (error)=>{
+            console.log(error)
+            // this.commonService.showProcessingToastOff();
+          });
+      
+      
+
+      }                 
+    }
+
   }
 
   close(): void {
@@ -137,6 +224,47 @@ export class CommonDrawerComponent implements OnInit {
 
 
   }
+
+  eventSubmit(){
+
+    if(this.EvetForm.valid){
+      console.log(this.EvetForm.value);
+      let formData = this.EvetForm.value;
+
+      if(this.isLive === true) {  formData['isLive'] = 'yes' }
+      if(this.isLive === false) {  formData['isLive'] = 'no' }
+      // need to update 
+      formData['eventImage'] = 'https://img.freepik.com/free-vector/beautiful-flying-colorful-balloons-happy-birthday-watercolor-background_1035-20642.jpg?w=2000';
+
+      if(this.value){
+        formData['_id'] = this.value['_id'];
+      }
+      this.drawerRef.close(formData);
+    }else{
+      alert("invalid data not able to proceed");
+
+    }
+  }
+
+  ecardSubmit(){
+
+    if(this.EcardForm.valid){
+      console.log(this.EcardForm.value);
+      let formData = this.EcardForm.value;
+      
+      if(this.isLive === true) {  formData['isLive'] = 'yes' }
+      if(this.isLive === false) {  formData['isLive'] = 'no' }
+
+      if(this.value){
+        formData['_id'] = this.value['_id'];
+      }
+      this.drawerRef.close(formData);
+    }else{
+      alert("invalid data not able to proceed");
+
+    }
+  }
+
   onImagesSelected(event:any){
     console.log(event.target.files);
     // alert()

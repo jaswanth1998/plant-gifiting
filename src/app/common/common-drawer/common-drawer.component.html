@@ -1,8 +1,8 @@
 
 <!-- tree add form -->
 <div class="form-min-width"   *ngIf="category === 'tree' ">
-  <div class="center">
-    Publish status
+  <div class="center" *ngIf="isNew === false ">
+    Is Live
     <nz-switch class="" [(ngModel)]="isLive"></nz-switch>
   </div>
 
@@ -25,7 +25,6 @@
         <div nz-col class="gutter-row" ><div class="inner-box">
           <label >  Secondary tag * </label>
           <input  nz-input placeholder="secondary tag" type="text" class="form-control" formControlName="secondaryTag" name="secondarytag"  />
-          <div  class="validation-error" > <p> {{  showreqError(TreeForm,'secondaryTag') }}</p></div>
          </div></div>
 
          <div nz-col class="gutter-row" ><div class="inner-box">
@@ -115,4 +114,83 @@
  </form> 
  </div>
     <!-- ngo add form -->
+
+<!-- event add form -->
+<div class="form-min-width"   *ngIf="category === 'event' ">
+
+  <div class="center" *ngIf="isNew === false " >
+    Is Live
+    <nz-switch class="" [(ngModel)]="isLive"></nz-switch>
+  </div>
+
+  <form  [formGroup]="EvetForm" (ngSubmit)="eventSubmit()"   >
+
+
+    <div nz-row  class="login-form" >
+        <div nz-col class="gutter-row" ><div class="inner-box">
+            <label > Event name *</label>
+            <input nz-input placeholder="Event name" type="text" class="form-control" formControlName="eventName" name="eventName"  />
+            <div  class="validation-error">  <p> {{  showreqError(EvetForm,'eventName') }}</p></div>
+        </div></div>
+
+         <div nz-col class="gutter-row" ><div class="inner-box">
+          <label >  Event image * </label>
+          <br>
+          <input  (change)="onOneImageSelected($event)" placeholder="Select image" type="file" accept="image/png, image/gif, image/jpeg" class="form-control" formControlName="eventImage" name="eventImage"  />
+          <!-- <div  class="validation-error" > <p> {{ showreqError(EvetForm,'eventImage') }}</p></div> -->
+          </div></div>
+
+           <br>
+            <div nz-col class="gutter-row align-center"  ><div class="inner-box">
+              <button nz-button nzType="primary" nzBlock  type="submit"  
+              [disabled]="!EvetForm.valid" >{{button}}</button>
+              </div></div>
+      </div>
+  </form>
+</div>
+  <!-- event add form -->
+
+<!-- ecard add form -->
+<div class="form-min-width"   *ngIf="category === 'ecard' ">
+
+  <div class="center" *ngIf="isNew === false " >
+    Is Live
+    <nz-switch class="" [(ngModel)]="isLive"></nz-switch>
+  </div>
+
+  <form  [formGroup]="EcardForm" (ngSubmit)="ecardSubmit()"   >
+
+
+    <div nz-row  class="login-form" >
+        <div nz-col class="gutter-row" ><div class="inner-box">
+            <label > Ecard name *</label>
+            <input nz-input placeholder="Ecard name" type="text" class="form-control" formControlName="ecardName" name="ecardName"  />
+            <div  class="validation-error">  <p> {{  showreqError(EcardForm,'ecardName') }}</p></div>
+        </div></div>
+
+      <div nz-col class="gutter-row" ><div class="inner-box">
+        <label > Ecard HTML link *</label>
+        <textarea  nz-input placeholder="Ecard HTML link" type="text" class="form-control" formControlName="html" name="html"  ></textarea>
+        <div  class="validation-error">  <p> {{  showreqError(EcardForm,'html') }}</p></div>
+    </div></div>
+
+    <div nz-col class="gutter-row"   *ngIf="isNew === false " ><div class="inner-box">
+      <label > Open for  * &nbsp;&nbsp;&nbsp;</label>
+    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a event"  formControlName="openFor" name="openFor" >
+      <nz-option *ngFor="let event of EventsList " [nzLabel]="event.eventName" [nzValue]="event.eventName"></nz-option>
+    </nz-select>
+    <div  class="validation-error">  <p> {{  showreqError(EcardForm,'openFor') }}</p></div>
+    </div></div>
+
+  
+            <br>
+            <div nz-col class="gutter-row align-center"  ><div class="inner-box">
+              <button nz-button nzType="primary" nzBlock  type="submit"  
+              [disabled]="!EcardForm.valid" >{{button}}</button>
+              </div></div>
+      </div>
+  </form>
+</div>
+  <!-- ecard add form -->
+  
 

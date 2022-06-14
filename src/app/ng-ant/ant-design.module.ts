@@ -16,6 +16,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     NzDividerModule,
     NzDrawerModule,
     NzMessageModule,
-    NzSwitchModule
+    NzSwitchModule,
+    NzSelectModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US } ],
   exports :[
@@ -53,7 +55,8 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     NzDividerModule,
     NzDrawerModule,
     NzMessageModule,
-    NzSwitchModule
+    NzSwitchModule,
+    NzSelectModule
   
   ]
 })

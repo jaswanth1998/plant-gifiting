@@ -4,15 +4,14 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { CommonDrawerComponent } from 'src/app/common/common-drawer/common-drawer.component';
 import { CommonnViewDrawerComponent } from 'src/app/common/commonn-view-drawer/commonn-view-drawer.component';
 import { CommonService } from 'src/app/services/common.service';
-import { NgoServicesService } from './ngo-services.service';
-
+import { EcardService } from './ecard.service';
 
 @Component({
-  selector: 'app-ngolist',
-  templateUrl: './ngolist.component.html',
-  styleUrls: ['./ngolist.component.scss']
+  selector: 'app-ecard',
+  templateUrl: './ecard.component.html',
+  styleUrls: ['./ecard.component.scss']
 })
-export class NgolistComponent implements OnInit {
+export class EcardComponent implements OnInit {
 
   confirmModal?: NzModalRef; 
   public HeaderButtons: any[] = [
@@ -25,51 +24,35 @@ export class NgolistComponent implements OnInit {
   ];
   public tableHeaders: any[] = [
     {
-      label: 'NGO name',
-      key: 'ngoName',
+      label: 'Ecard name',
+      key: 'ecardName',
       checked: true,
       sortable: true,
       sortDir: 'desc',
     },
     {
-      label: 'phone Number',
-      key: 'phoneNumber',
+      label: 'is Live',
+      key: 'isLive',
       checked: true,
       sortable: true,
       sortDir: 'desc',
     },
     {
-      label: 'spocName',
-      key: 'spocName',
+      label: 'Open For',
+      key: 'openFor',
       checked: true,
       sortable: true,
       sortDir: 'desc',
       filter: true,
     },
-    {
-      label: 'Description',
-      key: 'description',
-      checked: true,
-      sortable: true,
-      sortDir: 'desc',
-    },
-    {
-      label: 'Address',
-      key: 'address',
-      checked: true,
-      sortable: true,
-      sortDir: 'desc',
-      filter: true,
-    },
-    {
-      label: 'Email',
-      key: 'email',
-      checked: true,
-      sortable: true,
-      sortDir: 'desc',
-      filter: true,
-    },
-    
+    // {
+    //   label: 'HTML',
+    //   key: 'html',
+    //   checked: true,
+    //   sortable: true,
+    //   sortDir: 'desc',
+    //   filter: true,
+    // },
     {
       label: 'Action',
       key: 'actions',
@@ -85,16 +68,17 @@ export class NgolistComponent implements OnInit {
   isUpdate = false;
   constructor(
   private drawerService: NzDrawerService, 
-  private NGOService : NgoServicesService,
+  private EcardService : EcardService,
   private modal: NzModalService,
   private commonService: CommonService,) { }
 
   ngOnInit(): void {
-    this.getNGOTableData();
+    this.getEcardTableData();
   }
 
 
-  openNeworEditNGODrawer(data = {}, title = "Add NGO",  button = 'Add NGO', isNew = true){
+  openNeworEditEcardDrawer(data = {}, title = "Add Ecard",  button = 'Add Ecard', isNew = true){
+    console.log(title,button,isNew)
     const editdrawerRef = this.drawerService.create<CommonDrawerComponent, { value: Object, button : string, category : string, isNew : boolean }, Object>({
       nzTitle: title,
       // nzFooter: 'Footer',
@@ -102,7 +86,7 @@ export class NgolistComponent implements OnInit {
       nzContent: CommonDrawerComponent,
       nzContentParams: {
           value : data,
-          category : 'NGO',
+          category : 'ecard',
           button : button,
           isNew : isNew
       }
@@ -121,12 +105,12 @@ export class NgolistComponent implements OnInit {
 
         if(this.isUpdate){
           // this.commonService.showProcessingToastOn();
-          this.NGOService.updateNGO(data._id,data).subscribe((response: any) =>{
+          this.EcardService.updateEcard(data._id,data).subscribe((response: any) =>{
             console.log(response);
             // this.commonService.showProcessingToastOff();
-            this.commonService.successToast("NGO updated successfully");
+            this.commonService.successToast("Ecard updated successfully");
             setTimeout(() => {
-              this.getNGOTableData()
+              this.getEcardTableData()
             }, 1000);
             ;
             },
@@ -138,12 +122,13 @@ export class NgolistComponent implements OnInit {
         }
         else{
           // this.commonService.showProcessingToastOn();
-          this.NGOService.addNewNGO(data).subscribe((response: any) =>{
+          data.openFor = "NA";
+          this.EcardService.addNewEcard(data).subscribe((response: any) =>{
             console.log(response);
             // this.commonService.showProcessingToastOff();
-            this.commonService.successToast("NGO added successfully");
+            this.commonService.successToast("Ecard added successfully");
             setTimeout(() => {
-              this.getNGOTableData();
+              this.getEcardTableData();
             }, 1000);
             
             },
@@ -157,16 +142,16 @@ export class NgolistComponent implements OnInit {
     });
   }
 
-  openViewNGODrawer(NGOObj){
+  openViewEcardDrawer(EcardObj){
     const viewdrawerRef = this.drawerService.create<CommonnViewDrawerComponent, { value: Object, title : string,  category : string  }, string>({
-      nzTitle: 'NGO view',
+      nzTitle: 'Ecard view',
       // nzFooter: 'Footer',
       nzWidth : '550px',
       nzContent: CommonnViewDrawerComponent,
       nzContentParams: {
-        value: NGOObj,
-        title : 'NGO',
-        category : 'ngo-view'
+        value: EcardObj,
+        title : 'Ecard',
+        category : 'ecard-view'
       }
     });
 
@@ -184,26 +169,26 @@ export class NgolistComponent implements OnInit {
   }
 
 
-  async dataTableActions(event) {
-    console.log(event.label);
-    console.log(event);
+  async dataTableActions(Ecard) {
+    console.log(Ecard.label);
+    console.log(Ecard);
 
-    if(event.label === 'View'){ 
+    if(Ecard.label === 'View'){ 
 
-      this.openViewNGODrawer(event.data)
+      this.openViewEcardDrawer(Ecard.data)
 
-    }else if (event.label === 'Edit'){
+    }else if (Ecard.label === 'Edit'){
 
       this.isUpdate = true;
-      this.openNeworEditNGODrawer(event.data, 'Update NGO', 'Update NGO', false);
+      this.openNeworEditEcardDrawer(Ecard.data, 'Update Ecard', 'Update Ecard', false);
 
-    }else if (event.label === 'Delete'){
+    }else if (Ecard.label === 'Delete'){
 
       this.confirmModal = this.modal.confirm({
-        nzTitle: 'Do you Want to delete '+event.data.ngoName,
+        nzTitle: 'Do you Want to delete '+Ecard.data.ecardName,
         nzOnOk: () => {
           console.log('delete record ')
-          this.deleteNGO(event.data._id);
+          this.deleteEcard(Ecard.data._id);
           
         }
           
@@ -212,14 +197,14 @@ export class NgolistComponent implements OnInit {
   }
 
 
- async deleteNGO(id){
+ async deleteEcard(id){
   this.commonService.showProcessingToastOn();
-    (await this.NGOService.deleteNGO(id)).subscribe((response: any) =>{
+    (await this.EcardService.deleteEcard(id)).subscribe((response: any) =>{
       console.log(response);
       this.commonService.showProcessingToastOff();
-      this.commonService.successToast("NGO deleted successfully");
+      this.commonService.successToast("Ecard deleted successfully");
       setTimeout(() => {
-        this.getNGOTableData()
+        this.getEcardTableData()
       }, 1000);
       },
       (error)=>{
@@ -230,11 +215,11 @@ export class NgolistComponent implements OnInit {
   }
 
   
-  dataTableHeaderActions(event) {
-    console.log(event);
-    if(event.label === 'Add'){
+  dataTableHeaderActions(Ecard) {
+    console.log(Ecard);
+    if(Ecard.label === 'Add'){
       this.isUpdate = false;
-    this.openNeworEditNGODrawer();
+    this.openNeworEditEcardDrawer();
     }
   }
 
@@ -247,9 +232,9 @@ export class NgolistComponent implements OnInit {
   }
 
 
- async getNGOTableData(){
+ async getEcardTableData(){
     this.commonService.showProcessingToastOn();
-    (await this.NGOService.getNGOList()).subscribe((response: any) =>{
+    (await this.EcardService.getEcardList()).subscribe((response: any) =>{
     console.log(response)
     this.tableData = response.data;
     
