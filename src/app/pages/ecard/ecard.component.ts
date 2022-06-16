@@ -39,7 +39,7 @@ export class EcardComponent implements OnInit {
     },
     {
       label: 'Open For',
-      key: 'openFor',
+      key: 'openFordata',
       checked: true,
       sortable: true,
       sortDir: 'desc',
@@ -63,6 +63,7 @@ export class EcardComponent implements OnInit {
     },
   ];
   public tableData = undefined;
+  public eventsData = undefined;
   public dataTablePage = 1;
   dataTable = false;
   isUpdate = false;
@@ -122,7 +123,7 @@ export class EcardComponent implements OnInit {
         }
         else{
           // this.commonService.showProcessingToastOn();
-          data.openFor = "NA";
+          
           this.EcardService.addNewEcard(data).subscribe((response: any) =>{
             console.log(response);
             // this.commonService.showProcessingToastOff();
@@ -234,12 +235,59 @@ export class EcardComponent implements OnInit {
 
  async getEcardTableData(){
     this.commonService.showProcessingToastOn();
-    (await this.EcardService.getEcardList()).subscribe((response: any) =>{
+    (await this.EcardService.getEcardList()).subscribe(async (response: any) =>{
     console.log(response)
     this.tableData = response.data;
     
-    this.commonService.showProcessingToastOff();
-    this.refreshDatatable();
+    (await this.EcardService.getEventsList()).subscribe((response: any) =>{
+      console.log(response);
+      this.eventsData = response.data;
+
+      
+    this.tableData.forEach( (ecard)=>{
+      console.log(ecard);
+      if(ecard.openFor[0] !== "NA"){
+        let listOfNames = "";
+
+
+
+        ecard.openFor.forEach(evntid => {
+          const index = this.eventsData.findIndex(evnt => evnt._id === evntid);
+          console.log(index)
+          if(index >= 0){
+            if(listOfNames === ""){
+              if( this.eventsData[index]['isLive'].toLowerCase() === 'yes'){
+                listOfNames = this.eventsData[index]['eventName'];
+              }else{
+                listOfNames = 'inactive :('+ this.eventsData[index]['eventName']+') ';
+              }
+            }
+            
+          else{
+            if( this.eventsData[index]['isLive'].toLowerCase() === 'yes'){
+              listOfNames = listOfNames + ', ' + this.eventsData[index]['eventName'];
+            }else{
+              listOfNames = listOfNames + ', inactive :(' + this.eventsData[index]['eventName'] +') ';
+            }
+          }
+           
+  
+          console.log(listOfNames);
+          ecard.openFordata = listOfNames;
+          }
+          
+        });
+      }else{
+        ecard.openFordata = "Not available"
+      }
+     
+      this.commonService.showProcessingToastOff();
+      this.refreshDatatable();
+    });
+  
+    });
+
+    
     },
     (error)=>{
       console.log(error)

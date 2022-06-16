@@ -176,9 +176,11 @@
 
     <div nz-col class="gutter-row"   *ngIf="isNew === false " ><div class="inner-box">
       <label > Open for  * &nbsp;&nbsp;&nbsp;</label>
-    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a event"  formControlName="openFor" name="openFor" >
-      <nz-option *ngFor="let event of EventsList " [nzLabel]="event.eventName" [nzValue]="event.eventName"></nz-option>
+
+    <nz-select nzMode="multiple" [nzMaxTagCount]="3" nzShowSearch nzAllowClear nzPlaceHolder="Select events"  formControlName="openFor" name="openFor" >
+      <nz-option *ngFor="let event of EventsList " [nzLabel]="event.eventName" [nzValue]="event._id"></nz-option>
     </nz-select>
+
     <div  class="validation-error">  <p> {{  showreqError(EcardForm,'openFor') }}</p></div>
     </div></div>
 
@@ -190,6 +192,7 @@
               </div></div>
       </div>
   </form>
+
 </div>
   <!-- ecard add form -->
   

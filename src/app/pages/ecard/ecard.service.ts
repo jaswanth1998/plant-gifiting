@@ -30,4 +30,9 @@ export class EcardService extends ApiService {
 
   }
 
+  public getEventsList(){
+    return this.get('events/getEventDetails', {});
+  }
+  
+
 }

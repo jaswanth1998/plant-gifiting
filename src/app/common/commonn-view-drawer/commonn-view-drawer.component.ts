@@ -9,14 +9,22 @@ import { NzDrawerRef } from 'ng-zorro-antd/drawer';
 export class CommonnViewDrawerComponent implements OnInit {
 
  
-  @Input() value = {};
+  @Input() value : any;
   @Input() title = '';
   @Input() category = '';
 
-  constructor(private drawerRef: NzDrawerRef<string>) {}
+  constructor(
+    private drawerRef: NzDrawerRef<string>,
+    ) {
+
+    
+    }
 
   ngOnInit(): void {
-   
+   if(this.category === 'ecard-view'){
+    this.value.openFordataList =  this.value.openFordata.split(',');
+    console.log(this.value.openFordataList )
+   }
   }
 
   close(): void {

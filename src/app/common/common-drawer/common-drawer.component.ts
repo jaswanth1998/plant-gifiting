@@ -132,8 +132,6 @@ export class CommonDrawerComponent implements OnInit {
 
     if(this.category === 'ecard'){
 
-
-
       if(this.isNew === true){
         this.isLive = false;
         this.EcardForm = new FormGroup({
@@ -146,7 +144,8 @@ export class CommonDrawerComponent implements OnInit {
         });
       }
       else{
-
+      
+        console.log(this.value)
         this.EcardForm = new FormGroup({
           ecardName : new FormControl(this.value.ecardName, [
             Validators.required,
@@ -171,8 +170,12 @@ export class CommonDrawerComponent implements OnInit {
         }
         
         (await this.EventService.getEventList()).subscribe((response: any) =>{
-          console.log(response)
-          this.EventsList = response.data;
+          console.log(response);
+          this.EventsList = response.data.filter((item)=>{
+            if( item.isLive.toLowerCase() === 'yes' ){
+              return item;
+            } 
+          })
 
           },
           (error)=>{

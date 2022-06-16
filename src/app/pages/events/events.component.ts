@@ -37,14 +37,14 @@ export class EventsComponent implements OnInit {
       sortable: true,
       sortDir: 'desc',
     },
-    {
-      label: 'Event image',
-      key: 'eventImage',
-      checked: true,
-      sortable: true,
-      sortDir: 'desc',
-      filter: true,
-    },
+    // {
+    //   label: 'Event image',
+    //   key: 'eventImage',
+    //   checked: true,
+    //   sortable: true,
+    //   sortDir: 'desc',
+    //   filter: true,
+    // },
     {
       label: 'Action',
       key: 'actions',
