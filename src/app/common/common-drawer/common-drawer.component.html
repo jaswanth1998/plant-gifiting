@@ -69,7 +69,7 @@
   
     <!-- (ngSubmit)="NGOSubmit()" -->
 
-    <form  [formGroup]="NGOForm"    >
+    <form  [formGroup]="NGOForm"   >
   
           <div nz-row  class="login-form" class="form-no-min-width"  [nzGutter]="16" >
           <div nz-col  class="gutter-row"  nzSpan="8" ><div class="inner-box">
@@ -110,7 +110,9 @@
          </div>
     </form>
       <!-- data {{NGO_projects | json}} -->
+    <div *ngIf="isNew === false ">
 
+    
       <button nz-button nzType="primary" (click)="addNGOPrj()">ADD project</button> 
 
       <nz-divider nzText="Projects " nzOrientation="left"></nz-divider>
@@ -206,17 +208,18 @@
       </div>
    </div>
 
+  </div>
 
-<!-- [disabled]="!NGOForm?.valid" -->
 <br>
-          <div nz-col class="gutter-row align-center"  ><div class="inner-box">
-            <button nz-button nzType="primary" nzBlock  type="submit"  
+          <div nz-col class="gutter-row align-center"   [disabled]="!NGOForm?.valid" ><div class="inner-box">
+            <button nz-button nzType="primary" nzBlock  type="submit"   (click)="NGOSubmit()"
              >{{button}}</button>
             </div></div>
             
     
   
  </div>
+
     <!-- ngo add form -->
 
 <!-- event add form -->

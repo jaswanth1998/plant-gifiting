@@ -316,13 +316,19 @@ export class CommonDrawerComponent implements OnInit {
   }
 
   NGOSubmit(){
+    
     if(this.NGOForm.valid){
+
       console.log(this.NGOForm.value);
       let formData = this.NGOForm.value;
       if(this.value){
         formData['_id'] = this.value['_id'];
       }
-      this.drawerRef.close(formData);
+      formData.projectDetails = this.NGO_projects;
+      
+      console.log(formData.projectDetails )
+
+      // this.drawerRef.close(formData);
     }else{
       alert("invalid data not able to proceed");
 
