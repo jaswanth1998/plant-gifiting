@@ -94,11 +94,11 @@ export class NgolistComponent implements OnInit {
   }
 
 
-  openNeworEditNGODrawer(data = {}, title = "Add NGO",  button = 'Add NGO', isNew = true){
+  openNeworEditNGODrawer(data = {}, title = "Add NGO",  button = 'Add NGO', isNew = true, Drwidth = "550px"){
     const editdrawerRef = this.drawerService.create<CommonDrawerComponent, { value: Object, button : string, category : string, isNew : boolean }, Object>({
       nzTitle: title,
       // nzFooter: 'Footer',
-      nzWidth : '550px',
+      nzWidth : Drwidth,
       nzContent: CommonDrawerComponent,
       nzContentParams: {
           value : data,
@@ -195,7 +195,7 @@ export class NgolistComponent implements OnInit {
     }else if (event.label === 'Edit'){
 
       this.isUpdate = true;
-      this.openNeworEditNGODrawer(event.data, 'Update NGO', 'Update NGO', false);
+      this.openNeworEditNGODrawer(event.data, 'Update NGO', 'Update NGO', false, '1200px');
 
     }else if (event.label === 'Delete'){
 

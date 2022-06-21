@@ -78,12 +78,18 @@ nz-breadcrumb {
 .inner-content {
   padding: 20px;
   background: #fff;
-  min-height: 480px;
+  // min-height: 480px;
   margin: 5px;
-  // height: 
+  height:100% ; 
   
 }
 
 nz-footer {
+  min-height: 20px;
   text-align: center;
+}
+
+.fullScreen{
+  width: 100%;
+  height: 100vh;
 }

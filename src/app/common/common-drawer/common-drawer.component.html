@@ -9,45 +9,45 @@
   <form  [formGroup]="TreeForm" (ngSubmit)="treeSubmit()"   >
 
 
-    <div nz-row  class="login-form" >
-        <div nz-col class="gutter-row" ><div class="inner-box">
+    <div  class="login-form" >
+        <div  class="gutter-row" ><div class="inner-box">
             <label > Tree name *</label>
             <input nz-input placeholder="Tree name" type="text" class="form-control" formControlName="treeName" name="treename"  />
             <div  class="validation-error">  <p> {{  showreqError(TreeForm,'treeName') }}</p></div>
         </div></div>
 
-        <div nz-col class="gutter-row" ><div class="inner-box">
+        <div  class="gutter-row" ><div class="inner-box">
             <label >  Primary tag * </label>
             <input  nz-input placeholder="Primarytag" type="text" class="form-control" formControlName="primaryTag" name="primarytag"  />
             <div  class="validation-error" > <p> {{  showreqError(TreeForm,'primaryTag') }}</p></div>
          </div></div>
 
-        <div nz-col class="gutter-row" ><div class="inner-box">
+        <div  class="gutter-row" ><div class="inner-box">
           <label >  Secondary tag * </label>
           <input  nz-input placeholder="secondary tag" type="text" class="form-control" formControlName="secondaryTag" name="secondarytag"  />
          </div></div>
 
-         <div nz-col class="gutter-row" ><div class="inner-box">
+         <div class="gutter-row" ><div class="inner-box">
           <label >  Tree image * </label>
           <br>
           <input  (change)="onOneImageSelected($event)" placeholder="Select image" type="file" accept="image/png, image/gif, image/jpeg" class="form-control" formControlName="icon" name="treeimage"  />
           <!-- <div  class="validation-error" > <p> {{ showreqError(TreeForm,'icon') }}</p></div> -->
           </div></div>
 
-          <div nz-col class="gutter-row" ><div class="inner-box">
+          <div  class="gutter-row" ><div class="inner-box">
             <label >  Extra image * </label>
             <br>
             <input (change)="onImagesSelected($event)" placeholder="Select image" type="file" accept="image/png, image/gif, image/jpeg" class="form-control" formControlName="images" name="treeimages" multiple />
             <!-- <div  class="validation-error" > <p> {{ showreqError(TreeForm,'treeimage') }}</p></div> -->
         </div></div>
 
-          <div nz-col class="gutter-row" ><div class="inner-box">
+          <div  class="gutter-row" ><div class="inner-box">
             <label >  Tree introduction * </label>
             <textarea  nz-input placeholder="Tree introduction"  class="form-control" formControlName="treeIntroduction" name="treeintro"  ></textarea>
             <div  class="validation-error" > <p> {{ showreqError(TreeForm,'treeIntroduction') }}</p></div>
         </div></div>
         <br>
-            <div nz-col class="gutter-row align-center"  ><div class="inner-box">
+            <div  class="gutter-row align-center"  ><div class="inner-box">
               <button nz-button nzType="primary" nzBlock  type="submit"  
               [disabled]="!TreeForm.valid" >{{button}}</button>
               </div></div>
@@ -56,62 +56,166 @@
 </div>
   <!-- tree add form -->
 
-
-
+  <!-- <div nz-row [nzGutter]="16">
+    <div nz-col class="gutter-row" [nzSpan]="6"><div class="inner-box">col-6</div></div>
+    <div nz-col class="gutter-row" [nzSpan]="6"><div class="inner-box">col-6</div></div>
+    <div nz-col class="gutter-row" [nzSpan]="6"><div class="inner-box">col-6</div></div>
+    <div nz-col class="gutter-row" [nzSpan]="6"><div class="inner-box">col-6</div></div>
+  </div> -->
 
   <!-- ngo add form -->
   
-  <div class="form-min-width"   *ngIf="category === 'NGO' ">
+  <div   *ngIf="category === 'NGO' ">
   
+    <!-- (ngSubmit)="NGOSubmit()" -->
 
-    <form  [formGroup]="NGOForm" (ngSubmit)="NGOSubmit()"   >
+    <form  [formGroup]="NGOForm"    >
   
-  
-      <div nz-row  class="login-form" >
-          <div nz-col class="gutter-row" ><div class="inner-box">
+          <div nz-row  class="login-form" class="form-no-min-width"  [nzGutter]="16" >
+          <div nz-col  class="gutter-row"  nzSpan="8" ><div class="inner-box">
               <label > NGO name *</label>
               <input nz-input placeholder="NGO name" type="text" class="form-control" formControlName="ngoName" name="ngoName"  />
               <div  class="validation-error">  <p> {{ showreqError(NGOForm,'ngoName') }}</p></div>
           </div></div>
   
-          <div nz-col class="gutter-row" ><div class="inner-box">
+          <div nz-col class="gutter-row"   nzSpan="8"><div class="inner-box">
               <label >  Point of contact * </label>
               <input  nz-input placeholder="SPOC Name" type="text" class="form-control" formControlName="spocName" name="spocName"  />
               <div  class="validation-error" > <p> {{ showreqError(NGOForm,'spocName') }}</p></div>
           </div></div>
   
-          <div nz-col class="gutter-row" ><div class="inner-box">
+          <div nz-col class="gutter-row"  nzSpan="8" ><div class="inner-box">
               <label >  Phone Number * </label>
               <input  nz-input placeholder="PhoneNumber" type="text" class="form-control" formControlName="phoneNumber" name="phoneNumber"  />
               <div  class="validation-error" > <p> {{ showreqerrandPhoneerror(NGOForm,'phoneNumber') }}</p></div>
           </div></div>
   
-          <div nz-col class="gutter-row" ><div class="inner-box">
+          <div nz-col class="gutter-row"  nzSpan="8"><div class="inner-box">
             <label >  Email * </label>
             <input  nz-input placeholder="Email" type="text" class="form-control" formControlName="email" name="email"  />
             <div  class="validation-error" > <p> {{ showreqandemilError(NGOForm,'email') }}</p></div>
           </div></div>
 
-          <div nz-col class="gutter-row" ><div class="inner-box">
+          <div nz-col class="gutter-row"  nzSpan="8" ><div class="inner-box">
             <label >  NGO Description * </label>
             <textarea  nz-input placeholder="NGO Description"  class="form-control" formControlName="description" name="description"  ></textarea>
             <div  class="validation-error" > <p> {{ showreqError(NGOForm,'description') }}</p></div>
           </div></div>
  
-            <div nz-col class="gutter-row" ><div class="inner-box">
+            <div nz-col class="gutter-row"  nzSpan="8" ><div class="inner-box">
               <label >  NGO Address * </label>
               <textarea  nz-input placeholder="NGO Address"  class="form-control" formControlName="address" name="address"  ></textarea>
               <div  class="validation-error" > <p> {{ showreqError(NGOForm,'address') }}</p></div>
            </div></div>
+         </div>
+    </form>
+      <!-- data {{NGO_projects | json}} -->
 
-      <br>
+      <button nz-button nzType="primary" (click)="addNGOPrj()">ADD project</button> 
+
+      <nz-divider nzText="Projects " nzOrientation="left"></nz-divider>
+
+      <div  nz-row   [nzGutter]="16">
+      
+        <div *ngFor="let project of NGO_projects; index as prjindex" nz-col nzSpan="8" class="gutter-row" >
+          <div  class="inner-box" >
+          
+
+            <div nz-row>
+              <div nz-col nzSpan="12"  >
+                <input  nz-input placeholder="Project name " type="text"  name="prj name" [(ngModel)]="project.name" />
+              </div>
+              <div nz-col nzSpan="12" class="smallpadding" >
+
+                <div nz-row>
+                  <div nz-col nzSpan="12"  >
+                    <button nz-button nzType="primary" (click)="addNGOloc(prjindex)"> + Loc </button>
+                  </div>
+                  <div nz-col nzSpan="12" class="smallpadding" > 
+                    <button nz-button nzType="primary" (click)="deleteNGOprj(prjindex)" nzDanger  > - Project  </button>    
+                  </div>
+                  </div>
+
+              </div>
+              </div>
+              
+             <nz-divider [nzText]="project.name"></nz-divider>
+
+
+            <div *ngFor="let location of NGO_projects[prjindex].locations;  index as locindex">
+
+              
+              <div nz-row>
+                <div nz-col nzSpan="12">
+                  <!-- <input  nz-input placeholder="location name " type="text"  name="prj name" [(ngModel)]="location.location_name" /> -->
+
+                  <nz-select   nzShowSearch nzAllowClear nzPlaceHolder="Select tree" [(ngModel)]="location.location_name"   name="tree" >
+                    <nz-option *ngFor="let location of LocationsList" [nzLabel]="location.locationName" [nzValue]="location._id"></nz-option>
+                  </nz-select>
+
+                </div>
+                <div nz-col nzSpan="12" class="smallpadding">
+                  <div nz-row>
+                    <div nz-col nzSpan="12"  >
+                      <button nz-button nzType="primary" (click)="addNGOloctree(prjindex,locindex)"> + Tree </button> 
+                    </div>
+                    <div nz-col nzSpan="12" class="smallpadding" > 
+                      <button nz-button nzType="primary" (click)="deleteNGOlocation(prjindex,locindex)" nzDanger > - Location  </button>
+                    </div>
+                    </div>
+
+
+                </div>
+              </div>
+
+              
+            
+            <nz-divider [nzText]=" Trees "></nz-divider>
+
+              <div nz-row [nzGutter]="16" >
+
+             
+            <div *ngFor="let tree of NGO_projects[prjindex].locations[locindex].trees; ; index as treeindex "  nz-col [nzSpan]="8" class="gutter-row" >
+            <div class="inner-box" >
+              <label >  Tree * </label>
+              <!-- <input  nz-input placeholder="tree name " type="text"  name="tree name" [(ngModel)]="tree.treeName" /> -->
+
+              <nz-select   nzShowSearch nzAllowClear nzPlaceHolder="Select tree" [(ngModel)]="tree.treeName"  name="tree" >
+                <nz-option *ngFor="let tree of TreesList " [nzLabel]="tree.treeName" [nzValue]="tree._id"></nz-option>
+              </nz-select>
+
+              <br>
+              <label >  Inventory * </label>
+              <input  nz-input placeholder="inventory " type="text"  name="inven name" [(ngModel)]="tree.invenoory" />
+              <br>
+              <label >  Cost * </label>
+              <input  nz-input placeholder="cost " type="text"  name="cost" [(ngModel)]="tree.cost" />
+              <label > &nbsp; </label>
+              <button nz-button nzType="primary" (click)="deleteNGOloctree(prjindex,locindex,  treeindex)" nzDanger > Remove tree  </button>
+            </div> 
+          </div>
+          <nz-divider nzText="end" ></nz-divider>
+
+        </div>
+        
+          </div>
+
+      </div>
+      
+
+      </div>
+   </div>
+
+
+<!-- [disabled]="!NGOForm?.valid" -->
+<br>
           <div nz-col class="gutter-row align-center"  ><div class="inner-box">
             <button nz-button nzType="primary" nzBlock  type="submit"  
-            [disabled]="!NGOForm?.valid" >{{button}}</button>
+             >{{button}}</button>
             </div></div>
+            
+    
   
-    </div>
- </form> 
  </div>
     <!-- ngo add form -->
 
@@ -126,14 +230,14 @@
   <form  [formGroup]="EvetForm" (ngSubmit)="eventSubmit()"   >
 
 
-    <div nz-row  class="login-form" >
-        <div nz-col class="gutter-row" ><div class="inner-box">
+    <div   class="login-form" >
+        <div  class="gutter-row" ><div class="inner-box">
             <label > Event name *</label>
             <input nz-input placeholder="Event name" type="text" class="form-control" formControlName="eventName" name="eventName"  />
             <div  class="validation-error">  <p> {{  showreqError(EvetForm,'eventName') }}</p></div>
         </div></div>
 
-         <div nz-col class="gutter-row" ><div class="inner-box">
+         <div class="gutter-row" ><div class="inner-box">
           <label >  Event image * </label>
           <br>
           <input  (change)="onOneImageSelected($event)" placeholder="Select image" type="file" accept="image/png, image/gif, image/jpeg" class="form-control" formControlName="eventImage" name="eventImage"  />
@@ -141,7 +245,7 @@
           </div></div>
 
            <br>
-            <div nz-col class="gutter-row align-center"  ><div class="inner-box">
+            <div  class="gutter-row align-center"  ><div class="inner-box">
               <button nz-button nzType="primary" nzBlock  type="submit"  
               [disabled]="!EvetForm.valid" >{{button}}</button>
               </div></div>
@@ -161,20 +265,20 @@
   <form  [formGroup]="EcardForm" (ngSubmit)="ecardSubmit()"   >
 
 
-    <div nz-row  class="login-form" >
-        <div nz-col class="gutter-row" ><div class="inner-box">
+    <div   class="login-form" >
+        <div  class="gutter-row" ><div class="inner-box">
             <label > Ecard name *</label>
             <input nz-input placeholder="Ecard name" type="text" class="form-control" formControlName="ecardName" name="ecardName"  />
             <div  class="validation-error">  <p> {{  showreqError(EcardForm,'ecardName') }}</p></div>
         </div></div>
 
-      <div nz-col class="gutter-row" ><div class="inner-box">
+      <div  class="gutter-row" ><div class="inner-box">
         <label > Ecard HTML link *</label>
         <textarea  nz-input placeholder="Ecard HTML link" type="text" class="form-control" formControlName="html" name="html"  ></textarea>
         <div  class="validation-error">  <p> {{  showreqError(EcardForm,'html') }}</p></div>
     </div></div>
 
-    <div nz-col class="gutter-row"   *ngIf="isNew === false " ><div class="inner-box">
+    <div  class="gutter-row"   *ngIf="isNew === false " ><div class="inner-box">
       <label > Open for  * &nbsp;&nbsp;&nbsp;</label>
 
     <nz-select nzMode="multiple" [nzMaxTagCount]="3" nzShowSearch nzAllowClear nzPlaceHolder="Select events"  formControlName="openFor" name="openFor" >
@@ -186,7 +290,7 @@
 
   
             <br>
-            <div nz-col class="gutter-row align-center"  ><div class="inner-box">
+            <div  class="gutter-row align-center"  ><div class="inner-box">
               <button nz-button nzType="primary" nzBlock  type="submit"  
               [disabled]="!EcardForm.valid" >{{button}}</button>
               </div></div>

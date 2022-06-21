@@ -30,4 +30,9 @@ export class TreeService extends ApiService {
 
   }
 
+  async getlocatjionsList(){
+    return this.get('locations/getLocationDetails', {});
+  }
+
+
 }

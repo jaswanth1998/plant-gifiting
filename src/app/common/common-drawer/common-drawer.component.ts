@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzDrawerRef } from 'ng-zorro-antd/drawer';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { TreeService } from 'src/app/pages/tree/tree.service';
 import { EventService } from '../../pages/events/event-service.service';
 @Component({
   selector: 'app-common-drawer',
@@ -14,22 +16,62 @@ export class CommonDrawerComponent implements OnInit {
   @Input() category = '';
   @Input() isNew = true;
 
+  confirmModal?: NzModalRef; 
+  
   TreeForm : FormGroup;
-  NGOForm : FormGroup
+  NGOForm : FormGroup;
   EvetForm : FormGroup;
   EcardForm : FormGroup;
 
-
   isLive = false;
-
   oneImageUploadFlag = false;
   multipleImageUploadFlag = false;
   EventsList: any;
+  TreesList : any;
+  LocationsList : any;
   selectedEvent = "";
+
+  NGO_projects : any[] = [];
+
+  addNGOPrj(){
+
+    let prj = {
+      name : '',
+      locations : []
+    }
+
+    this.NGO_projects.push(prj)
+
+  }
+
+  addNGOloc(prjindex){
+
+    this.NGO_projects[prjindex]["locations"].push({
+      location_name : "",
+      trees : []
+    })
+
+  }
+
+  addNGOloctree(prjindex,locindex){
+    this.NGO_projects[prjindex]["locations"][locindex].trees.push({
+      treeName : "",
+      invenoory : "",
+      cost : ""
+    })
+  }
+
   constructor(private drawerRef: NzDrawerRef<string>,
-              private EventService : EventService) {}
+              private EventService : EventService,
+              private TreeService : TreeService,
+              private modal: NzModalService,
+              private fb: FormBuilder) {}
 
  async ngOnInit(): Promise<void> {
+
+
+  
+
 
     console.log(this.value, this.category ,this.button );
 
@@ -67,29 +109,88 @@ export class CommonDrawerComponent implements OnInit {
 
     if(this.category === 'NGO'){
 
-      this.NGOForm = new FormGroup({
-        ngoName : new FormControl(this.value.ngoName, [
-          Validators.required,
-        ]),
-        description : new FormControl(this.value.description, [
-          Validators.required,
-        ]),
-        address : new FormControl(this.value.address, [
-          Validators.required,
-        ]),
-        spocName : new FormControl(this.value.spocName, [
-          Validators.required,
-        ]),
-        email: new FormControl(this.value.email, [
-          Validators.required,
-          Validators.email
-        ]),
-        phoneNumber : new FormControl(this.value.phoneNumber, [
-          Validators.required, 
-          Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")
+      if(this.isNew === true){
 
-        ])
-      });
+        this.NGOForm = new FormGroup({
+          ngoName : new FormControl(null, [
+            Validators.required,
+          ]),
+          description : new FormControl(null, [
+            Validators.required,
+          ]),
+          address : new FormControl(null, [
+            Validators.required,
+          ]),
+          spocName : new FormControl(null, [
+            Validators.required,
+          ]),
+          email: new FormControl(null, [
+            Validators.required,
+            Validators.email
+          ]),
+          phoneNumber : new FormControl(this.value.phoneNumber, [
+            Validators.required, 
+            Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")
+  
+          ])
+        });
+  
+      }else
+      {
+        this.NGOForm = new FormGroup({
+          ngoName : new FormControl(this.value.ngoName, [
+            Validators.required,
+          ]),
+          description : new FormControl(this.value.description, [
+            Validators.required,
+          ]),
+          address : new FormControl(this.value.address, [
+            Validators.required,
+          ]),
+          spocName : new FormControl(this.value.spocName, [
+            Validators.required,
+          ]),
+          email: new FormControl(this.value.email, [
+            Validators.required,
+            Validators.email
+          ]),
+          phoneNumber : new FormControl(this.value.phoneNumber, [
+            Validators.required, 
+            Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")
+          ])
+        });
+
+
+        (await this.TreeService.getTreeList()).subscribe((response: any) =>{
+          console.log(response);
+          this.TreesList = response.data.filter((item)=>{
+            if( item.isLive.toLowerCase() === 'yes' ||  item.isLive.toLowerCase() === 'true' ){
+              return item;
+            } 
+          })
+          console.log(this.TreesList);
+      
+          },
+          (error)=>{
+            console.log(error)
+            // this.commonService.showProcessingToastOff();
+          });
+
+          
+
+          (await this.TreeService.getlocatjionsList()).subscribe((response: any) =>{
+            console.log(response);
+            this.LocationsList = response.data;
+            console.log(this.LocationsList);
+        
+            },
+            (error)=>{
+              console.log(error)
+              // this.commonService.showProcessingToastOff();
+            });
+      
+
+      }
 
       if( this.value.isLive === "false"){
         this.isLive = false;
@@ -100,8 +201,8 @@ export class CommonDrawerComponent implements OnInit {
       else{
         this.isLive = false;
       }
+    
     }
-
 
     if(this.category === 'event'){
 
@@ -189,6 +290,8 @@ export class CommonDrawerComponent implements OnInit {
     }
 
   }
+
+ 
 
   close(): void {
     this.drawerRef.close({});
@@ -320,6 +423,51 @@ export class CommonDrawerComponent implements OnInit {
       }
       // regex 
     }
+  }
+
+
+  deleteNGOloctree(prjindex,locindex,  treeindex){
+
+    console.log(prjindex,locindex,  treeindex);
+    console.log(this.NGO_projects);
+    this.confirmModal = this.modal.confirm({
+      nzTitle: 'Do you Want to delete tree ',
+      nzOnOk: () => {
+        console.log('delete the tree ')
+        this.NGO_projects[prjindex]["locations"][locindex]["trees"].splice(treeindex,1);       
+      }
+        
+    });
+
+  }
+  deleteNGOlocation(prjindex,locindex){
+
+    console.log(prjindex,locindex);
+    console.log(this.NGO_projects);
+
+    this.confirmModal = this.modal.confirm({
+      nzTitle: 'Do you Want to delete Location ',
+      nzOnOk: () => {
+        console.log('delete the location ')
+        this.NGO_projects[prjindex]["locations"].splice(locindex,1);       
+      }
+        
+    });
+ 
+
+  }
+  deleteNGOprj(prjindex){
+    console.log(prjindex);
+    console.log(this.NGO_projects);
+
+    this.confirmModal = this.modal.confirm({
+      nzTitle: 'Do you Want to delete Project ',
+      nzOnOk: () => {
+        console.log('delete the location ')
+        this.NGO_projects.splice(prjindex,1);       
+      }
+        
+    });
   }
 
 }
