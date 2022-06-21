@@ -1,44 +1,66 @@
-
 <div class="container">
-    <div class="centered-div">
-        <div>
-            <img class="login-logo" src="https://www.treetag.in/icons/logo-transparent.png" alt="">
-        </div>
-        <div>
-            <form  [formGroup]="loginForm" (ngSubmit)="onUserLogin()"  >
-                <div nz-row  class="login-form" >
-                    <h3 class="align-center"> <strong >ADMIN LOGIN PORTAL</strong> </h3>
-                    <div nz-col class="gutter-row " ><div class="inner-box">
-                        <label > Email/Mobile number *</label>
-                        <input nz-input placeholder="Email/Mobile number" type="text" class="form-control" formControlName="username" name="username"  />
-                        <div  class="validation-error">  <p> {{ showEmailErrors() }}</p></div>
-   
-                    </div></div>
-                    <div nz-col class="gutter-row " ><div class="inner-box">
-                        <label >  Password * (Should be 8 charactor length )</label>
-                        <input status="error" nz-input placeholder="Password" type="password" class="form-control" formControlName="password" name="password"  />
-
-
-                        <div  class="validation-error" > <p> {{ showPwErrors() }}</p></div>
-        
-
-                    </div></div>
-                    <div nz-col class="gutter-row align-center"  ><div class="inner-box">
-                        
-                        <button nz-button nzType="primary" nzBlock  type="submit"  [disabled]="!loginForm.valid" >LOGIN</button>
-
-                      
-
-
-
-                    </div></div>
-                  </div>
-
-
-            </form>
-        </div>
+  <div class="centered-div">
+    <div>
+      <img
+        class="login-logo"
+        src="https://www.treetag.in/icons/logo-transparent.png"
+        alt=""
+      />
     </div>
+    <div>
+      <form [formGroup]="loginForm" (ngSubmit)="onUserLogin()">
+        <div nz-row class="login-form">
+          <h3 class="align-center"><strong>ADMIN LOGIN PORTAL</strong></h3>
+          <div nz-col class="gutter-row">
+            <div class="inner-box">
+              <label> Email/Mobile number *</label>
+              <input
+                nz-input
+                placeholder="Email/Mobile number"
+                type="text"
+                class="form-control"
+                formControlName="emailId"
+                name="emailId"
+              />
+              <div class="validation-error">
+                <p>{{ showEmailErrors() }}</p>
+              </div>
+            </div>
+          </div>
+          <div nz-col class="gutter-row">
+            <div class="inner-box">
+              <label> Password * (Should be 6 charactor length )</label>
+              <input
+                status="error"
+                nz-input
+                placeholder="Password"
+                type="password"
+                class="form-control"
+                formControlName="password"
+                name="password"
+              />
 
-    
-
-</div> 
+              <div class="validation-error">
+                <p>{{ showPwErrors() }}</p>
+              </div>
+            </div>
+          </div>
+          <p style="color: red;">   {{error}}</p>
+          <div nz-col class="gutter-row align-center">
+            <div class="inner-box">
+              <button
+                nz-button
+                nzType="primary"
+                nzBlock
+                type="submit"
+                [disabled]="!loginForm.valid"
+              >
+                LOGIN
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

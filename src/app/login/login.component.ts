@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginServiceService } from './login-service.service';
 
 @Component({
   selector: 'app-login',
@@ -11,23 +12,26 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   passwordStatus = "none";
-  constructor(private router: Router) {}
+  error = '';
+  constructor(private router: Router,
+    private loginService: LoginServiceService
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      username : new FormControl(null, [
+      emailId: new FormControl(null, [
         Validators.required,
         Validators.email
       ]),
       password: new FormControl(null, [
         Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(6),
       ]),
     });
   }
 
   showEmailErrors() {
-    const usernameForm = this.loginForm.get('username');
+    const usernameForm = this.loginForm.get('emailId');
     if (usernameForm.touched && !usernameForm.valid) {
       if (usernameForm.errors.required) {
         return 'Email/Phone number is required';
@@ -52,14 +56,21 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onUserLogin() {
-   
-    if(this.loginForm.valid){
+  async onUserLogin() {
 
-      console.log(this.loginForm.value)
-      this.router.navigateByUrl('/lanch')
+    if (this.loginForm.valid) {
+      const response = await (await this.loginService.loginUser(this.loginForm.value)).toPromise()
+      if (response.data.message) {
+        this.error = response.data.message;
+      } else {
+
+
+        localStorage.setItem('token', response.data.token)
+        localStorage.setItem('user', JSON.stringify(response.data.userData))
+        this.router.navigateByUrl('/lanch')
+      }
     }
-   
+
   }
 
 }
