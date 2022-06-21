@@ -16,16 +16,14 @@
         <ul>
           <li nz-menu-item><a routerLink="/lanch/dashboard"> Dashboard</a></li>
           <li nz-menu-item><a routerLink="/lanch/ngolist"> NGO list </a></li>
-          <li nz-menu-item><a routerLink="/lanch/tree"> Tree </a></li> 
-
-          
+          <li nz-menu-item><a routerLink="/lanch/tree"> Tree </a></li>
         </ul>
       </li>
       <li nz-submenu nzTitle="Plan" nzIcon="star">
         <ul>
           <li nz-menu-item><a routerLink="/lanch/events"> Events</a></li>
           <li nz-menu-item><a routerLink="/lanch/ecard"> E-cards</a></li>
-          
+
           <!-- <li nz-menu-item>Team 2</li> -->
         </ul>
       </li>
@@ -43,6 +41,7 @@
         [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="isCollapsed = !isCollapsed"
       ></i>
+      
     </nz-header>
     <nz-content>
       <!-- <nz-breadcrumb>
@@ -50,15 +49,12 @@
         <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
       </nz-breadcrumb> -->
       <div class="inner-content">
-        
         <router-outlet></router-outlet>
-
       </div>
     </nz-content>
     <nz-footer>Plant gifting made in india with ❤</nz-footer>
   </nz-layout>
 </nz-layout>
-
 
 <!-- <div class="pages" >
   
