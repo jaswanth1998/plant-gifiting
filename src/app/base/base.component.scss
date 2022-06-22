@@ -93,3 +93,8 @@ nz-footer {
   width: 100%;
   height: 100vh;
 }
+.header-buttons{
+  display: flex;
+    justify-content: space-between;
+    margin-right: 30px;
+}

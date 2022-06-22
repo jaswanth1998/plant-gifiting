@@ -14,4 +14,7 @@ export class BaseComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  logout(){
+    localStorage.clear();
+  }
 }
