@@ -161,7 +161,7 @@ export class NgolistComponent implements OnInit {
     const viewdrawerRef = this.drawerService.create<CommonnViewDrawerComponent, { value: Object, title : string,  category : string  }, string>({
       nzTitle: 'NGO view',
       // nzFooter: 'Footer',
-      nzWidth : '550px',
+      nzWidth : '1200px',
       nzContent: CommonnViewDrawerComponent,
       nzContentParams: {
         value: NGOObj,

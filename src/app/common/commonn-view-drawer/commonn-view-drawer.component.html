@@ -26,16 +26,62 @@
     <!-- tree view -->
     <!-- ngo view -->
 
-<div class="form-min-width" *ngIf="category === 'ngo-view' ">
+<div class="fullwidth " *ngIf="category === 'ngo-view' ">
     
-    <div #ngoView *ngIf="value">
+    <div #ngoView *ngIf="value && loadview">
 
-        <h1> <strong>  {{value.ngoName}} </strong> </h1> 
-        <p> SPOC : <strong> {{value.spocName}} </strong></p>
-        <p> Phone Number: <strong>{{ value.phoneNumber }}</strong></p>
-        <p>  Email : <strong> {{value.email}} </strong> </p>
-        <p>  Address : <strong> {{value.address}} </strong> </p>
-        <p>  Description : <strong> {{value.description}} </strong> </p>
+         <div nz-row>
+            <div nz-col nzSpan="12">
+                <h1> <strong>  {{value.ngoName}} </strong> </h1> 
+            </div>
+            <div nz-col nzSpan="6">
+                
+            </div>
+            <div nz-col nzSpan="6">
+                <p> SPOC : <strong> {{value.spocName}} </strong></p>
+                <p> Phone Number: <strong>{{ value.phoneNumber }}</strong></p>
+            </div>
+            <div nz-col nzSpan="4">
+                <p>  Email : <strong> {{value.email}} </strong> </p>
+            </div>
+            <div nz-col nzSpan="10">
+                <p>  Address : <strong> {{value.address}} </strong> </p>
+            </div>
+            <div nz-col nzSpan="10">
+                <p>  Description : <strong> {{value.description}} </strong> </p>
+            </div>
+          </div>
+
+
+        <!-- this.NGO_projects  = this.value.projectDetails; -->
+        <div nz-row   >
+            <div nz-col nzSpan="12" *ngFor="let project of value.projectDetails" class="border_groove">
+                <nz-divider [nzText]="project.projectName" nzOrientation="left"></nz-divider>
+
+                <div nz-row  nz-row>
+                    <div nz-col nzSpan="12" *ngFor="let location of project.ProjectLocationandTrees" class="border_groove" >
+                      
+                        <nz-divider [nzText]=" getLocationname(location.projectLocationID)"></nz-divider>
+                        
+                        <div nz-row  nz-row>
+                            <div nz-col nzSpan="12" *ngFor="let tree of location.trees" class="border_groove">
+                                 <strong> Tree id : </strong>  {{ getTreename( tree.treeId ) }}
+                                <br>
+                                 <strong> Inventory :  </strong> {{ tree.invenoory }}
+                                <br>
+                                 <strong> Cost :   </strong>  {{ tree.cost }}
+                            </div>
+                            
+                         </div>
+        
+                         <!-- <nz-divider [nzText]="location.projectLocationID"></nz-divider> -->
+                    </div>
+                    
+                </div>
+                 
+                 <!-- <nz-divider [nzText]="project.projectName" nzOrientation="right"></nz-divider> -->
+            </div>
+         </div>
 
     </div>
 
