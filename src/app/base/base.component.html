@@ -8,9 +8,9 @@
 
 </div> -->
 
-<nz-layout class="fullScreen" >
-  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null" >
-    <div class="logo" > <strong> 🎁-🌳 </strong> </div>
+<nz-layout class="fullScreen">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div class="logo"><strong> 🎁-🌳 </strong></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-submenu nzTitle="Home" nzIcon="gift">
         <ul>
@@ -35,12 +35,15 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
+      <div class="header-buttons">
       <i
         class="trigger"
         nz-icon
         [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="isCollapsed = !isCollapsed"
       ></i>
+      <i class="trigger" nz-icon nzType="logout" nzTheme="outline"  (click)="logout()" ></i>
+    </div>
       
     </nz-header>
     <nz-content>
