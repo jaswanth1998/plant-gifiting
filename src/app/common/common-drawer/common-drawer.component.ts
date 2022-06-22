@@ -36,8 +36,8 @@ export class CommonDrawerComponent implements OnInit {
   addNGOPrj(){
 
     let prj = {
-      name : '',
-      locations : []
+      projectName : '',
+      ProjectLocationandTrees : []
     }
 
     this.NGO_projects.push(prj)
@@ -46,18 +46,19 @@ export class CommonDrawerComponent implements OnInit {
 
   addNGOloc(prjindex){
 
-    this.NGO_projects[prjindex]["locations"].push({
-      location_name : "",
+    this.NGO_projects[prjindex]["ProjectLocationandTrees"].push({
+      projectLocationID : "",
       trees : []
     })
 
   }
 
   addNGOloctree(prjindex,locindex){
-    this.NGO_projects[prjindex]["locations"][locindex].trees.push({
+    this.NGO_projects[prjindex]["ProjectLocationandTrees"][locindex].trees.push({
       treeName : "",
       invenoory : "",
-      cost : ""
+      cost : 0,
+      treeId : ""
     })
   }
 
@@ -188,6 +189,8 @@ export class CommonDrawerComponent implements OnInit {
               console.log(error)
               // this.commonService.showProcessingToastOff();
             });
+
+            this.NGO_projects  = this.value.projectDetails;
       
 
       }
@@ -316,7 +319,7 @@ export class CommonDrawerComponent implements OnInit {
   }
 
   NGOSubmit(){
-    
+
     if(this.NGOForm.valid){
 
       console.log(this.NGOForm.value);
@@ -326,9 +329,9 @@ export class CommonDrawerComponent implements OnInit {
       }
       formData.projectDetails = this.NGO_projects;
       
-      console.log(formData.projectDetails )
+      console.log(JSON.stringify(formData) )
 
-      // this.drawerRef.close(formData);
+      this.drawerRef.close(formData);
     }else{
       alert("invalid data not able to proceed");
 
@@ -440,7 +443,7 @@ export class CommonDrawerComponent implements OnInit {
       nzTitle: 'Do you Want to delete tree ',
       nzOnOk: () => {
         console.log('delete the tree ')
-        this.NGO_projects[prjindex]["locations"][locindex]["trees"].splice(treeindex,1);       
+        this.NGO_projects[prjindex]["ProjectLocationandTrees"][locindex]["trees"].splice(treeindex,1);       
       }
         
     });
@@ -455,7 +458,7 @@ export class CommonDrawerComponent implements OnInit {
       nzTitle: 'Do you Want to delete Location ',
       nzOnOk: () => {
         console.log('delete the location ')
-        this.NGO_projects[prjindex]["locations"].splice(locindex,1);       
+        this.NGO_projects[prjindex]["ProjectLocationandTrees"].splice(locindex,1);       
       }
         
     });
