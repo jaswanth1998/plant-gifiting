@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-base',
@@ -8,13 +9,29 @@ import { Component, OnInit } from '@angular/core';
 export class BaseComponent implements OnInit {
 
   isCollapsed = true;
+  username = "";
+  usetType = "";
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+   const userdata =  localStorage.getItem('user');
+   console.log(userdata);
+   const userdataobj = JSON.parse(userdata);
+   if(!userdata){
+    this.router.navigateByUrl('/');
+   }else{
+    this.username = userdataobj["name"];
+    this.usetType = userdataobj["usetType"];
+   }
+
   }
 
   logout(){
-    localStorage.clear();
+    if (confirm( 'Do you want to logout...? ')){
+      localStorage.clear();
+      location.reload();
+    }
+    
   }
 }

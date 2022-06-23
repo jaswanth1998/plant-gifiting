@@ -11,27 +11,42 @@
 <nz-layout class="fullScreen">
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
     <div class="logo"><strong> 🎁-🌳 </strong></div>
-    <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li nz-submenu nzTitle="Home" nzIcon="gift">
-        <ul>
-          <li nz-menu-item><a routerLink="/lanch/dashboard"> Dashboard</a></li>
-          <li nz-menu-item><a routerLink="/lanch/ngolist"> NGO list </a></li>
-          <li nz-menu-item><a routerLink="/lanch/tree"> Tree </a></li>
-        </ul>
-      </li>
-      <li nz-submenu nzTitle="Plan" nzIcon="star">
-        <ul>
-          <li nz-menu-item><a routerLink="/lanch/events"> Events</a></li>
-          <li nz-menu-item><a routerLink="/lanch/ecard"> E-cards</a></li>
+ 
+    <div *ngIf="usetType === 'admin'">
+      <ul nz-menu nzTheme="dark" nzMode="inline">
+        <li nz-submenu nzTitle="Home" nzIcon="gift">
+          <ul>
+            <li nz-menu-item><a routerLink="/lanch/dashboard"> Dashboard</a></li>
+            <li nz-menu-item><a routerLink="/lanch/ngolist"> NGO list </a></li>
+            <li nz-menu-item><a routerLink="/lanch/tree"> Tree </a></li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="Plan" nzIcon="star">
+          <ul>
+            <li nz-menu-item><a routerLink="/lanch/events"> Events</a></li>
+            <li nz-menu-item><a routerLink="/lanch/ecard"> E-cards</a></li>
+          </ul>
+        </li>
+        <li nz-menu-item>
+          <i nz-icon nzType="file"></i>
+          <span>File</span>
+        </li>
+      </ul>
+  </div>
 
-          <!-- <li nz-menu-item>Team 2</li> -->
+  <div *ngIf="usetType === 'vendor'">
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-submenu nzTitle="Menu" nzIcon="star">
+        <ul>
+          <li nz-menu-item><a routerLink="/lanch/vendor-projects"> Projects</a></li>
+          <li nz-menu-item><a routerLink="/lanch/vendor-orders"> Orders </a></li>
+          <li nz-menu-item><a routerLink="/lanch/vendor-reports"> Reports </a></li>
         </ul>
       </li>
-      <li nz-menu-item>
-        <i nz-icon nzType="file"></i>
-        <span>File</span>
-      </li>
-    </ul>
+      </ul>
+  </div>
+
+
   </nz-sider>
   <nz-layout>
     <nz-header>
@@ -42,6 +57,10 @@
         [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="isCollapsed = !isCollapsed"
       ></i>
+
+      <i class="trigger" > Welcome {{ username }} | {{ usetType }} </i>
+      
+
       <i class="trigger" nz-icon nzType="logout" nzTheme="outline"  (click)="logout()" ></i>
     </div>
       

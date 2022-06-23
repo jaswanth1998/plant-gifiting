@@ -60,14 +60,21 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.valid) {
       const response = await (await this.loginService.loginUser(this.loginForm.value)).toPromise()
+
+      console.log(response  )
+
       if (response.data.message) {
         this.error = response.data.message;
       } else {
 
-
-        localStorage.setItem('token', response.data.token)
-        localStorage.setItem('user', JSON.stringify(response.data.userData))
-        this.router.navigateByUrl('/lanch')
+        if(response.data.userData.usetType === "admin" || response.data.userData.usetType === "vendor"  ){
+          localStorage.setItem('token', response.data.token)
+          localStorage.setItem('user', JSON.stringify(response.data.userData));
+          this.router.navigateByUrl('/lanch');
+        }else{
+          this.error = "Try login with Admin / Vendor credentials";
+        }
+        
       }
     }
 

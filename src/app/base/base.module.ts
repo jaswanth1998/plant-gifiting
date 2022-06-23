@@ -47,11 +47,36 @@ const routes: Routes = [
            }),
         // canActivate: [RouterGuardService]
       },
+
       {
         path: 'ecard',
         loadChildren: () =>
         import('../pages/ecard/Ecard-routing.module').then((m)=>{
           return m.EcardRoutingModule
+           }),
+        // canActivate: [RouterGuardService]
+      },
+      {
+        path: 'vendor-projects',
+        loadChildren: () =>
+        import('../vendor-pages/vendor-projects/vendor-projects-routing.module').then((m)=>{
+          return m.VendorProjectsRoutingModule
+           }),
+        // canActivate: [RouterGuardService]
+      },
+      {
+        path: 'vendor-orders',
+        loadChildren: () =>
+        import('../vendor-pages/vendor-orders/vendor-orders-routing.module').then((m)=>{
+          return m.VendorOrdersRoutingModule
+           }),
+        // canActivate: [RouterGuardService]
+      },
+      {
+        path: 'vendor-reports',
+        loadChildren: () =>
+        import('../vendor-pages/vendor-projects/vendor-projects-routing.module').then((m)=>{
+          return m.VendorProjectsRoutingModule
            }),
         // canActivate: [RouterGuardService]
       }

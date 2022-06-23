@@ -24,6 +24,9 @@ import { TreeComponent } from './pages/tree/tree.component';
 import { CommonnViewDrawerComponent } from './common/commonn-view-drawer/commonn-view-drawer.component';
 import { EventsComponent } from './pages/events/events.component';
 import { EcardComponent } from './pages/ecard/ecard.component';
+import { VendorProjectsComponent } from './vendor-pages/vendor-projects/vendor-projects.component';
+import { VendorOrdersComponent } from './vendor-pages/vendor-orders/vendor-orders.component';
+import { VendorReportsComponent } from './vendor-pages/vendor-reports/vendor-reports.component';
 
 registerLocaleData(en);
 
@@ -41,6 +44,9 @@ registerLocaleData(en);
     CommonnViewDrawerComponent,
     EventsComponent,
     EcardComponent,
+    VendorProjectsComponent,
+    VendorOrdersComponent,
+    VendorReportsComponent,
   
   ],
   imports: [
