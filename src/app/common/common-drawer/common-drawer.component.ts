@@ -24,6 +24,8 @@ export class CommonDrawerComponent implements OnInit {
   NGOForm: FormGroup;
   EvetForm: FormGroup;
   EcardForm: FormGroup;
+  OrdersForm : FormGroup;
+  QueriesForm : FormGroup;
 
   isLive = false;
   oneImageUploadFlag = false;
@@ -38,6 +40,26 @@ export class CommonDrawerComponent implements OnInit {
 
 
   NGO_projects: any[] = [];
+
+  // orderStatus = [
+  //   {
+  //     lable  : "open",
+  //     value : "open"
+  //   },
+  //   {
+  //     lable  : "In progress",
+  //     value : "In progress"
+  //   },
+  //   {
+  //     lable  : "Planted",
+  //     value : "Planted"
+  //   },
+  //   {
+  //     lable  : "Project concluded",
+  //     value : "Project concluded"
+  //   }
+   
+  // ];
 
   addNGOPrj() {
 
@@ -302,6 +324,58 @@ export class CommonDrawerComponent implements OnInit {
       }
     }
 
+    
+    if (this.category === 'orders') {
+
+      if (this.isNew === true) {
+        // this.isLive = false;
+        // this.EcardForm = new FormGroup({
+        //   ecardName: new FormControl(this.value.ecardName, [
+        //     Validators.required,
+        //   ]),
+        //   html: new FormControl(this.value.html, [
+        //     Validators.required,
+        //   ])
+        // });
+      }
+      else {
+
+        console.log(this.value)
+        this.OrdersForm = new FormGroup({
+          status: new FormControl(this.value.status, [
+            Validators.required,
+          ])        
+        });
+
+
+      }
+    }
+
+    if (this.category === 'queries') {
+
+      if (this.isNew === true) {
+        // this.isLive = false;
+        // this.EcardForm = new FormGroup({
+        //   ecardName: new FormControl(this.value.ecardName, [
+        //     Validators.required,
+        //   ]),
+        //   html: new FormControl(this.value.html, [
+        //     Validators.required,
+        //   ])
+        // });
+      }
+      else {
+
+        console.log(this.value)
+        this.QueriesForm = new FormGroup({
+          status: new FormControl(this.value.status, [
+            Validators.required,
+          ])        
+        });
+
+
+      }
+    }
   }
 
 
@@ -505,6 +579,38 @@ export class CommonDrawerComponent implements OnInit {
       }
 
     });
+  }
+
+  
+  
+  orderEditSubmit() {
+
+    if (this.OrdersForm.valid) {
+      console.log(this.OrdersForm.value);
+      let formData = this.OrdersForm.value;
+      if (this.value) {
+        formData['_id'] = this.value['_id'];
+      }
+      this.drawerRef.close(formData);
+    } else {
+      alert("invalid data not able to proceed");
+
+    }
+  }
+
+  queriesEditSubmit(){
+    if (this.QueriesForm.valid) {
+      console.log(this.QueriesForm.value);
+      let formData = this.QueriesForm.value;
+      if (this.value) {
+        formData['_id'] = this.value['_id'];
+      }
+      this.drawerRef.close(formData);
+    } else {
+      alert("invalid data not able to proceed");
+
+    }
+
   }
 
 }

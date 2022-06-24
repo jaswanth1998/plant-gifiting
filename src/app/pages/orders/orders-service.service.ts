@@ -11,7 +11,7 @@ export class OrdersService extends ApiService {
     return this.get('orders/getOrderDetails/', {});
   }
 
-  public getOrdersListByID(id){ //NA2
+  public getOrdersListByID(id){ //NA
     return this.get('orders/getOrderDetailsById/'+id, {});
   }
 
@@ -19,8 +19,8 @@ export class OrdersService extends ApiService {
     return this.post('orders/addOrdersDetails', body);
   }
 
-  public updateOrders(id,body){ //NA
-    return this.post('orders/updateOrdersData/'+id, body);
+  public updateOrders(id,body){ 
+    return this.post('orders/updateOrderData/'+id, body);
   }
 
 

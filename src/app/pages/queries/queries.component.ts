@@ -85,7 +85,7 @@ export class QueriesComponent implements OnInit {
       nzContent: CommonDrawerComponent,
       nzContentParams: {
           value : data,
-          category : 'Queries',
+          category : 'queries',
           button : button,
           isNew : isNew
       }

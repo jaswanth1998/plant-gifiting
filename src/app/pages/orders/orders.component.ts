@@ -128,11 +128,11 @@ export class OrdersComponent implements OnInit {
     const editdrawerRef = this.drawerService.create<CommonDrawerComponent, { value: Object, button : string, category : string, isNew : boolean }, Object>({
       nzTitle: title,
       // nzFooter: 'Footer',
-      nzWidth : '550px',
+      nzWidth : '1000px',
       nzContent: CommonDrawerComponent,
       nzContentParams: {
           value : data,
-          category : 'Orders',
+          category : 'orders',
           button : button,
           isNew : isNew
       }
