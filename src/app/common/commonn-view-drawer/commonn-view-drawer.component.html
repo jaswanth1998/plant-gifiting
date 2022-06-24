@@ -26,7 +26,7 @@
     <!-- tree view -->
     <!-- ngo view -->
 
-<div class="fullwidth " *ngIf="category === 'ngo-view' ">
+<div class="fullwidth-ngo" *ngIf="category === 'ngo-view' ">
     
     <div #ngoView *ngIf="value && loadview">
 
@@ -128,3 +128,121 @@
 </div>
 
  <!-- ecard-view -->
+
+ <!-- queries-view -->
+ <div class="form-min-width" *ngIf="category === 'queries-view' ">
+    
+    <div #queryView *ngIf="value">
+
+        Email : <strong> {{value.email}}  </strong>   <br>
+         
+        Phone No : <strong> {{value.phoneNo}} </strong>   <br>
+
+        Status : <strong>   {{value.status}} </strong> <br>
+
+        Query : <br> <strong>   {{value.query}} </strong> 
+
+ 
+         
+    </div>
+  
+
+</div>
+
+ <!-- queries-view   -->
+
+  <!-- orders-view -->
+<div class="fullwidth-orders" *ngIf="category === 'orders-view' ">
+    
+    <div #queryView *ngIf="value">
+
+          <!-- <strong> {{value | json }}  </strong>   <br> -->
+         
+        <div nz-row    >
+            <div nz-col  class="gutter-row" nzSpan="8"  >
+                <div class="inner-box" > 
+                    Project Name : <b>{{value.projectName}}</b> 
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8"  >
+                <div class="inner-box" > 
+                    Tree Name / Count  : <b>{{value.treeNameOrdered}} / ( {{ value.numberOfSpeciesOrdered }} ) </b> 
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8"  >
+                <div class="inner-box" > 
+                    Location : <b>{{value.location}}</b> 
+                </div>
+            </div>
+               <!--  -->
+                <nz-divider nzText="Sender Details"></nz-divider>
+            <div nz-col class="gutter-row" nzSpan="8"  >
+                <div class="inner-box" > 
+                    Sender Name : <b>{{value.senderName}}</b> 
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8"  >
+                <div class="inner-box" > 
+                    Phone number : <b>{{value.senderPhoneNumber}}</b> 
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8"  >
+                <div class="inner-box" > 
+                    Repetative user : <b >  {{ value.isSenderRepeatUser === 'true' ?  'Yes' : 'NO'}}</b> 
+                </div>
+            </div>
+                <!--  -->
+                <nz-divider nzText="Receiver Details"></nz-divider>
+            <div nz-col class="gutter-row" nzSpan="8"  >
+                <div class="inner-box" > 
+                    Receiver name  : <b>{{value.receiverName}}</b> 
+                    
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8"  >
+                <div class="inner-box" > 
+                    Receiver number : <b>{{value.receiverPhoneNumber}}</b> 
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8"  >
+                <div class="inner-box" > 
+                    Receiver Email Id : <b>{{value.receiverEmailId}}</b> 
+                </div>
+            </div>
+                <!--  -->
+                <nz-divider nzText="vendor Details"></nz-divider>
+             <div nz-col class="gutter-row" nzSpan="12"  >
+                <div class="inner-box" > 
+                    vendor name  : <b>{{value.vendorName}}</b> 
+                </div>
+             </div>
+             <div nz-col class="gutter-row" nzSpan="12"  >
+                <div class="inner-box" > 
+                    vendor Email Id : <b>{{value.vendorEmailId}}</b> 
+                </div>
+            </div>
+
+                <!--  -->
+                <nz-divider nzText="Payment  Details"></nz-divider>
+            <div nz-col class="gutter-row" nzSpan="8"  >
+                <div class="inner-box" > 
+                    Mode of Payment   : <b>{{value.modeOfPayment}}</b> 
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8"  >
+                <div class="inner-box" > 
+                    Amount Received : <b>{{value.amountReceived}}</b> 
+                </div>
+            </div>
+           <div nz-col class="gutter-row" nzSpan="8"  >
+                <div class="inner-box" > 
+                    Order Status: <b>{{value.status}}</b> 
+                </div>
+            </div>
+
+        </div>  
+    </div>
+
+</div>
+
+ <!-- odes-view   -->

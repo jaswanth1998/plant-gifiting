@@ -56,6 +56,24 @@ const routes: Routes = [
            }),
         // canActivate: [RouterGuardService]
       },
+
+      {
+        path: 'queries',
+        loadChildren: () =>
+        import('../pages/queries/queries-routing.module').then((m)=>{
+          return m.QueriesRoutingModule
+           }),
+        // canActivate: [RouterGuardService]
+      },
+      {
+        path: 'orders',
+        loadChildren: () =>
+        import('../pages/orders/orders-routing.module').then((m)=>{
+          return m.OrdersRoutingModule
+           }),
+        // canActivate: [RouterGuardService]
+      },
+      
       {
         path: 'vendor-projects',
         loadChildren: () =>
@@ -67,19 +85,20 @@ const routes: Routes = [
       {
         path: 'vendor-orders',
         loadChildren: () =>
-        import('../vendor-pages/vendor-orders/vendor-orders-routing.module').then((m)=>{
-          return m.VendorOrdersRoutingModule
+        import('../pages/orders/orders-routing.module').then((m)=>{
+          return m.OrdersRoutingModule
            }),
         // canActivate: [RouterGuardService]
       },
       {
         path: 'vendor-reports',
         loadChildren: () =>
-        import('../vendor-pages/vendor-projects/vendor-projects-routing.module').then((m)=>{
-          return m.VendorProjectsRoutingModule
+        import('../vendor-pages/vendor-reports/vendor-reports-routing.module').then((m)=>{
+          return m.VendorReportsRoutingModule
            }),
         // canActivate: [RouterGuardService]
       }
+      
       
     ]
     

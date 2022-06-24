@@ -27,6 +27,8 @@ import { EcardComponent } from './pages/ecard/ecard.component';
 import { VendorProjectsComponent } from './vendor-pages/vendor-projects/vendor-projects.component';
 import { VendorOrdersComponent } from './vendor-pages/vendor-orders/vendor-orders.component';
 import { VendorReportsComponent } from './vendor-pages/vendor-reports/vendor-reports.component';
+import { OrdersComponent } from './pages/orders/orders.component';
+import { QueriesComponent } from './pages/queries/queries.component';
 
 registerLocaleData(en);
 
@@ -47,6 +49,8 @@ registerLocaleData(en);
     VendorProjectsComponent,
     VendorOrdersComponent,
     VendorReportsComponent,
+    OrdersComponent,
+    QueriesComponent,
   
   ],
   imports: [

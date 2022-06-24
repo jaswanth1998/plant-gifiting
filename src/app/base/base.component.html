@@ -27,16 +27,20 @@
             <li nz-menu-item><a routerLink="/lanch/ecard"> E-cards</a></li>
           </ul>
         </li>
-        <li nz-menu-item>
-          <i nz-icon nzType="file"></i>
-          <span>File</span>
+ 
+        <li nz-submenu nzTitle="Plan" nzIcon="shopping-cart">
+          <ul>
+            <li nz-menu-item><a routerLink="/lanch/orders"> Orders</a></li>
+            <li nz-menu-item><a routerLink="/lanch/queries"> Queries</a></li>
+          </ul>
         </li>
+        
       </ul>
   </div>
 
   <div *ngIf="usetType === 'vendor'">
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li nz-submenu nzTitle="Menu" nzIcon="star">
+      <li nz-submenu nzTitle="Menu" nzIcon="appstore">
         <ul>
           <li nz-menu-item><a routerLink="/lanch/vendor-projects"> Projects</a></li>
           <li nz-menu-item><a routerLink="/lanch/vendor-orders"> Orders </a></li>

@@ -1,0 +1,30 @@
+<div class="breadcrumb">
+    <nz-breadcrumb>
+        <nz-breadcrumb-item>
+          <i nz-icon nzType="home"></i>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+          <a>
+            <i nz-icon nzType="question"></i>
+            <span>Queries</span>
+          </a>
+        </nz-breadcrumb-item>
+      </nz-breadcrumb>
+  </div>
+  
+  <hr>
+  
+  <div  *ngIf="dataTable" >
+  
+  
+  <app-table  
+        [headerButtons]="HeaderButtons"
+        [headers]="tableHeaders"
+        [tableData]="tableData"
+        [defaultColumn]="'customer_name'"
+        [dir]="'asc'"
+        [page]="dataTablePage"
+        (actions)="dataTableActions($event)"
+        (headerActions)="dataTableHeaderActions($event)"
+  ></app-table>
+  </div>
