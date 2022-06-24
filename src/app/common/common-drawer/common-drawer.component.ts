@@ -87,7 +87,7 @@ export class CommonDrawerComponent implements OnInit {
     if (this.category === 'tree') {
 
       this.uploadedImage = this.value.icon;
-      this.multipleUploadImages = this.value.images;
+      this.multipleUploadImages = this.value.images ? this.value.images: [];
       this.TreeForm = new FormGroup({
         treeName: new FormControl(this.value.treeName, [
           Validators.required,
@@ -398,6 +398,7 @@ export class CommonDrawerComponent implements OnInit {
     this.apiService.uploadPic(formData).subscribe((data) => {
       this.multipleUploadImages.push(data.data.url)
     });
+    console.log(this.multipleUploadImages)
     // alert()
   }
 
