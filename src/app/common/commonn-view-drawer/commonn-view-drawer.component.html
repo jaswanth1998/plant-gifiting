@@ -12,13 +12,22 @@
         <h1> {{value.treeName}}  </h1> 
         <h3> Primary tag : <strong> {{value.primaryTag}} </strong></h3>
         <h3> Scondary tag : <strong>{{ value.secondaryTag }}</strong></h3>
-        <span *ngIf="value.isLive"> Status : Active ✅ </span> <span *ngIf="!value.isLive"> Status : Inactive 🚫 </span>
+        <span *ngIf="value.isLive === 'yes' "> Status : Active ✅ </span> <span *ngIf="value.isLive === 'no' "> Status : Inactive 🚫 </span>
+        <br>
+        
+        <ng-container *ngFor="let item of value.images; let i = index" class="smallpadding">
+            <img
+              [src]="item"
+              alt=""  class="additinalimgs"
+              style="width: 100px; height: 100px; margin: 10px"
+            />
+       
+          </ng-container>
+
         <p> Tree Introduction : <strong> {{value.treeIntroduction}} </strong> </p>
-        <div *ngFor="let img of value.images ">
 
-            <img [src]="img" alt="" class="additinalimgs">
 
-        </div>
+
     </div>
 
 </div>
@@ -41,13 +50,13 @@
                 <p> SPOC : <strong> {{value.spocName}} </strong></p>
                 <p> Phone Number: <strong>{{ value.phoneNumber }}</strong></p>
             </div>
-            <div nz-col nzSpan="4">
+            <div nz-col nzSpan="8">
                 <p>  Email : <strong> {{value.email}} </strong> </p>
             </div>
-            <div nz-col nzSpan="10">
+            <div nz-col nzSpan="8">
                 <p>  Address : <strong> {{value.address}} </strong> </p>
             </div>
-            <div nz-col nzSpan="10">
+            <div nz-col nzSpan="8">
                 <p>  Description : <strong> {{value.description}} </strong> </p>
             </div>
           </div>

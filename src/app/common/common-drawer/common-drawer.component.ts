@@ -35,7 +35,7 @@ export class CommonDrawerComponent implements OnInit {
   LocationsList: any;
   selectedEvent = "";
 
-  uploadedImage;
+  uploadedImage = null;
   multipleUploadImages = [];
 
 
@@ -108,7 +108,7 @@ export class CommonDrawerComponent implements OnInit {
 
     if (this.category === 'tree') {
 
-      this.uploadedImage = this.value.icon;
+      this.uploadedImage = this.value.icon ? this.value.icon : null ;
       this.multipleUploadImages = this.value.images ? this.value.images: [];
       this.TreeForm = new FormGroup({
         treeName: new FormControl(this.value.treeName, [
@@ -117,7 +117,7 @@ export class CommonDrawerComponent implements OnInit {
         primaryTag: new FormControl(this.value.primaryTag, [
           Validators.required,
         ]),
-        secondaryTag: new FormControl(this.value.primaryTag, []),
+        secondaryTag: new FormControl(this.value.secondaryTag, []),
         icon: new FormControl(null, [
           // Validators.required,
         ]),
@@ -248,7 +248,7 @@ export class CommonDrawerComponent implements OnInit {
           //  
         ]),
       });
-      this.uploadedImage = this.value.eventImage;
+      this.uploadedImage = this.value.eventImage ?  this.value.eventImage  : null;
 
       if (this.isNew === true) {
         this.isLive = false;
@@ -385,18 +385,22 @@ export class CommonDrawerComponent implements OnInit {
   }
   treeSubmit() {
     if (this.TreeForm.valid) {
-      let formData = this.TreeForm.value;
-      formData['isLive'] = this.isLive;
-      formData['icon'] = this.uploadedImage
-      formData['images'] = this.multipleUploadImages;
-      if (this.value) {
-        formData['_id'] = this.value['_id'];
+        if(!this.uploadedImage){
+          alert("Upload Tree image to proceed");
+        }else{       
+          let formData = this.TreeForm.value;
+          formData['isLive'] = this.isLive;
+          formData['icon'] = this.uploadedImage
+          formData['images'] = this.multipleUploadImages;
+        if (this.value) {
+          formData['_id'] = this.value['_id'];
+        }
+          console.log(formData);
+          this.drawerRef.close(formData);
+        }
+      } else {
+        alert("invalid data not able to proceed");
       }
-      console.log(formData);
-      this.drawerRef.close(formData);
-    } else {
-      alert("invalid data not able to proceed");
-    }
   }
 
   NGOSubmit() {
@@ -424,6 +428,12 @@ export class CommonDrawerComponent implements OnInit {
   eventSubmit() {
 
     if (this.EvetForm.valid) {
+      if(!this.uploadedImage){
+
+        alert("Upload event image to proceed");
+
+      }else{
+     
       console.log(this.EvetForm.value);
       let formData = this.EvetForm.value;
 
@@ -436,6 +446,7 @@ export class CommonDrawerComponent implements OnInit {
         formData['_id'] = this.value['_id'];
       }
       this.drawerRef.close(formData);
+    }
     } else {
       alert("invalid data not able to proceed");
 
@@ -613,4 +624,10 @@ export class CommonDrawerComponent implements OnInit {
 
   }
 
+  deleteimageindex(index){
+      this.multipleUploadImages.splice(index,1);
+  }
+  deleteLogo(){
+    this.uploadedImage = null;
+  }
 }

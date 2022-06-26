@@ -1,7 +1,7 @@
 <div class="breadcrumb">
     <nz-breadcrumb>
         <nz-breadcrumb-item>
-          <i nz-icon nzType="home"></i>
+     <i nz-icon nzType="login"></i>
         </nz-breadcrumb-item>
         <nz-breadcrumb-item>
           <a>
@@ -14,5 +14,24 @@
 
 <hr>
 
-<h1> welcome to app </h1>
+<h1 style="text-align: center"> Welcome to Plant Gifting "{{usetType}} portal" </h1>
+
+<nz-divider nzOrientation="left" nzText="Quick links"></nz-divider>
+<div nz-row [nzGutter]="16" *ngIf="usetType === 'admin' " style="width: 500px;">
+  <div nz-col class="gutter-row" [nzSpan]="8"><div class="inner-box"><a routerLink="/lanch/ngolist"> NGO list </a></div></div>
+  <div nz-col class="gutter-row" [nzSpan]="8"><div class="inner-box"><a routerLink="/lanch/tree"> Tree </a></div></div>
+  <div nz-col class="gutter-row" [nzSpan]="8"><div class="inner-box"><a routerLink="/lanch/events"> Events</a></div></div>
+
+  <div nz-col class="gutter-row" [nzSpan]="8"><div class="inner-box"><a routerLink="/lanch/ecard"> E-cards</a></div></div>
+  <div nz-col class="gutter-row" [nzSpan]="8"><div class="inner-box"><a routerLink="/lanch/orders"> Orders</a></div></div>
+  <div nz-col class="gutter-row" [nzSpan]="8"><div class="inner-box"><a routerLink="/lanch/queries"> Queries</a></div></div>
+</div>
+
+<div nz-row [nzGutter]="16" *ngIf="usetType === 'vendor' " style="width: 500px;">
+
+  <div nz-col class="gutter-row" [nzSpan]="8"><div class="inner-box"><a routerLink="/lanch/vendor-projects"> Projects</a></div></div>
+  <div nz-col class="gutter-row" [nzSpan]="8"><div class="inner-box"><a routerLink="/lanch/vendor-orders"> Orders </a></div></div>
+  <div nz-col class="gutter-row" [nzSpan]="8"><div class="inner-box"><a routerLink="/lanch/vendor-reports"> Reports </a></div></div>
+</div>
+
 

@@ -53,14 +53,14 @@ export class TreeComponent implements OnInit {
       sortDir: 'desc',
       filter: true,
     },
-    {
-      label: 'Tree Introduction',
-      key: 'treeIntroduction',
-      checked: true,
-      sortable: true,
-      sortDir: 'desc',
-      filter: true,
-    },
+    // {
+    //   label: 'Tree Introduction',
+    //   key: 'treeIntroduction',
+    //   checked: true,
+    //   sortable: true,
+    //   sortDir: 'desc',
+    //   filter: true,
+    // },
     {
       label: 'Action',
       key: 'actions',
@@ -242,7 +242,15 @@ export class TreeComponent implements OnInit {
     this.commonService.showProcessingToastOn();
     (await this.treeService.getTreeList()).subscribe((response: any) => {
       console.log(response)
-      this.tableData = response.data;
+      this.tableData = response.data
+      
+      this.tableData.map((ele) =>{
+      if(  ele.isLive.toLowerCase() === 'true' ){
+        ele.isLive = 'yes'
+      }else{
+        ele.isLive = 'no'
+      }
+      });
 
       this.commonService.showProcessingToastOff();
       this.refreshDatatable();

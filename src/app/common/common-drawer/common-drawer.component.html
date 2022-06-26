@@ -71,17 +71,20 @@
           <!-- <div  class="validation-error" > <p> {{ showreqError(TreeForm,'icon') }}</p></div> -->
         </div>
       </div>
-
-      <img
-      
-        *ngIf="uploadedImage"
+      <div *ngIf="uploadedImage">
+        <img
         [src]="uploadedImage"
         style="width: 100px; height: 100px"
         alt=""
       />
+      <i class="trigger" nz-icon nzType="delete" nzTheme="outline"  (click)="deleteLogo()" ></i>
+      </div>
+    
+
+
       <div class="gutter-row">
         <div class="inner-box">
-          <label> Extra image * </label>
+          <label> Extra image </label>
           <br />
           <input
             (change)="onImagesSelected($event)"
@@ -96,12 +99,17 @@
           <!-- <div  class="validation-error" > <p> {{ showreqError(TreeForm,'treeimage') }}</p></div> -->
         </div>
       </div>
-      <ng-container *ngFor="let item of multipleUploadImages; let i = index">
+      <ng-container *ngFor="let item of multipleUploadImages; let i = index" class="smallpadding">
         <img
           [src]="item"
           alt=""
           style="width: 100px; height: 100px; margin: 10px"
         />
+
+        <i class="trigger" nz-icon nzType="delete" nzTheme="outline"  (click)="deleteimageindex(i)" ></i>
+
+        <nz-divider nzType="vertical"></nz-divider>
+
       </ng-container>
 
       <div class="gutter-row">
@@ -138,12 +146,7 @@
 </div>
 <!-- tree add form -->
 
-<!-- <div nz-row [nzGutter]="16">
-    <div nz-col class="gutter-row" [nzSpan]="6"><div class="inner-box">col-6</div></div>
-    <div nz-col class="gutter-row" [nzSpan]="6"><div class="inner-box">col-6</div></div>
-    <div nz-col class="gutter-row" [nzSpan]="6"><div class="inner-box">col-6</div></div>
-    <div nz-col class="gutter-row" [nzSpan]="6"><div class="inner-box">col-6</div></div>
-  </div> -->
+
 
 <!-- ngo add form -->
 
@@ -511,13 +514,15 @@
           <!-- <div  class="validation-error" > <p> {{ showreqError(EvetForm,'eventImage') }}</p></div> -->
         </div>
       </div>
-      <img
-      
-      *ngIf="uploadedImage"
-      [src]="uploadedImage"
-      style="width: 100px; height: 100px;margin: 10px;"
-      alt=""
-    />
+      <br>
+      <div *ngIf="uploadedImage">
+        <img
+        [src]="uploadedImage"
+        style="width: 300px; height: 300px"
+        alt=""
+      />
+      <i class="trigger" nz-icon nzType="delete" nzTheme="outline"  (click)="deleteLogo()" ></i>
+      </div>
 
       <br />
       <div class="gutter-row align-center">
@@ -683,16 +688,20 @@
         </div>
     </div>
         <!--  -->
-     <div nz-col class="gutter-row" nzSpan="12"  >
+     <div nz-col class="gutter-row" nzSpan="8"  >
         <div class="inner-box" > 
             vendor name  : <b>{{value.vendorName}}</b> 
         </div>
      </div>
-     <div nz-col class="gutter-row" nzSpan="12"  >
+     <div nz-col class="gutter-row" nzSpan="8"  >
         <div class="inner-box" > 
             vendor Email Id : <b>{{value.vendorEmailId}}</b> 
         </div>
     </div>
+    <div nz-col class="gutter-row" nzSpan="8"  >
+      <div class="inner-box" > 
+      </div>
+  </div>
 
         <!--  -->
     <div nz-col class="gutter-row" nzSpan="8"  >
@@ -756,10 +765,7 @@
   </form>
 </div>
 
-
-
 <!-- QueriesForm -->
-
 
 <div class="form-min-width" *ngIf="category === 'queries'">
 
