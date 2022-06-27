@@ -71,18 +71,19 @@
           <!-- <div  class="validation-error" > <p> {{ showreqError(TreeForm,'icon') }}</p></div> -->
         </div>
       </div>
-      <br>
+      <br />
       <div *ngIf="uploadedImage">
-        <img
-        [src]="uploadedImage"
-        style="width: 100px; height: 100px"
-        alt=""
-      />
-      <i class="trigger" nz-icon nzType="delete" nzTheme="outline"  (click)="deleteLogo()" ></i>
+        <img [src]="uploadedImage" style="width: 100px; height: 100px" alt="" />
+        <i
+          class="trigger"
+          nz-icon
+          nzType="delete"
+          nzTheme="outline"
+          (click)="deleteLogo()"
+        ></i>
       </div>
-    
 
-<br>
+      <br />
       <div class="gutter-row">
         <div class="inner-box">
           <label> Extra image </label>
@@ -100,17 +101,46 @@
           <!-- <div  class="validation-error" > <p> {{ showreqError(TreeForm,'treeimage') }}</p></div> -->
         </div>
       </div>
-      <ng-container *ngFor="let item of multipleUploadImages; let i = index" class="smallpadding">
+      <ng-container
+        *ngFor="let item of multipleUploadImages; let i = index"
+        class="smallpadding"
+      >
         <img
           [src]="item"
           alt=""
           style="width: 100px; height: 100px; margin: 10px"
         />
 
-        <i class="trigger" nz-icon nzType="delete" nzTheme="outline"  (click)="deleteimageindex(i)" ></i>
+        <i
+          class="trigger"
+          nz-icon
+          nzType="delete"
+          nzTheme="outline"
+          (click)="deleteimageindex(i)"
+        ></i>
 
         <nz-divider nzType="vertical"></nz-divider>
+      </ng-container>
 
+      <ng-container *ngIf="this.button == 'Update Tree'">
+        <br>
+        <br>
+        <h4 *ngIf="value.locationNames && value.locationNames.length > 0">Location Tags</h4>
+        <ul>
+          <ng-container *ngFor="let item of value.locationNames">
+            <li>{{ item.locationName }}</li>
+          </ng-container>
+        </ul>
+      </ng-container>
+      <ng-container *ngIf="this.button == 'Update Tree'">
+        
+        <br>
+        <h4 *ngIf="value.ngoName && value.ngoName.length > 0">Ngo Tags</h4>
+        <ul>
+          <ng-container *ngFor="let item of value.ngoName">
+            <li>{{ item }}</li>
+          </ng-container>
+        </ul>
       </ng-container>
 
       <div class="gutter-row">
@@ -146,8 +176,6 @@
   </form>
 </div>
 <!-- tree add form -->
-
-
 
 <!-- ngo add form -->
 
@@ -515,14 +543,16 @@
           <!-- <div  class="validation-error" > <p> {{ showreqError(EvetForm,'eventImage') }}</p></div> -->
         </div>
       </div>
-      <br>
+      <br />
       <div *ngIf="uploadedImage">
-        <img
-        [src]="uploadedImage"
-        style="width: 300px; height: 300px"
-        alt=""
-      />
-      <i class="trigger" nz-icon nzType="delete" nzTheme="outline"  (click)="deleteLogo()" ></i>
+        <img [src]="uploadedImage" style="width: 300px; height: 300px" alt="" />
+        <i
+          class="trigger"
+          nz-icon
+          nzType="delete"
+          nzTheme="outline"
+          (click)="deleteLogo()"
+        ></i>
       </div>
 
       <br />
@@ -634,155 +664,152 @@
 
 <!-- orders  -->
 <div class="fullwidth-orders" *ngIf="category === 'orders'">
-
-
   <!-- view -->
 
-
-  <div nz-row    >
-    <div nz-col  class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Project Name : <b>{{value.projectName}}</b> 
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Tree Name / Count  : <b>{{value.treeNameOrdered}} / ( {{ value.numberOfSpeciesOrdered }} ) </b> 
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Location : <b>{{value.location}}</b> 
-        </div>
-    </div>
-       <!--  -->
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Sender Name : <b>{{value.senderName}}</b> 
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Phone number : <b>{{value.senderPhoneNumber}}</b> 
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Repetative user : <b >  {{ value.isSenderRepeatUser === 'true' ?  'Yes' : 'NO'}}</b> 
-        </div>
-    </div>
-        <!--  -->
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Receiver name  : <b>{{value.receiverName}}</b> 
-            
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Receiver number : <b>{{value.receiverPhoneNumber}}</b> 
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Receiver Email Id : <b>{{value.receiverEmailId}}</b> 
-        </div>
-    </div>
-        <!--  -->
-     <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            vendor name  : <b>{{value.vendorName}}</b> 
-        </div>
-     </div>
-     <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            vendor Email Id : <b>{{value.vendorEmailId}}</b> 
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-      <div class="inner-box" > 
+  <div nz-row>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Project Name : <b>{{ value.projectName }}</b>
       </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Tree Name / Count :
+        <b
+          >{{ value.treeNameOrdered }} / ( {{ value.numberOfSpeciesOrdered }} )
+        </b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Location : <b>{{ value.location }}</b>
+      </div>
+    </div>
+    <!--  -->
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Sender Name : <b>{{ value.senderName }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Phone number : <b>{{ value.senderPhoneNumber }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Repetative user :
+        <b> {{ value.isSenderRepeatUser === "true" ? "Yes" : "NO" }}</b>
+      </div>
+    </div>
+    <!--  -->
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Receiver name : <b>{{ value.receiverName }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Receiver number : <b>{{ value.receiverPhoneNumber }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Receiver Email Id : <b>{{ value.receiverEmailId }}</b>
+      </div>
+    </div>
+    <!--  -->
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        vendor name : <b>{{ value.vendorName }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        vendor Email Id : <b>{{ value.vendorEmailId }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box"></div>
+    </div>
+
+    <!--  -->
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Mode of Payment : <b>{{ value.modeOfPayment }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Amount Received : <b>{{ value.amountReceived }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Order Status: <b>{{ value.status }}</b>
+      </div>
+    </div>
   </div>
-
-        <!--  -->
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Mode of Payment   : <b>{{value.modeOfPayment}}</b> 
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Amount Received : <b>{{value.amountReceived}}</b> 
-        </div>
-    </div>
-   <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Order Status: <b>{{value.status}}</b> 
-        </div>
-    </div>
-
-</div>  
-<br><br><br>
+  <br /><br /><br />
   <!-- view -->
-
-
 
   <form [formGroup]="OrdersForm" (ngSubmit)="orderEditSubmit()">
     <div class="login-form">
       <div class="gutter-row">
         <div class="inner-box">
           <label> Change the status *</label>
-         
-              <nz-select
-                nzShowSearch
-                nzAllowClear
-                nzPlaceHolder="Change the status"
-                formControlName="status"
-                name="status" >
-                <nz-option nzLabel = "open" nzValue = "open"></nz-option>
-                <nz-option nzLabel = "In progress" nzValue = "In progress"></nz-option>
-                <nz-option nzLabel = "Planted" nzValue = "Planted"></nz-option>
-                <nz-option nzLabel = "Project concluded" nzValue = "Project concluded"></nz-option>
-              </nz-select>
-            </div>
-          </div>
-        </div>
-   
-      <br />
-      <div class="gutter-row align-center">
-        <div class="inner-box">
-          <button
-            nz-button
-            nzType="primary"
-            nzBlock
-            type="submit"
-            [disabled]="!OrdersForm.valid"
+
+          <nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Change the status"
+            formControlName="status"
+            name="status"
           >
-            {{ button }}
-          </button>
+            <nz-option nzLabel="open" nzValue="open"></nz-option>
+            <nz-option nzLabel="In progress" nzValue="In progress"></nz-option>
+            <nz-option nzLabel="Planted" nzValue="Planted"></nz-option>
+            <nz-option
+              nzLabel="Project concluded"
+              nzValue="Project concluded"
+            ></nz-option>
+          </nz-select>
         </div>
       </div>
-  
+    </div>
+
+    <br />
+    <div class="gutter-row align-center">
+      <div class="inner-box">
+        <button
+          nz-button
+          nzType="primary"
+          nzBlock
+          type="submit"
+          [disabled]="!OrdersForm.valid"
+        >
+          {{ button }}
+        </button>
+      </div>
+    </div>
   </form>
 </div>
 
 <!-- QueriesForm -->
 
 <div class="form-min-width" *ngIf="category === 'queries'">
-
   <!-- view -->
 
-  Email : <strong> {{value.email}}  </strong>   <br>
-         
-  Phone No : <strong> {{value.phoneNo}} </strong>   <br>
+  Email : <strong> {{ value.email }} </strong> <br />
 
-  Status : <strong>   {{value.status}} </strong> <br>
+  Phone No : <strong> {{ value.phoneNo }} </strong> <br />
 
-  Query : <br> <strong>   {{value.query}} </strong> 
+  Status : <strong> {{ value.status }} </strong> <br />
 
+  Query : <br />
+  <strong> {{ value.query }} </strong>
 
-   <br><br><br>
-
+  <br /><br /><br />
 
   <!-- view -->
 
@@ -791,35 +818,35 @@
       <div class="gutter-row">
         <div class="inner-box">
           <label> Change the status *</label>
-         
-              <nz-select
-                nzShowSearch
-                nzAllowClear
-                nzPlaceHolder="Change the status"
-                formControlName="status"
-                name="status" >
-                <nz-option nzLabel = "Open" nzValue = "Open"></nz-option>
-                <nz-option nzLabel = "In progress" nzValue = "In progress"></nz-option>
-                <nz-option nzLabel = "Closed" nzValue = "Closed"></nz-option>
-              </nz-select>
-            </div>
-          </div>
-        </div>
-   
-      <br />
-      <div class="gutter-row align-center">
-        <div class="inner-box">
-          <button
-            nz-button
-            nzType="primary"
-            nzBlock
-            type="submit"
-            [disabled]="!QueriesForm.valid"
+
+          <nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Change the status"
+            formControlName="status"
+            name="status"
           >
-            {{ button }}
-          </button>
+            <nz-option nzLabel="Open" nzValue="Open"></nz-option>
+            <nz-option nzLabel="In progress" nzValue="In progress"></nz-option>
+            <nz-option nzLabel="Closed" nzValue="Closed"></nz-option>
+          </nz-select>
         </div>
       </div>
-  
+    </div>
+
+    <br />
+    <div class="gutter-row align-center">
+      <div class="inner-box">
+        <button
+          nz-button
+          nzType="primary"
+          nzBlock
+          type="submit"
+          [disabled]="!QueriesForm.valid"
+        >
+          {{ button }}
+        </button>
+      </div>
+    </div>
   </form>
 </div>
