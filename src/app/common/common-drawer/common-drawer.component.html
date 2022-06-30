@@ -5,7 +5,7 @@
     <nz-switch class="" [(ngModel)]="isLive"></nz-switch>
   </div>
 
-  <form [formGroup]="TreeForm" (ngSubmit)="treeSubmit()">
+  <form [formGroup]="TreeForm" >
     <div class="login-form">
       <div class="gutter-row">
         <div class="inner-box">
@@ -44,14 +44,41 @@
       <div class="gutter-row">
         <div class="inner-box">
           <label> Secondary tag * </label>
-          <input
-            nz-input
-            placeholder="secondary tag"
-            type="text"
-            class="form-control"
-            formControlName="secondaryTag"
-            name="secondarytag"
-          />
+         
+          <button nz-button nzType="default" nzSize ="small" (click)="addsecondaryTag()"> + Secondary Tag</button>
+
+          <!-- --- -->
+
+          <ng-container formArrayName="secondaryTag" class="smallpaddingtop">
+            <ng-container *ngFor="let stag of secondaryTag.controls; let i = index" >
+
+                <div  [formGroup]="stag" class="smallpaddingtop">
+
+                  <div nz-row >
+                    <div nz-col class="gutter-row" [nzSpan]="18"><div class="inner-box">
+                      <input  nz-input  [placeholder]=" 'secondary tag : ' + (i+1)" type="text"  class="form-control"  formControlName="tag" name="tag"  />
+
+                    </div></div>
+                    <div nz-col class="gutter-row" [nzSpan]="1"><div class="inner-box">
+
+                    </div></div>
+                    <div nz-col class="gutter-row" [nzSpan]="4"><div class="inner-box">
+                      <button nz-button nzType="default"  (click)="deletesecondaryTag(i)" nzDanger>Delete tag</button>
+
+                    </div></div>
+                    <div nz-col class="gutter-row" [nzSpan]="1"><div class="inner-box">
+
+                    </div></div>
+                  
+                  </div>
+                </div>
+            </ng-container>
+        </ng-container>
+
+
+          <!-- --- -->
+
+
         </div>
       </div>
 
@@ -80,9 +107,7 @@
       />
       <i class="trigger" nz-icon nzType="delete" nzTheme="outline"  (click)="deleteLogo()" ></i>
       </div>
-    
 
-<br>
       <div class="gutter-row">
         <div class="inner-box">
           <label> Extra image </label>
@@ -135,7 +160,8 @@
             nz-button
             nzType="primary"
             nzBlock
-            type="submit"
+            type="button"
+            (click)="treeSubmit()"
             [disabled]="!TreeForm.valid"
           >
             {{ button }}

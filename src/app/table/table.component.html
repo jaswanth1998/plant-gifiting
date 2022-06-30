@@ -3,23 +3,34 @@
 <section *ngIf="showFilters"> 
     <div class="buttons">
         <div class="search">
-            <!-- <nz-select *ngIf="monthFilter" class="select margin" [style.width]="'180px'" nzPlaceHolder="Select Month" [(ngModel)]="selectedMonth" (ngModelChange)="monthFilterCgange($event)">
+            
+             <!-- <nz-select *ngIf="monthFilter" class="select margin" [style.width]="'180px'" nzPlaceHolder="Select Month" [(ngModel)]="selectedMonth" (ngModelChange)="monthFilterCgange($event)">
                 <ng-container *ngFor="let month of months">
                     <nz-option [nzLabel]="month" [nzValue]="month"></nz-option>
                 </ng-container>
-            </nz-select> -->
-            <!-- <nz-select class="select margin" [style.width]="showDateFilter ? '200px' : '230px'" nzPlaceHolder="Filter" [(ngModel)]="searchBy">
-                <ng-container *ngFor="let header of headers">
-                    <nz-option *ngIf="header.filter && header.checked" [nzLabel]="header.label" [nzValue]="header.filterKey ? header.filterKey : header.key"></nz-option>
-                </ng-container>
-            </nz-select> -->
-            <!-- <nz-input-group [nzPrefix]="suffixIconSearch" [style.width]="showDateFilter ? '250px' : '300px'" style="height: 38px;">
+            </nz-select>  -->
+           
+              &nbsp;&nbsp;
+              <nz-select class="select margin" [style.width]="showDateFilter ? '200px' : '230px'" nzPlaceHolder="Filter" [(ngModel)]="searchBy">
+                 <ng-container *ngFor="let header of headers">
+                     <nz-option *ngIf="header.filter && header.checked" [nzLabel]="header.label" [nzValue]="header.filterKey ? header.filterKey : header.key"></nz-option>
+                 </ng-container>
+             </nz-select> 
+             &nbsp;&nbsp;
+            <nz-input-group [nzPrefix]="suffixIconSearch" [style.width]="showDateFilter ? '200px' : '230px'"    >
                 <input type="text" nz-input [(ngModel)]="searchValue" (keyup.enter)="filterData()" />
-            </nz-input-group> -->
-            <!-- <ng-template #suffixIconSearch>
+            </nz-input-group>
+            
+            <ng-template #suffixIconSearch>
                 <i nz-icon nzType="search" style="font-size: 18px;"></i>
-            </ng-template> -->
+            </ng-template>
+            &nbsp;&nbsp;
+            <button nz-button nzType="default" (click)="filterData()" >Apply filter</button>
+            &nbsp;&nbsp;
+            <button nz-button nzType="default" (click)="clearFilter()" *ngIf="searchValue" >Clear filter</button>
+
             <!-- <nz-range-picker *ngIf="showDateFilter" [(ngModel)]="date" (ngModelChange)="onDateChange($event)" style="margin-left: 15px;height: 40px;"></nz-range-picker> -->
+            
         </div>
         <div class="header_buttons">
             <!-- <button class="desktop" nz-button *ngIf="showExport" (click)="exportToExcel()">Export</button>

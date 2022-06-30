@@ -18,6 +18,7 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
     NzMessageModule,
     NzSwitchModule,
     NzSelectModule,
-    NzGridModule
+    NzGridModule,
+    NzDatePickerModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US } ],
   exports :[
@@ -59,7 +61,8 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
     NzMessageModule,
     NzSwitchModule,
     NzSelectModule,
-    NzGridModule
+    NzGridModule,
+    NzDatePickerModule
   
   ]
 })

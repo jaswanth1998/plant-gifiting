@@ -30,6 +30,7 @@ export class TreeComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     {
       label: 'Is live',
@@ -37,6 +38,7 @@ export class TreeComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     {
       label: 'Primary tag',
@@ -44,6 +46,7 @@ export class TreeComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     {
       label: 'Secondary tag',

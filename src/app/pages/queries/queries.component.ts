@@ -28,6 +28,7 @@ export class QueriesComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     {
       label: 'Email',
@@ -35,6 +36,7 @@ export class QueriesComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     {
       label: 'Status',

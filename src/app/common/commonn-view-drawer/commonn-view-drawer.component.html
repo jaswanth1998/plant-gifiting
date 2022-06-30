@@ -6,15 +6,45 @@
 <div class="form-min-width" *ngIf="category === 'tree-view' ">
     
     <div #TreeView *ngIf="value">
+        <h3> {{value.treeName}}  </h3> 
 
         <img [src]="value.icon" class="view-icon" alt="">
 
-        <h1> {{value.treeName}}  </h1> 
+        
         <h3> Primary tag : <strong> {{value.primaryTag}} </strong></h3>
-        <h3> Scondary tag : <strong>{{ value.secondaryTag }}</strong></h3>
         <span *ngIf="value.isLive === 'yes' "> Status : Active ✅ </span> <span *ngIf="value.isLive === 'no' "> Status : Inactive 🚫 </span>
         <br>
+
+        <nz-divider nzOrientation="left" nzText="Secondary tags"></nz-divider>
+        <div nz-row [nzGutter]="16">
+            <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let tag of value.secondaryTag">
+              <div class="inner-box">
+                  {{tag}}
+               </div></div>
+          
+          </div>
         
+        <nz-divider nzOrientation="left" nzText="NGO names"></nz-divider>
+        <div nz-row [nzGutter]="16">
+            <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let ngo of value.ngoName">
+              <div class="inner-box">
+                  {{ngo}}
+               </div></div>
+          
+          </div>
+
+        <nz-divider nzOrientation="left" nzText="Locations for the Tree"></nz-divider>
+        <div nz-row [nzGutter]="16">
+          <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let location of value.locationNames">
+            <div class="inner-box">
+                {{location.locationName}}
+             </div></div>
+        
+        </div>
+
+        <br>
+        <nz-divider nzOrientation="left" nzText="Tree images"></nz-divider>
+
         <ng-container *ngFor="let item of value.images; let i = index" class="smallpadding">
             <img
               [src]="item"
