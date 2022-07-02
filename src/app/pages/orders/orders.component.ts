@@ -112,16 +112,13 @@ export class OrdersComponent implements OnInit {
       sortDir: 'desc',
       filter: true,
     },
-   
-   
-
     {
       label: 'Action',
       key: 'actions',
       checked: true,
       sortable: false,
       static: true,
-      controls: [{ label: 'View' },{ label: 'Edit' }, { label: 'Delete' }],
+      controls: [{ label: 'View' }],
     },
   ];
   public tableData = undefined;

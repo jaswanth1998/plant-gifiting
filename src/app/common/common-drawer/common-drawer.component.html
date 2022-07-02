@@ -444,7 +444,7 @@
                     [(ngModel)]="tree.invenoory"
                   />
                   <br />
-                  <label> Cost * </label>
+                  <label> Cost per plant * </label>
                   <input
                     nz-input
                     placeholder="cost "
@@ -615,7 +615,7 @@
 
       <div class="gutter-row" *ngIf="isNew === false">
         <div class="inner-box">
-          <label> Open for * &nbsp;&nbsp;&nbsp;</label>
+          <label> Open for tags* &nbsp;&nbsp;&nbsp;</label>
 
           <nz-select
             nzMode="multiple"
@@ -846,6 +846,83 @@
           </button>
         </div>
       </div>
-  
-  </form>
+    </form>
+    
+    <br>
+      <div class="chat">
+
+        <div class="user-msg">
+        <nz-card style="width: 300px;margin-top: 5px"  >
+          <nz-card-meta
+            [nzAvatar]="userTemplate"
+            nzTitle="User - 1-7-2022 10:30 AM"
+            nzDescription="Where is my order #test"
+          ></nz-card-meta>
+        </nz-card>
+        <ng-template #userTemplate>
+          <nz-avatar nzSrc="https://www.ipiindia.org/site_data/user_profiles/admin/default.jpg"></nz-avatar>
+        </ng-template>
+      </div>
+
+
+      <div class="admin-msg">
+
+        <nz-card style="width: 300px;margin-top: 5px" >
+          <nz-card-meta
+            [nzAvatar]="adminTemplate"
+            nzTitle="Admin - 1-7-2022 2:30 PM "
+            nzDescription="We are working on it #test "
+          ></nz-card-meta>
+        </nz-card>
+        <ng-template #adminTemplate>
+          <nz-avatar nzSrc="https://www.svgimages.com/svg-image/s2/admin-256x256.png"></nz-avatar>
+        </ng-template>
+        </div>
+
+        <!-- ---- test  -->
+
+        <div class="user-msg">
+          <nz-card style="width: 300px;margin-top: 5px"  >
+            <nz-card-meta
+              [nzAvatar]="userTemplate"
+              nzTitle="User - 2-7-2022 10:0 AM"
+              nzDescription="thanks for update  #test"
+            ></nz-card-meta>
+          </nz-card>
+          <ng-template #userTemplate>
+            <nz-avatar nzSrc="https://www.ipiindia.org/site_data/user_profiles/admin/default.jpg"></nz-avatar>
+          </ng-template>
+        </div>
+
+        <div class="admin-msg">
+
+          <nz-card style="width: 300px;margin-top: 5px" >
+            <nz-card-meta
+              [nzAvatar]="adminTemplate"
+              nzTitle="Admin - 2-7-2022 5:30 PM"
+              nzDescription="Issue is resoved thakns for reachig us  #test"
+            ></nz-card-meta>
+          </nz-card>
+          <ng-template #adminTemplate>
+            <nz-avatar nzSrc="https://www.svgimages.com/svg-image/s2/admin-256x256.png"></nz-avatar>
+          </ng-template>
+          </div>
+      </div>
+
+      <label> Send message *</label>
+      <input
+        nz-input
+        placeholder="Message"
+        type="text"
+        name="treename"
+      />
+      <br>
+      <br>
+      <button
+      nz-button
+      nzType="primary"
+      nzBlock
+    >
+      Send 
+    </button>
 </div>
