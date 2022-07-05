@@ -251,22 +251,7 @@
           </div>
         </div>
       </div>
-
-      <div nz-col class="gutter-row" nzSpan="8">
-        <div class="inner-box">
-          <label> NGO Description * </label>
-          <textarea
-            nz-input
-            placeholder="NGO Description"
-            class="form-control"
-            formControlName="description"
-            name="description"
-          ></textarea>
-          <div class="validation-error">
-            <p>{{ showreqError(NGOForm, "description") }}</p>
-          </div>
-        </div>
-      </div>
+     
 
       <div nz-col class="gutter-row" nzSpan="8">
         <div class="inner-box">
@@ -284,6 +269,32 @@
         </div>
       </div>
     </div>
+     <!-- <div nz-col class="gutter-row" nzSpan="8"> -->
+        <!-- <div class="inner-box"> -->
+          <label> NGO Description * </label>
+          <!-- <textarea
+            nz-input
+            placeholder="NGO Description"
+            class="form-control"
+            formControlName="description"
+            name="description"
+          ></textarea> -->
+          <ckeditor class="editor" [config]="{
+            toolbar: [
+                'heading',
+                '|',
+                'bold',
+                'italic',
+                'link',
+                'bulletedList',
+                'numberedList'
+            ]
+        }" [editor]="Editor" formControlName="description"></ckeditor>
+          <!-- <div class="validation-error"> -->
+            <p>{{ showreqError(NGOForm, "description") }}</p>
+          <!-- </div> -->
+        <!-- </div> -->
+      <!-- </div> -->
   </form>
   <!-- data {{NGO_projects | json}} -->
   <div *ngIf="isNew === false">

@@ -5,6 +5,7 @@ import { BaseComponent } from './base.component';
 
 
 
+
 const routes: Routes = [
   {
     path: '',
@@ -108,8 +109,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
+    CommonModule,    
     RouterModule.forChild(routes),
+    
   ]
 })
 export class BaseModule { }

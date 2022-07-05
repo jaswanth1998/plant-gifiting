@@ -29,7 +29,7 @@ import { VendorOrdersComponent } from './vendor-pages/vendor-orders/vendor-order
 import { VendorReportsComponent } from './vendor-pages/vendor-reports/vendor-reports.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { QueriesComponent } from './pages/queries/queries.component';
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 registerLocaleData(en);
 
 @NgModule({
@@ -64,7 +64,8 @@ registerLocaleData(en);
     NgxPaginationModule,
     NzDropDownModule,
     NzCheckboxModule,
-    NzButtonModule
+    NzButtonModule,
+    CKEditorModule
     
     
   ],

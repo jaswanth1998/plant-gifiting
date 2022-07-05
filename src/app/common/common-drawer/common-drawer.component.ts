@@ -6,6 +6,7 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { TreeService } from 'src/app/pages/tree/tree.service';
 import { EventService } from '../../pages/events/event-service.service';
 import { ApiServiceService } from './api-service.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 @Component({
   selector: 'app-common-drawer',
   templateUrl: './common-drawer.component.html',
@@ -17,6 +18,7 @@ export class CommonDrawerComponent implements OnInit {
   @Input() button = ''
   @Input() category = '';
   @Input() isNew = true;
+  public Editor = ClassicEditor;
 
   confirmModal?: NzModalRef;
 
