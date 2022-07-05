@@ -29,6 +29,7 @@ export class EcardComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     {
       label: 'is Live',
@@ -36,6 +37,7 @@ export class EcardComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     {
       label: 'Open For',

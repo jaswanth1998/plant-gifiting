@@ -28,6 +28,7 @@ export class OrdersComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     {
       label: 'Tree',
@@ -35,6 +36,7 @@ export class OrdersComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     {
       label: 'Status',
@@ -42,6 +44,7 @@ export class OrdersComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     {
       label: 'Count',
@@ -49,6 +52,7 @@ export class OrdersComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     {
       label: 'Project',
@@ -73,6 +77,7 @@ export class OrdersComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     {
       label: 'Sender PH',
@@ -80,6 +85,7 @@ export class OrdersComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     {
       label: 'Receiver',
@@ -87,6 +93,7 @@ export class OrdersComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     
     {
@@ -95,17 +102,23 @@ export class OrdersComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
-   
-   
-
+    {
+      label: 'Order id',
+      key: '_id',
+      checked: true,
+      sortable: true,
+      sortDir: 'desc',
+      filter: true,
+    },
     {
       label: 'Action',
       key: 'actions',
       checked: true,
       sortable: false,
       static: true,
-      controls: [{ label: 'View' },{ label: 'Edit' }, { label: 'Delete' }],
+      controls: [{ label: 'View' }],
     },
   ];
   public tableData = undefined;

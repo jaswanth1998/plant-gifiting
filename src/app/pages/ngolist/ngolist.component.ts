@@ -30,6 +30,7 @@ export class NgolistComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     {
       label: 'phone Number',
@@ -37,6 +38,7 @@ export class NgolistComponent implements OnInit {
       checked: true,
       sortable: true,
       sortDir: 'desc',
+      filter: true,
     },
     {
       label: 'spocName',
@@ -45,6 +47,7 @@ export class NgolistComponent implements OnInit {
       sortable: true,
       sortDir: 'desc',
       filter: true,
+      
     },
     {
       label: 'Description',

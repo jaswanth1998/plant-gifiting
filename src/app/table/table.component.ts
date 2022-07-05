@@ -24,10 +24,10 @@ export class TableComponent implements OnInit {
   @Input('page') page: any = 1;
   @Input('showExport') showExport: boolean = true;
   @Input('showCheckbox') showCheckbox: boolean = false;
-  @Input('showDateFilter') showDateFilter: boolean = false;
+  @Input('showDateFilter') showDateFilter: boolean = true;
   @Input('dateFilterColumn') dateFilterColumn: any = 'createdOn';
   @Input('addPagination') addPagination: boolean = true;
-  @Input('monthFilter') monthFilter: boolean = false;
+  @Input('monthFilter') monthFilter: boolean = true;
   @Input('filterByMonth') filterByMonth: boolean = false;
   @Input('excelName') excelName: any = 'data';
   @Input('buttonPermission') buttonPermission: boolean = true;
@@ -36,6 +36,7 @@ export class TableComponent implements OnInit {
   @Output('format') format = new EventEmitter();
   @Output('emitter') emitter = new EventEmitter();
 
+  mode = 'date';
   data: any = [];
   total: any;
   searchBy: any;
@@ -253,5 +254,10 @@ export class TableComponent implements OnInit {
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, workSheet, 'Sheet1');
     XLSX.writeFile(wb, `${this.excelName}.xlsx`);
+  }
+
+  clearFilter(){
+    this.searchValue = '';
+    this.filterData();
   }
 }

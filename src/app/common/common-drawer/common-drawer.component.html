@@ -5,7 +5,7 @@
     <nz-switch class="" [(ngModel)]="isLive"></nz-switch>
   </div>
 
-  <form [formGroup]="TreeForm" (ngSubmit)="treeSubmit()">
+  <form [formGroup]="TreeForm" >
     <div class="login-form">
       <div class="gutter-row">
         <div class="inner-box">
@@ -44,14 +44,41 @@
       <div class="gutter-row">
         <div class="inner-box">
           <label> Secondary tag * </label>
-          <input
-            nz-input
-            placeholder="secondary tag"
-            type="text"
-            class="form-control"
-            formControlName="secondaryTag"
-            name="secondarytag"
-          />
+         
+          <button nz-button nzType="default" nzSize ="small" (click)="addsecondaryTag()"> + Secondary Tag</button>
+
+          <!-- --- -->
+
+          <ng-container formArrayName="secondaryTag" class="smallpaddingtop">
+            <ng-container *ngFor="let stag of secondaryTag.controls; let i = index" >
+
+                <div  [formGroup]="stag" class="smallpaddingtop">
+
+                  <div nz-row >
+                    <div nz-col class="gutter-row" [nzSpan]="18"><div class="inner-box">
+                      <input  nz-input  [placeholder]=" 'secondary tag : ' + (i+1)" type="text"  class="form-control"  formControlName="tag" name="tag"  />
+
+                    </div></div>
+                    <div nz-col class="gutter-row" [nzSpan]="1"><div class="inner-box">
+
+                    </div></div>
+                    <div nz-col class="gutter-row" [nzSpan]="4"><div class="inner-box">
+                      <button nz-button nzType="default"  (click)="deletesecondaryTag(i)" nzDanger>Delete tag</button>
+
+                    </div></div>
+                    <div nz-col class="gutter-row" [nzSpan]="1"><div class="inner-box">
+
+                    </div></div>
+                  
+                  </div>
+                </div>
+            </ng-container>
+        </ng-container>
+
+
+          <!-- --- -->
+
+
         </div>
       </div>
 
@@ -165,7 +192,8 @@
             nz-button
             nzType="primary"
             nzBlock
-            type="submit"
+            type="button"
+            (click)="treeSubmit()"
             [disabled]="!TreeForm.valid"
           >
             {{ button }}
@@ -457,7 +485,7 @@
                     [(ngModel)]="tree.invenoory"
                   />
                   <br />
-                  <label> Cost * </label>
+                  <label> Cost per plant * </label>
                   <input
                     nz-input
                     placeholder="cost "
@@ -630,7 +658,7 @@
 
       <div class="gutter-row" *ngIf="isNew === false">
         <div class="inner-box">
-          <label> Open for * &nbsp;&nbsp;&nbsp;</label>
+          <label> Open for tags* &nbsp;&nbsp;&nbsp;</label>
 
           <nz-select
             nzMode="multiple"
@@ -843,6 +871,7 @@
           </nz-select>
         </div>
       </div>
+<<<<<<< HEAD
     </div>
 
     <br />
@@ -860,4 +889,85 @@
       </div>
     </div>
   </form>
+=======
+    </form>
+    
+    <br>
+      <div class="chat">
+
+        <div class="user-msg">
+        <nz-card style="width: 300px;margin-top: 5px"  >
+          <nz-card-meta
+            [nzAvatar]="userTemplate"
+            nzTitle="User - 1-7-2022 10:30 AM"
+            nzDescription="Where is my order #test"
+          ></nz-card-meta>
+        </nz-card>
+        <ng-template #userTemplate>
+          <nz-avatar nzSrc="https://www.ipiindia.org/site_data/user_profiles/admin/default.jpg"></nz-avatar>
+        </ng-template>
+      </div>
+
+
+      <div class="admin-msg">
+
+        <nz-card style="width: 300px;margin-top: 5px" >
+          <nz-card-meta
+            [nzAvatar]="adminTemplate"
+            nzTitle="Admin - 1-7-2022 2:30 PM "
+            nzDescription="We are working on it #test "
+          ></nz-card-meta>
+        </nz-card>
+        <ng-template #adminTemplate>
+          <nz-avatar nzSrc="https://www.svgimages.com/svg-image/s2/admin-256x256.png"></nz-avatar>
+        </ng-template>
+        </div>
+
+        <!-- ---- test  -->
+
+        <div class="user-msg">
+          <nz-card style="width: 300px;margin-top: 5px"  >
+            <nz-card-meta
+              [nzAvatar]="userTemplate"
+              nzTitle="User - 2-7-2022 10:0 AM"
+              nzDescription="thanks for update  #test"
+            ></nz-card-meta>
+          </nz-card>
+          <ng-template #userTemplate>
+            <nz-avatar nzSrc="https://www.ipiindia.org/site_data/user_profiles/admin/default.jpg"></nz-avatar>
+          </ng-template>
+        </div>
+
+        <div class="admin-msg">
+
+          <nz-card style="width: 300px;margin-top: 5px" >
+            <nz-card-meta
+              [nzAvatar]="adminTemplate"
+              nzTitle="Admin - 2-7-2022 5:30 PM"
+              nzDescription="Issue is resoved thakns for reachig us  #test"
+            ></nz-card-meta>
+          </nz-card>
+          <ng-template #adminTemplate>
+            <nz-avatar nzSrc="https://www.svgimages.com/svg-image/s2/admin-256x256.png"></nz-avatar>
+          </ng-template>
+          </div>
+      </div>
+
+      <label> Send message *</label>
+      <input
+        nz-input
+        placeholder="Message"
+        type="text"
+        name="treename"
+      />
+      <br>
+      <br>
+      <button
+      nz-button
+      nzType="primary"
+      nzBlock
+    >
+      Send 
+    </button>
+>>>>>>> 0afb7ecf1f650e8968c534cd4d15169e8ce10db3
 </div>

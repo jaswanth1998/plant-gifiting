@@ -1,3 +1,4 @@
+import { ThisReceiver, ThrowStmt } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
@@ -100,10 +101,26 @@ export class CommonDrawerComponent implements OnInit {
     private apiService: ApiServiceService
   ) { }
 
+  get secondaryTag() {
+    return this.TreeForm.controls["secondaryTag"] as FormArray;
+  }
+
+  addsecondaryTag(data = ''){
+
+    const form = new FormGroup({
+      tag: new FormControl(data, [
+        Validators.required,
+      ])
+    });
+
+  this.secondaryTag.push(form);
+  }
+
+  deletesecondaryTag(tagIndex: number) {
+    this.secondaryTag.removeAt(tagIndex);
+}
+   
   async ngOnInit(): Promise<void> {
-
-
-
 
 
     console.log(this.value, this.category, this.button);
@@ -119,7 +136,8 @@ export class CommonDrawerComponent implements OnInit {
         primaryTag: new FormControl(this.value.primaryTag, [
           Validators.required,
         ]),
-        secondaryTag: new FormControl(this.value.secondaryTag, []),
+        secondaryTag: this.fb.array([]),
+        //  new FormControl(this.value.secondaryTag, []),
         icon: new FormControl(null, [
           // Validators.required,
         ]),
@@ -131,15 +149,28 @@ export class CommonDrawerComponent implements OnInit {
         ])
       });
 
-      if (this.value.isLive === "false") {
-        this.isLive = false;
+
+      
+      if( ! this.isNew ){
+        if (this.value.isLive.toLowerCase() === "false" || this.value.isLive.toLowerCase() === "no") {
+          this.isLive = false;
+        }
+        else if (this.value.isLive.toLowerCase() === "true" || this.value.isLive.toLowerCase() === "yes") {
+          this.isLive = true;
+        }
+        else {
+          this.isLive = false;
+        }
+
+        // addsecondaryTag
+
+        this.value.secondaryTag.forEach(element => {
+          console.log(element)
+         this.addsecondaryTag(element)
+        });
+
       }
-      else if (this.value.isLive === "true") {
-        this.isLive = true;
-      }
-      else {
-        this.isLive = false;
-      }
+      
     }
 
     if (this.category === 'NGO') {
@@ -394,7 +425,14 @@ export class CommonDrawerComponent implements OnInit {
           formData['isLive'] = this.isLive;
           formData['icon'] = this.uploadedImage
           formData['images'] = this.multipleUploadImages;
-        if (this.value) {
+          let tags = [];
+          
+          formData['secondaryTag'].map(stag=>{
+            tags.push(stag.tag);
+          })
+          formData['secondaryTag'] = tags;
+
+        if (this.value || !this.isNew) {
           formData['_id'] = this.value['_id'];
         }
           console.log(formData);
