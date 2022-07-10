@@ -2,37 +2,51 @@ import { Injectable } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VendorProjectsService extends ApiService {
+  async getProjectsList() {
+    return this.get('ngo/vendorProjects', {});
+  }
 
+  public getProjectsListByID(id) {
+    return this.get('Projectss/getProjectsDataById' + id, {});
+  }
 
-  // async getEcardList(){
-  //   return this.get('ecards/getEcardDetails', {});
-  // }
+  public addNewProjects(body) {
+    return this.post('Projectss/addProjectsDetails', body);
+  }
 
-  // public getEcardListByID(id){
-  //   return this.get('ecards/getEcardDataById'+id, {});
-  // }
+  public updateProjects(id, body) {
+    return this.post('Projectss/updateProjectsData/' + id, body);
+  }
 
-  // public addNewEcard(body){
-  //   return this.post('ecards/addEcardDetails', body);
-  // }
+  public deleteProjects(objId) {
+    console.log(objId);
+    return this.get('Projectss/deleteProjectsDataByID/' + objId, {});
+  }
 
-  // public updateEcard(id,body){
-  //   return this.post('ecards/updateEcardData/'+id, body);
-  // }
+  // ----
 
+  public updatevendorPrj(prjid, status) {
+    return this.post('ngo/updateVendorProject', {
+      projectId: prjid,
+      status: status,
+    });
+  }
 
-  // public deleteEcard(objId){
-  //   console.log(objId);
-  //   return this.get('ecards/deleteEcardDataByID/'+objId,{});
+  public updateVendPrjLive(prjId, locid, status) {
+    return this.post('ngo/updateVendorProjectLocationLive', {
+      projectId: prjId,
+      projectLocationId: locid,
+      status: status,
+    });
+  }
 
-  // }
-
-  // public getEventsList(){
-  //   return this.get('events/getEventDetails', {});
-  // }
-  
-
+  public addVendorPrjReport(prjid, url) {
+    return this.post('ngo/updateVendorProjectReport', {
+      projectId: prjid,
+      report: url,
+    });
+  }
 }

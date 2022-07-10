@@ -938,3 +938,124 @@
       Send 
     </button>
 </div>
+<div *ngIf="category === 'projects'">
+
+
+  <div #queryView *ngIf="value">
+
+    <!-- <strong> {{value.projectDetails | json }} </strong> <br> -->
+
+    <nz-divider nzText="Project  Details"></nz-divider>
+
+    <div class="center-div">
+      Is Project Live :
+      <nz-switch class="" [(ngModel)]="isPrjLive"></nz-switch>
+    </div>
+
+    <div nz-row>
+      <div nz-col class="gutter-row" nzSpan="8">
+        <div class="inner-box">
+          Project Name : <b>{{value.projectDetails.projectName}}</b>
+        </div>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="8">
+        <div class="inner-box">
+          Is live : <b>{{value.projectDetails.live}} </b>
+        </div>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="8">
+        <div class="inner-box">
+          id : <b>{{value.projectDetails._id}}</b>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <!-- -- locationDetails -- -->
+    <nz-divider nzText="Location  Details"></nz-divider>
+
+    <div class="center-div">
+      Is Location Live :
+      <nz-switch class="" [(ngModel)]="isLocLive"></nz-switch>
+    </div>
+    <br>
+
+    <div nz-row>
+      <div nz-col class="gutter-row" nzSpan="8">
+        <div class="inner-box">
+          Location name : <strong> {{ value.locationDetails.locationName}} </strong>
+        </div>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="8">
+        <div class="inner-box">
+          Location live status : <strong> {{ value.projectDetails.live}} </strong>
+        </div>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="8">
+        <div class="inner-box" *ngIf="value.projectDetails.report">
+          <strong> Download report </strong> <a href={{value.projectDetails.report}} target="_blank"> <i class="trigger"
+              nz-icon nzType="download" nzTheme="outline"> </i> </a>
+        </div>
+      </div>
+
+    </div>
+
+    <nz-divider nzText="Tree  Details"></nz-divider>
+
+    <div nz-row *ngFor="let tree of value.projectDetails.ProjectLocationandTrees.trees">
+      <div nz-col class="gutter-row" nzSpan="6">
+        <div class="inner-box">
+          Name : <b>{{tree.treeName}}</b>
+        </div>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="6">
+        <div class="inner-box">
+          Invenory: <b>{{tree.invenoory}} </b>
+        </div>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="6">
+        <div class="inner-box">
+          Slapping cost : <b>{{tree.cost}}</b>
+        </div>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="6">
+        <div class="inner-box">
+          id : <b>{{tree._id}}</b>
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+
+    <div class="center-div">
+
+      <nz-divider nzText="Reports "></nz-divider>
+
+      <label> Project report * </label>
+      <br />
+      <input (change)="onOneFileSelected($event)" placeholder="Select report" type="file" accept="application/pdf"
+        class="form-control" name="report" />
+
+      <br>
+      <br>
+      <div *ngIf="uploadedDoc">
+
+        link generated : {{uploadedDoc}}
+        <br>
+
+        Download report <a href={{uploadedDoc}} target="_blank"> <i class="trigger" nz-icon nzType="download"
+            nzTheme="outline"> </i> </a>
+        <i class="trigger" nz-icon nzType="delete" nzTheme="outline" (click)="deleteDoc()"></i>
+      </div>
+    </div>
+
+  </div>
+
+  <button nz-button nzType="primary" (click)="submitVendPrj()" nzBlock> Submit </button>
+
+
+
+</div>

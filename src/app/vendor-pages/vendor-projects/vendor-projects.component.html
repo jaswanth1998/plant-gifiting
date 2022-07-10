@@ -13,3 +13,10 @@
   </div>
   
   <hr>
+<div *ngIf="dataTable">
+
+
+  <app-table [headerButtons]="HeaderButtons" [headers]="tableHeaders" [tableData]="tableData"
+    [defaultColumn]="'customer_name'" [dir]="'asc'" [page]="dataTablePage" (actions)="dataTableActions($event)"
+    (headerActions)="dataTableHeaderActions($event)"></app-table>
+</div>

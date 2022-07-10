@@ -285,3 +285,89 @@
 </div>
 
  <!-- odes-view   -->
+<!-- Projects -->
+
+<div class="fullwidth-orders" *ngIf="category === 'Projects-view' ">
+
+    <div #queryView *ngIf="value">
+
+        <!-- <strong> {{value.projectDetails | json }} </strong> <br> -->
+
+        <nz-divider nzText="Project  Details"></nz-divider>
+
+        <div nz-row>
+            <div nz-col class="gutter-row" nzSpan="8">
+                <div class="inner-box">
+                    Project Name : <b>{{value.projectDetails.projectName}}</b>
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8">
+                <div class="inner-box">
+                    Project live status : <b>{{value.projectDetails.live}} </b>
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8">
+                <div class="inner-box">
+                    id : <b>{{value.projectDetails._id}}</b>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- -- locationDetails -- -->
+        <nz-divider nzText="Location  Details"></nz-divider>
+
+
+        <div nz-row>
+            <div nz-col class="gutter-row" nzSpan="8">
+                <div class="inner-box">
+                    Location name : <strong> {{ value.locationDetails.locationName}} </strong>
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8">
+                <div class="inner-box">
+                    Location live status : <strong> {{ value.projectDetails.live}} </strong>
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="8">
+                <div class="inner-box" *ngIf="value.projectDetails.report">
+                    <strong> Download report </strong> <a href={{value.projectDetails.report}} target="_blank"> <i
+                            class="trigger" nz-icon nzType="download" nzTheme="outline"> </i> </a>
+                </div>
+            </div>
+
+        </div>
+
+        <nz-divider nzText="Tree  Details"></nz-divider>
+
+
+
+        <!-- {{value.projectDetails.ProjectLocationandTrees.trees | json}} -->
+
+        <div nz-row *ngFor="let tree of value.projectDetails.ProjectLocationandTrees.trees">
+            <div nz-col class="gutter-row" nzSpan="6">
+                <div class="inner-box">
+                    Name : <b>{{tree.treeName}}</b>
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="6">
+                <div class="inner-box">
+                    Invenory: <b>{{tree.invenoory}} </b>
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="6">
+                <div class="inner-box">
+                    Slapping cost : <b>{{tree.cost}}</b>
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="6">
+                <div class="inner-box">
+                    id : <b>{{tree._id}}</b>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

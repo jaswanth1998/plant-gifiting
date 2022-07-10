@@ -29,6 +29,7 @@ export class CommonnViewDrawerComponent implements OnInit {
    if(this.category === 'ecard-view'){
     this.value.openFordataList =  this.value.openFordata.split(',');
     console.log(this.value.openFordataList )
+
    }
 
 
