@@ -44,6 +44,7 @@ export class CommonDrawerComponent implements OnInit {
   uploadedDoc: any;
   isLocLive: boolean;
   isPrjLive: boolean;
+  newMsg: string;
 
   // orderStatus = [
   //   {
@@ -676,5 +677,25 @@ export class CommonDrawerComponent implements OnInit {
 
   deleteDoc() {
     this.uploadedDoc = null;
+  }
+
+  sendNewChat() {
+    console.log(this.newMsg, this.value._id);
+
+    console.log(this.value);
+
+    this.value.chats.push({
+      type: 'admin',
+      reply: this.newMsg,
+      date: moment().toString(),
+    });
+
+    this.newMsg = '';
+
+    this.apiService
+      .sendQueriesNewMsg(this.value._id, this.value)
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 }

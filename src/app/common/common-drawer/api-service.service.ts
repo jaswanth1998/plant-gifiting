@@ -12,4 +12,8 @@ export class ApiServiceService extends ApiService {
   uploadPDF(formData) {
     return this.post('images/upload', formData);
   }
+
+  sendQueriesNewMsg(id, obj) {
+    return this.post('queries/updateQuery/' + id, obj);
+  }
 }

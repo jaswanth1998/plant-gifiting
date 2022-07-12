@@ -861,14 +861,14 @@
     </form>
     
     <br>
-      <div class="chat">
+      <div class="chat" *ngFor="let onemsg of value.chats">
 
-        <div class="user-msg">
-        <nz-card style="width: 300px;margin-top: 5px"  >
+        <div class="user-msg" *ngIf="onemsg.type === 'user' ">
+          <nz-card style="width: 400px;margin-top: 5px">
           <nz-card-meta
             [nzAvatar]="userTemplate"
-            nzTitle="User - 1-7-2022 10:30 AM"
-            nzDescription="Where is my order #test"
+            [nzTitle]=" 'User at '+  onemsg.date.substring(0,16) "
+            [nzDescription]="  onemsg.reply"
           ></nz-card-meta>
         </nz-card>
         <ng-template #userTemplate>
@@ -877,13 +877,13 @@
       </div>
 
 
-      <div class="admin-msg">
+      <div class="admin-msg" *ngIf="onemsg.type === 'admin' ">
 
-        <nz-card style="width: 300px;margin-top: 5px" >
+        <nz-card style="width: 400px;margin-top: 5px">
           <nz-card-meta
             [nzAvatar]="adminTemplate"
-            nzTitle="Admin - 1-7-2022 2:30 PM "
-            nzDescription="We are working on it #test "
+            [nzTitle]=" 'Admin at ' +  onemsg.date.substring(0,16) "
+            [nzDescription]="onemsg.reply"
           ></nz-card-meta>
         </nz-card>
         <ng-template #adminTemplate>
@@ -891,34 +891,7 @@
         </ng-template>
         </div>
 
-        <!-- ---- test  -->
-
-        <div class="user-msg">
-          <nz-card style="width: 300px;margin-top: 5px"  >
-            <nz-card-meta
-              [nzAvatar]="userTemplate"
-              nzTitle="User - 2-7-2022 10:0 AM"
-              nzDescription="thanks for update  #test"
-            ></nz-card-meta>
-          </nz-card>
-          <ng-template #userTemplate>
-            <nz-avatar nzSrc="https://www.ipiindia.org/site_data/user_profiles/admin/default.jpg"></nz-avatar>
-          </ng-template>
-        </div>
-
-        <div class="admin-msg">
-
-          <nz-card style="width: 300px;margin-top: 5px" >
-            <nz-card-meta
-              [nzAvatar]="adminTemplate"
-              nzTitle="Admin - 2-7-2022 5:30 PM"
-              nzDescription="Issue is resoved thakns for reachig us  #test"
-            ></nz-card-meta>
-          </nz-card>
-          <ng-template #adminTemplate>
-            <nz-avatar nzSrc="https://www.svgimages.com/svg-image/s2/admin-256x256.png"></nz-avatar>
-          </ng-template>
-          </div>
+      
       </div>
 
       <label> Send message *</label>
@@ -927,6 +900,7 @@
         placeholder="Message"
         type="text"
         name="treename"
+        [(ngModel)]="newMsg"
       />
       <br>
       <br>
@@ -934,6 +908,7 @@
       nz-button
       nzType="primary"
       nzBlock
+      (click)="sendNewChat()"
     >
       Send 
     </button>
