@@ -134,6 +134,7 @@ export class CommonDrawerComponent implements OnInit {
         icon: new FormControl(null, [
           // Validators.required,
         ]),
+        price: new FormControl(this.value.price, []),
         images: new FormControl(null, [
           // Validators.required,
         ]),
