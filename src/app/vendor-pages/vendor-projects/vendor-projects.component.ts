@@ -115,7 +115,7 @@ export class VendorProjectsComponent implements OnInit {
               this.ProjectsService.updateVendPrjLive(
                 data.projectId,
                 data.locationID,
-                data.PrjLive
+                data.locLive
               ).subscribe(
                 (response: any) => {
                   console.log(response);

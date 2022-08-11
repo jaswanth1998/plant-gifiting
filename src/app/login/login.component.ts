@@ -63,18 +63,19 @@ export class LoginComponent implements OnInit {
 
       console.log(response  )
 
-      if (response.data.message) {
-        this.error = response.data.message;
+      if (response.data[0].message) {
+        this.error = response.data[0].message;
       } else {
-
-        if(response.data.userData.usetType === "admin" || response.data.userData.usetType === "vendor"  ){
-          localStorage.setItem('token', response.data.token)
-          localStorage.setItem('user', JSON.stringify(response.data.userData));
+        if (
+          response.data[0].usetType === 'admin' ||
+          response.data[0].usetType === 'vendor'
+        ) {
+          localStorage.setItem('token', response.data[0].token);
+          localStorage.setItem('user', JSON.stringify(response.data[0]));
           this.router.navigateByUrl('/lanch');
-        }else{
-          this.error = "Try login with Admin / Vendor credentials";
+        } else {
+          this.error = 'Try login with Admin / Vendor credentials';
         }
-        
       }
     }
 
