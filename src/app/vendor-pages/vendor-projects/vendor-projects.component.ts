@@ -115,7 +115,7 @@ export class VendorProjectsComponent implements OnInit {
               this.ProjectsService.updateVendPrjLive(
                 data.projectId,
                 data.locationID,
-                data.PrjLive == 'Yes' ? data.locLive: 'Nof'
+                data.PrjLive == 'Yes' ? data.locLive: 'No'
               ).subscribe(
                 (response: any) => {
                   console.log(response);
@@ -306,6 +306,3 @@ export class VendorProjectsComponent implements OnInit {
     }, 100);
   }
 }
-
-
-

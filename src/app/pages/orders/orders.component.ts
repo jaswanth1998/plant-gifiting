@@ -14,9 +14,9 @@ import { OrdersService } from './orders-service.service';
 export class OrdersComponent implements OnInit {
   confirmModal?: NzModalRef; 
   public HeaderButtons: any[] = [
-    {
-      label: 'Export',
-    },
+    // {
+    //   label: 'Export',
+    // },
     // {
     //   label: 'Add',
     // },
