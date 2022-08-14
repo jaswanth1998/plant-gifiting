@@ -34,8 +34,16 @@ export class VendorProjectsComponent implements OnInit {
       filter: true,
     },
     {
-      label: 'Status',
+      label: 'Project Status',
       key: 'live',
+      checked: true,
+      sortable: true,
+      sortDir: 'desc',
+      filter: true,
+    },
+    {
+      label: 'Report Status',
+      key: 'report',
       checked: true,
       sortable: true,
       sortDir: 'desc',
@@ -275,14 +283,18 @@ export class VendorProjectsComponent implements OnInit {
         response.data.forEach((value, index) => {
           // console.log(value.projectDetails);
           let obj = {
-            projectName: String,
-            projectLocations: String,
-            live: String,
-            index: Number,
+            projectName: '',
+            projectLocations: '',
+            live: '',
+            index: 0,
+            report: '',
           };
           obj.projectName = value.projectDetails.projectName;
           obj.projectLocations = value.locationDetails.locationName;
           obj.live = value.projectDetails.live;
+
+          obj.report = value.projectDetails.report ? 'Available' : '--';
+
           obj.index = index;
           this.tableData.push(obj);
         });
