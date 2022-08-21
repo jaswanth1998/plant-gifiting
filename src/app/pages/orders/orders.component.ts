@@ -15,7 +15,7 @@ export class OrdersComponent implements OnInit {
   confirmModal?: NzModalRef; 
   public HeaderButtons: any[] = [
     // {
-    //   label: 'Upload',
+    //   label: 'Export',
     // },
     // {
     //   label: 'Add',
