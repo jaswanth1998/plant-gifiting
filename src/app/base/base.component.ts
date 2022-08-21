@@ -21,8 +21,8 @@ export class BaseComponent implements OnInit {
    if(!userdata){
     this.router.navigateByUrl('/');
    }else{
-    this.username = userdataobj["name"];
-    this.usetType = userdataobj["usetType"];
+    this.username = userdataobj['userData']['name'];
+    this.usetType = userdataobj['userData']['usetType'];
    }
 
   }

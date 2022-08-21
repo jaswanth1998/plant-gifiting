@@ -71,31 +71,23 @@ export class CommonnViewDrawerComponent implements OnInit {
   }
 
   getLocationname(id){
-
-    const index = this.LocationsList.findIndex(loc => loc._id === id);
-    console.log(index)
-    if(index >= 0){
-     
-      return  this.LocationsList[index]['locationName'];
-      
-      }
-      else {
-        return "Location error"
-      }
+    const index = this.LocationsList.findIndex((loc) => loc._id === id);
+    // console.log(index)
+    if (index >= 0) {
+      return this.LocationsList[index]['locationName'];
+    } else {
+      return 'Location error';
+    }
   }
 
   getTreename(id){
-
-    const index = this.TreesList.findIndex(loc => loc._id === id);
-    console.log(index)
-    if(index >= 0){
-     
-      return  this.TreesList[index]['treeName'];
-      
-      }
-      else {
-        return "Tree error"
-      }
+    const index = this.TreesList.findIndex((loc) => loc._id === id);
+    // console.log(index)
+    if (index >= 0) {
+      return this.TreesList[index]['treeName'];
+    } else {
+      return 'Tree error';
+    }
   }
 
 }

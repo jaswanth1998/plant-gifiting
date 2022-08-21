@@ -245,6 +245,11 @@ export class EcardComponent implements OnInit {
       console.log(response);
       this.eventsData = response.data;
 
+      if (this.tableData.length === 0) {
+        this.commonService.showProcessingToastOff();
+
+        this.refreshDatatable();
+      }
       
     this.tableData.forEach( (ecard)=>{
       console.log(ecard);

@@ -54,8 +54,9 @@
        
           </ng-container>
 
-        <p> Tree Introduction : <strong> {{value.treeIntroduction}} </strong> </p>
+        <p> Tree Introduction : </p>
 
+        <div [innerHTML]="value.treeIntroduction"></div>
 
 
     </div>
@@ -70,10 +71,10 @@
     <div #ngoView *ngIf="value && loadview">
 
          <div nz-row>
-            <div nz-col nzSpan="12">
+            <div nz-col nzSpan="9">
                 <h1> <strong>  {{value.ngoName}} </strong> </h1> 
             </div>
-            <div nz-col nzSpan="6">
+            <div nz-col nzSpan="9">
                 
             </div>
             <div nz-col nzSpan="6">
@@ -83,12 +84,18 @@
             <div nz-col nzSpan="8">
                 <p>  Email : <strong> {{value.email}} </strong> </p>
             </div>
-            <div nz-col nzSpan="8">
+            <div nz-col nzSpan="16">
                 <p>  Address : <strong> {{value.address}} </strong> </p>
             </div>
-            <div nz-col nzSpan="8">
+            <!-- <div nz-col nzSpan="8">
                 <p>  Description : <strong> {{value.description}} </strong> </p>
-            </div>
+            </div> -->
+        </div>
+<div>
+    <p> Description : </p>
+
+    <div [innerHTML]="value.description"></div>
+
           </div>
 
 
@@ -100,7 +107,7 @@
                 <div nz-row  nz-row>
                     <div nz-col nzSpan="12" *ngFor="let location of project.ProjectLocationandTrees" class="border_groove" >
                       
-                        <nz-divider [nzText]=" getLocationname(location.projectLocationID)"></nz-divider>
+                        <nz-divider [nzText]="getLocationname(location.projectLocationID)"></nz-divider>
                         
                         <div nz-row  nz-row>
                             <div nz-col nzSpan="12" *ngFor="let tree of location.trees" class="border_groove">
@@ -109,6 +116,11 @@
                                  <strong> Inventory :  </strong> {{ tree.invenoory }}
                                 <br>
                                  <strong> Cost :   </strong>  {{ tree.cost }}
+                                <br>
+                                <strong> Min : </strong> {{ tree.min }}
+                                <br>
+                                <strong> Max : </strong> {{ tree.max }}
+
                             </div>
                             
                          </div>
@@ -319,7 +331,7 @@
 
 
         <div nz-row>
-            <div nz-col class="gutter-row" nzSpan="8">
+            <div nz-col class="gutter-row" nzSpan="10">
                 <div class="inner-box">
                     Location name : <strong> {{ value.locationDetails.locationName}} </strong>
                 </div>
@@ -329,9 +341,9 @@
                     Location live status : <strong> {{ value.projectDetails.live}} </strong>
                 </div>
             </div>
-            <div nz-col class="gutter-row" nzSpan="8">
+            <div nz-col class="gutter-row" nzSpan="4">
                 <div class="inner-box" *ngIf="value.projectDetails.report">
-                    <strong> Download report </strong> <a href={{value.projectDetails.report}} target="_blank"> <i
+                    <strong> Download report &nbsp;&nbsp; </strong> <a href={{value.projectDetails.report}} target="_blank"> <i
                             class="trigger" nz-icon nzType="download" nzTheme="outline"> </i> </a>
                 </div>
             </div>
@@ -350,14 +362,24 @@
                     Name : <b>{{tree.treeName}}</b>
                 </div>
             </div>
-            <div nz-col class="gutter-row" nzSpan="6">
+            <div nz-col class="gutter-row" nzSpan="4">
                 <div class="inner-box">
-                    Invenory: <b>{{tree.invenoory}} </b>
+                Invenory: <b>{{tree.invenoory}} </b>
                 </div>
             </div>
-            <div nz-col class="gutter-row" nzSpan="6">
+            <div nz-col class="gutter-row" nzSpan="4">
                 <div class="inner-box">
-                    Slapping cost : <b>{{tree.cost}}</b>
+                Slapping cost : <b>{{tree.cost}}</b>
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="2">
+                <div class="inner-box">
+                    Min : <b>{{tree.min}} </b>
+                </div>
+            </div>
+            <div nz-col class="gutter-row" nzSpan="2">
+                <div class="inner-box">
+                    Max : <b>{{tree.max}}</b>
                 </div>
             </div>
             <div nz-col class="gutter-row" nzSpan="6">

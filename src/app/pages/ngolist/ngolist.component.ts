@@ -10,11 +10,10 @@ import { NgoServicesService } from './ngo-services.service';
 @Component({
   selector: 'app-ngolist',
   templateUrl: './ngolist.component.html',
-  styleUrls: ['./ngolist.component.scss']
+  styleUrls: ['./ngolist.component.scss'],
 })
 export class NgolistComponent implements OnInit {
-
-  confirmModal?: NzModalRef; 
+  confirmModal?: NzModalRef;
   public HeaderButtons: any[] = [
     // {
     //   label: 'Upload',
@@ -47,15 +46,14 @@ export class NgolistComponent implements OnInit {
       sortable: true,
       sortDir: 'desc',
       filter: true,
-      
     },
-    {
-      label: 'Description',
-      key: 'description',
-      checked: true,
-      sortable: true,
-      sortDir: 'desc',
-    },
+    // {
+    //   label: 'Description',
+    //   key: 'description',
+    //   checked: true,
+    //   sortable: true,
+    //   sortDir: 'desc',
+    // },
     {
       label: 'Address',
       key: 'address',
@@ -72,14 +70,14 @@ export class NgolistComponent implements OnInit {
       sortDir: 'desc',
       filter: true,
     },
-    
+
     {
       label: 'Action',
       key: 'actions',
       checked: true,
       sortable: false,
       static: true,
-      controls: [{ label: 'View' },{ label: 'Edit' }, { label: 'Delete' }],
+      controls: [{ label: 'View' }, { label: 'Edit' }, { label: 'Delete' }],
     },
   ];
   public tableData = undefined;
@@ -87,98 +85,111 @@ export class NgolistComponent implements OnInit {
   dataTable = false;
   isUpdate = false;
   constructor(
-  private drawerService: NzDrawerService, 
-  private NGOService : NgoServicesService,
-  private modal: NzModalService,
-  private commonService: CommonService,) { }
+    private drawerService: NzDrawerService,
+    private NGOService: NgoServicesService,
+    private modal: NzModalService,
+    private commonService: CommonService
+  ) {}
 
   ngOnInit(): void {
     this.getNGOTableData();
   }
 
-
-  openNeworEditNGODrawer(data = {}, title = "Add NGO",  button = 'Add NGO', isNew = true, Drwidth = "550px"){
-    const editdrawerRef = this.drawerService.create<CommonDrawerComponent, { value: Object, button : string, category : string, isNew : boolean }, Object>({
+  openNeworEditNGODrawer(
+    data = {},
+    title = 'Add NGO',
+    button = 'Add NGO',
+    isNew = true,
+    Drwidth = '550px'
+  ) {
+    const editdrawerRef = this.drawerService.create<
+      CommonDrawerComponent,
+      { value: Object; button: string; category: string; isNew: boolean },
+      Object
+    >({
       nzTitle: title,
       // nzFooter: 'Footer',
-      nzWidth : Drwidth,
+      nzWidth: Drwidth,
       nzContent: CommonDrawerComponent,
       nzContentParams: {
-          value : data,
-          category : 'NGO',
-          button : button,
-          isNew : isNew
-      }
+        value: data,
+        category: 'NGO',
+        button: button,
+        isNew: isNew,
+      },
     });
-
 
     editdrawerRef.afterOpen.subscribe(() => {
       console.log('Drawer(Component) open');
     });
 
-    editdrawerRef.afterClose.subscribe((data :any) => {
+    editdrawerRef.afterClose.subscribe((data: any) => {
       console.log(data);
       if (typeof data === 'object') {
         // this.responseData = data;
         console.log(data);
 
-        if(this.isUpdate){
+        if (this.isUpdate) {
           // this.commonService.showProcessingToastOn();
-          this.NGOService.updateNGO(data._id,data).subscribe((response: any) =>{
-            console.log(response);
-            // this.commonService.showProcessingToastOff();
-            this.commonService.successToast("NGO updated successfully");
-            setTimeout(() => {
-              this.getNGOTableData()
-            }, 1000);
-            ;
-            },
-            (error)=>{
-              console.log(error)
-              this.commonService.showProcessingToastOff();
-              this.commonService.errorToast(error.message)
-            })
-        }
-        else{
-          // this.commonService.showProcessingToastOn();
-          this.NGOService.addNewNGO(data).subscribe((response: any) =>{
-            console.log(response);
-            // this.commonService.showProcessingToastOff();
-            this.commonService.successToast("NGO added successfully");
-            setTimeout(() => {
-              this.getNGOTableData();
-            }, 1000);
-            
-            },
-            (error)=>{
-              console.log(error)
+          this.NGOService.updateNGO(data._id, data).subscribe(
+            (response: any) => {
+              console.log(response);
               // this.commonService.showProcessingToastOff();
-              this.commonService.errorToast(error.message)
-            })
-          }
-     }
+              this.commonService.successToast('NGO updated successfully');
+              setTimeout(() => {
+                this.getNGOTableData();
+              }, 1000);
+            },
+            (error) => {
+              console.log(error);
+              this.commonService.showProcessingToastOff();
+              this.commonService.errorToast(error.message);
+            }
+          );
+        } else {
+          // this.commonService.showProcessingToastOn();
+          this.NGOService.addNewNGO(data).subscribe(
+            (response: any) => {
+              console.log(response);
+              // this.commonService.showProcessingToastOff();
+              this.commonService.successToast('NGO added successfully');
+              setTimeout(() => {
+                this.getNGOTableData();
+              }, 1000);
+            },
+            (error) => {
+              console.log(error);
+              // this.commonService.showProcessingToastOff();
+              this.commonService.errorToast(error.message);
+            }
+          );
+        }
+      }
     });
   }
 
-  openViewNGODrawer(NGOObj){
-    const viewdrawerRef = this.drawerService.create<CommonnViewDrawerComponent, { value: Object, title : string,  category : string  }, string>({
+  openViewNGODrawer(NGOObj) {
+    const viewdrawerRef = this.drawerService.create<
+      CommonnViewDrawerComponent,
+      { value: Object; title: string; category: string },
+      string
+    >({
       nzTitle: 'NGO view',
       // nzFooter: 'Footer',
-      nzWidth : '1200px',
+      nzWidth: '1200px',
       nzContent: CommonnViewDrawerComponent,
       nzContentParams: {
         value: NGOObj,
-        title : 'NGO',
-        category : 'ngo-view'
-      }
+        title: 'NGO',
+        category: 'ngo-view',
+      },
     });
-
 
     viewdrawerRef.afterOpen.subscribe(() => {
       console.log('Drawer(Component) open');
     });
 
-    viewdrawerRef.afterClose.subscribe(data => {
+    viewdrawerRef.afterClose.subscribe((data) => {
       console.log(data);
       if (typeof data === 'string') {
         // this.responseData = data;
@@ -186,58 +197,56 @@ export class NgolistComponent implements OnInit {
     });
   }
 
-
   async dataTableActions(event) {
     console.log(event.label);
     console.log(event);
 
-    if(event.label === 'View'){ 
-
-      this.openViewNGODrawer(event.data)
-
-    }else if (event.label === 'Edit'){
-
+    if (event.label === 'View') {
+      this.openViewNGODrawer(event.data);
+    } else if (event.label === 'Edit') {
       this.isUpdate = true;
-      this.openNeworEditNGODrawer(event.data, 'Update NGO', 'Update NGO', false, '1200px');
-
-    }else if (event.label === 'Delete'){
-
+      this.openNeworEditNGODrawer(
+        event.data,
+        'Update NGO',
+        'Update NGO',
+        false,
+        '1200px'
+      );
+    } else if (event.label === 'Delete') {
       this.confirmModal = this.modal.confirm({
-        nzTitle: 'Do you Want to delete '+event.data.ngoName,
+        nzTitle: 'Do you Want to delete ' + event.data.ngoName,
         nzOnOk: () => {
-          console.log('delete record ')
+          console.log('delete record ');
           this.deleteNGO(event.data._id);
-          
-        }
-          
+        },
       });
     }
   }
 
-
- async deleteNGO(id){
-  this.commonService.showProcessingToastOn();
-    (await this.NGOService.deleteNGO(id)).subscribe((response: any) =>{
-      console.log(response);
-      this.commonService.showProcessingToastOff();
-      this.commonService.successToast("NGO deleted successfully");
-      setTimeout(() => {
-        this.getNGOTableData()
-      }, 1000);
-      },
-      (error)=>{
-        console.log(error)
+  async deleteNGO(id) {
+    this.commonService.showProcessingToastOn();
+    (await this.NGOService.deleteNGO(id)).subscribe(
+      (response: any) => {
+        console.log(response);
         this.commonService.showProcessingToastOff();
-        this.commonService.errorToast(error.message)
-      });
+        this.commonService.successToast('NGO deleted successfully');
+        setTimeout(() => {
+          this.getNGOTableData();
+        }, 1000);
+      },
+      (error) => {
+        console.log(error);
+        this.commonService.showProcessingToastOff();
+        this.commonService.errorToast(error.message);
+      }
+    );
   }
 
-  
   dataTableHeaderActions(event) {
     console.log(event);
-    if(event.label === 'Add'){
+    if (event.label === 'Add') {
       this.isUpdate = false;
-    this.openNeworEditNGODrawer();
+      this.openNeworEditNGODrawer();
     }
   }
 
@@ -249,30 +258,30 @@ export class NgolistComponent implements OnInit {
     // }, 500);
   }
 
-
- async getNGOTableData(){
+  async getNGOTableData() {
     this.commonService.showProcessingToastOn();
-    (await this.NGOService.getNGOList()).subscribe((response: any) =>{
-    console.log(response)
-    this.tableData = response.data;
-    
-    this.commonService.showProcessingToastOff();
-    this.refreshDatatable();
-    },
-    (error)=>{
-      console.log(error)
-      // this.commonService.showProcessingToastOff();
-      this.commonService.errorToast(error.message)
-    })
+    (await this.NGOService.getNGOList()).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.tableData = response.data;
 
-}
+        this.commonService.showProcessingToastOff();
+        this.refreshDatatable();
+      },
+      (error) => {
+        console.log(error);
+        // this.commonService.showProcessingToastOff();
+        this.commonService.errorToast(error.message);
+      }
+    );
+  }
 
-refreshDatatable(){
-  this.dataTable = false;
-  setTimeout(() => {
-   this.dataTable = true;
-  }, 100);
- }
+  refreshDatatable() {
+    this.dataTable = false;
+    setTimeout(() => {
+      this.dataTable = true;
+    }, 100);
+  }
 }
 
 function subscribe(arg0: (response: any) => void) {

@@ -40,7 +40,7 @@
           </div>
         </div>
       </div>
-
+<br>
       <div class="gutter-row">
         <div class="inner-box">
           <label> Secondary tag * </label>
@@ -155,13 +155,25 @@
       <div class="gutter-row">
         <div class="inner-box">
           <label> Tree introduction * </label>
-          <textarea
+<ckeditor class="editor" [config]="{
+            toolbar: [
+                'heading',
+                '|',
+                'bold',
+                'italic',
+                'link',
+                'bulletedList',
+                'numberedList'
+            ]
+        }" [editor]="Editor" formControlName="treeIntroduction"></ckeditor>
+
+<!-- <textarea
             nz-input
             placeholder="Tree introduction"
             class="form-control"
             formControlName="treeIntroduction"
             name="treeintro"
-          ></textarea>
+          ></textarea> -->
           <div class="validation-error">
             <p>{{ showreqError(TreeForm, "treeIntroduction") }}</p>
           </div>
@@ -280,7 +292,7 @@
         </div>
       </div> -->
 
-      <div nz-col class="gutter-row" nzSpan="8">
+      <div nz-col class="gutter-row" nzSpan="16">
         <div class="inner-box">
           <label> NGO Address * </label>
           <textarea
@@ -309,6 +321,7 @@
       ]
   }" [editor]="Editor" formControlName="description"></ckeditor>
   </form>
+  <br>
   <!-- data {{NGO_projects | json}} -->
   <div *ngIf="isNew === false">
     <button nz-button nzType="primary" (click)="addNGOPrj()">
@@ -465,7 +478,7 @@
                   <input
                     nz-input
                     placeholder="inventory "
-                    type="text"
+                    type="number"
                     name="inven name"
                     [(ngModel)]="tree.invenoory"
                   />
@@ -478,6 +491,14 @@
                     name="cost"
                     [(ngModel)]="tree.cost"
                   />
+
+                  <br />
+                  <label> Min no of plants* </label>
+                  <input nz-input placeholder="cost " type="number" name="min count" [(ngModel)]="tree.min" />
+                  
+                  <br />
+                  <label> Max no of plants* </label>
+                  <input nz-input placeholder="cost " type="number" name="max count" [(ngModel)]="tree.max" />
 
                   <button
                     nz-button
@@ -990,7 +1011,7 @@
       </div>
 
     </div>
-
+<p>debug : {{tree|json}}</p>
     <nz-divider nzText="Tree  Details"></nz-divider>
 
     <div nz-row *ngFor="let tree of value.projectDetails.ProjectLocationandTrees.trees">
@@ -999,16 +1020,27 @@
           Name : <b>{{tree.treeName}}</b>
         </div>
       </div>
-      <div nz-col class="gutter-row" nzSpan="6">
+      <div nz-col class="gutter-row" nzSpan="4">
         <div class="inner-box">
           Invenory: <b>{{tree.invenoory}} </b>
         </div>
       </div>
-      <div nz-col class="gutter-row" nzSpan="6">
+      <div nz-col class="gutter-row" nzSpan="4">
         <div class="inner-box">
           Slapping cost : <b>{{tree.cost}}</b>
         </div>
       </div>
+<div nz-col class="gutter-row" nzSpan="2">
+  <div class="inner-box">
+    Min : <b>{{tree.min}} </b>
+  </div>
+</div>
+<div nz-col class="gutter-row" nzSpan="2">
+  <div class="inner-box">
+    Max : <b>{{tree.max}}</b>
+  </div>
+</div>
+
       <div nz-col class="gutter-row" nzSpan="6">
         <div class="inner-box">
           id : <b>{{tree._id}}</b>
