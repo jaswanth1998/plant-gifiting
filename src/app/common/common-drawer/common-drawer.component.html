@@ -1011,13 +1011,13 @@
       </div>
 
     </div>
-<p>debug : {{tree|json}}</p>
+<!-- <p>debug : {{value || json}}</p> -->
     <nz-divider nzText="Tree  Details"></nz-divider>
 
     <div nz-row *ngFor="let tree of value.projectDetails.ProjectLocationandTrees.trees">
       <div nz-col class="gutter-row" nzSpan="6">
         <div class="inner-box">
-          Name : <b>{{tree.treeName}}</b>
+          Name : <b>{{value.trees[0].treeName}}</b>
         </div>
       </div>
       <div nz-col class="gutter-row" nzSpan="4">
