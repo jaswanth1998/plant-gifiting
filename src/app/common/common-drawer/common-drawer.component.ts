@@ -86,8 +86,10 @@ export class CommonDrawerComponent implements OnInit {
     this.NGO_projects[prjindex]['ProjectLocationandTrees'][locindex].trees.push(
       {
         treeName: '',
-        invenoory: '',
+        invenoory: 0,
         cost: 0,
+        min: 0,
+        max: 0,
         treeId: '',
       }
     );

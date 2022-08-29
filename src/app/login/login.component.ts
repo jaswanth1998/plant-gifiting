@@ -59,19 +59,36 @@ export class LoginComponent implements OnInit {
   async onUserLogin() {
 
     if (this.loginForm.valid) {
-      const response = await (await this.loginService.loginUser(this.loginForm.value)).toPromise()
+      const response = await(
+        await this.loginService.loginUser(this.loginForm.value)
+      ).toPromise();
 
-      console.log(response  )
+      console.log(response);
 
-      if (response.data[0].message) {
-        this.error = response.data[0].message;
+      // if (response.data[0].message) {
+      //   this.error = response.data[0].message;
+      // } else {
+      //   if (
+      //     response.data[0].usetType === 'admin' ||
+      //     response.data[0].usetType === 'vendor'
+      //   ) {
+      //     localStorage.setItem('token', response.data[0].token);
+      //     localStorage.setItem('user', JSON.stringify(response.data[0]));
+      //     this.router.navigateByUrl('/lanch');
+      //   } else {
+      //     this.error = 'Try login with Admin / Vendor credentials';
+      //   }
+      // }
+
+      if (!response.success) {
+        this.error = response.data.message;
       } else {
         if (
-          response.data[0].usetType === 'admin' ||
-          response.data[0].usetType === 'vendor'
+          response.data.userData.usetType === 'admin' ||
+          response.data.userData.usetType === 'vendor'
         ) {
-          localStorage.setItem('token', response.data[0].token);
-          localStorage.setItem('user', JSON.stringify(response.data[0]));
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('user', JSON.stringify(response.data));
           this.router.navigateByUrl('/lanch');
         } else {
           this.error = 'Try login with Admin / Vendor credentials';

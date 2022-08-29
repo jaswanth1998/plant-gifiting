@@ -18,8 +18,8 @@ export class DashboardComponent implements OnInit {
    console.log(userdata);
    const userdataobj = JSON.parse(userdata);
    if(userdata){
-      this.username = userdataobj["name"];
-     this.usetType = userdataobj["usetType"];
+      this.username = userdataobj['userData']['name'];
+      this.usetType = userdataobj['userData']['usetType'];
    }
 
   }
