@@ -322,6 +322,7 @@ export class CommonDrawerComponent implements OnInit {
         // });
       } else {
         console.log(this.value);
+        this.multipleUploadImages = this.value.orderPhotos;
         this.OrdersForm = new FormGroup({
           status: new FormControl(this.value.status, [Validators.required]),
         });
@@ -520,10 +521,12 @@ export class CommonDrawerComponent implements OnInit {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append('image', file);
-    let filename = 'trees' + moment() + '.png';
-    formData.append('fileName', 'tress/' + filename);
+    let filename =
+      'orderImage' + this.value.senderPhoneNumber + '_' + moment() + '.png';
+    formData.append('fileName', 'orders/' + filename);
     this.oneImageUploadFlag = true;
     this.apiService.uploadPic(formData).subscribe((data) => {
+      console.log(data);
       this.multipleUploadImages.push(data.data.url);
     });
     console.log(this.multipleUploadImages);
@@ -651,6 +654,7 @@ export class CommonDrawerComponent implements OnInit {
       let formData = this.OrdersForm.value;
       if (this.value) {
         formData['_id'] = this.value['_id'];
+        formData['orderPhotos'] = this.multipleUploadImages;
       }
       this.drawerRef.close(formData);
     } else {

@@ -292,6 +292,16 @@
             </div>
 
         </div>  
+<br>
+<h3> <strong> Order Images : </strong> </h3>
+<ng-container *ngFor="let item of value.orderPhotos; let i = index" class="smallpadding">
+    <img [src]="item" alt="" style="width: 100px; height: 100px; margin: 10px" />
+
+    <!-- <i class="trigger" nz-icon nzType="delete" nzTheme="outline" (click)="deleteimageindex(i)"></i> -->
+
+    <nz-divider nzType="vertical"></nz-divider>
+
+</ng-container>
     </div>
 
 </div>
