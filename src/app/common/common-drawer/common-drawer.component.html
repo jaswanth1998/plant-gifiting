@@ -795,9 +795,32 @@
     </div>
 
 </div>  
-<br><br><br>
+<br><br>
   <!-- view -->
 
+  <!-- @@ -->
+  
+  <div class="gutter-row">
+    <div class="inner-box">
+      <label> Order images </label>
+      <br />
+      <input (change)="onImagesSelected($event)" placeholder="Select image" type="file"
+        accept="image/png, image/gif, image/jpeg" class="form-control" name="treeimages" multiple />
+    </div>
+  </div>
+  <ng-container *ngFor="let item of multipleUploadImages; let i = index" class="smallpadding">
+    <img [src]="item" alt="" style="width: 100px; height: 100px; margin: 10px" />
+  
+    <i class="trigger" nz-icon nzType="delete" nzTheme="outline" (click)="deleteimageindex(i)"></i>
+  
+    <nz-divider nzType="vertical"></nz-divider>
+  
+  </ng-container>
+  
+  <br><br>
+  
+  
+  <!-- @@ -->
 
 
   <form [formGroup]="OrdersForm" (ngSubmit)="orderEditSubmit()">
