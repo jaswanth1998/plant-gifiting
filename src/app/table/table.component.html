@@ -33,8 +33,8 @@
             
         </div>
         <div class="header_buttons">
-            <!-- <button class="desktop" nz-button *ngIf="showExport" (click)="exportToExcel()">Export</button>
-            <button class="mobile" nz-button *ngIf="showExport" nzType="primary" (click)="exportToExcel()">Export</button> -->
+            <button class="desktop" nz-button *ngIf="showExport" (click)="exportToExcel()">Export</button>
+            <button class="mobile" nz-button *ngIf="showExport" nzType="primary" (click)="exportToExcel()">Export</button> 
             <ng-container *ngFor="let button of headerButtons">
                 <button class="desktop" nz-button (click)="buttonClick(button)">{{button.label}}</button>
             </ng-container>
