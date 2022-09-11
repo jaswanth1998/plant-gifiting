@@ -642,10 +642,29 @@
           </div>
         </div>
       </div>
+<!-- ## -->
 
-      <div class="gutter-row">
-        <div class="inner-box">
-          <label> Ecard HTML link *</label>
+<div class="gutter-row">
+  <div class="inner-box">
+    <label> Ecard image * </label>
+    <br />
+    <input (change)="onOneImageSelectedEcard($event)" placeholder="Select image" type="file"
+      accept="image/png, image/gif, image/jpeg" />
+    <!-- <div  class="validation-error" > <p> {{ showreqError(TreeForm,'icon') }}</p></div> -->
+    </div>
+    </div>
+    <br>
+    <div *ngIf="uploadedImage">
+      <img [src]="uploadedImage" style="width: 100px; height: 100px" alt="" />
+      <i class="trigger" nz-icon nzType="delete" nzTheme="outline" (click)="deleteLogo()"></i>
+    </div>
+    
+    
+    
+    
+    <!-- <div class="gutter-row">
+                            <div class="inner-box">
+                              <label> Ecard HTML link * </label>
           <textarea
             nz-input
             placeholder="Ecard HTML link"
@@ -658,7 +677,7 @@
             <p>{{ showreqError(EcardForm, "html") }}</p>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="gutter-row" *ngIf="isNew === false">
         <div class="inner-box">
@@ -798,13 +817,13 @@
 <br><br>
   <!-- view -->
 
-  <!-- @@ -->
+  <!-- multiple image -->
   
   <div class="gutter-row">
     <div class="inner-box">
       <label> Order images </label>
       <br />
-      <input (change)="onImagesSelected($event)" placeholder="Select image" type="file"
+      <input (change)="onImagesSelectedOrder($event)" placeholder="Select image" type="file"
         accept="image/png, image/gif, image/jpeg" class="form-control" name="treeimages" multiple />
     </div>
   </div>
@@ -818,9 +837,32 @@
   </ng-container>
   
   <br><br>
+<!-- @@ -->
+<div class="center-div">
+
+  <nz-divider nzText="Reports "></nz-divider>
+
+  <label> Order report * </label>
+  <br />
+  <input (change)="onOneFileSelectedForOrder($event)" placeholder="Select report" type="file" accept="application/pdf"
+    class="form-control" name="report" />
+
+  <br>
+  <br>
+  <div *ngIf="uploadedDoc">
+
+    link generated : {{uploadedDoc}}
+    <br>
+
+    Download report <a href={{uploadedDoc}} target="_blank"> <i class="trigger" nz-icon nzType="download"
+        nzTheme="outline"> </i> </a>
+    <i class="trigger" nz-icon nzType="delete" nzTheme="outline" (click)="deleteDoc()"></i>
+  </div>
+</div>
+<br><br>
   
   
-  <!-- @@ -->
+  <!-- multiple image -->
 
 
   <form [formGroup]="OrdersForm" (ngSubmit)="orderEditSubmit()">

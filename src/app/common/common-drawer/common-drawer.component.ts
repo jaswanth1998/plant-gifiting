@@ -272,7 +272,7 @@ export class CommonDrawerComponent implements OnInit {
           ecardName: new FormControl(this.value.ecardName, [
             Validators.required,
           ]),
-          html: new FormControl(this.value.html, [Validators.required]),
+          // html: new FormControl(this.value.html, [Validators.required]),
         });
       } else {
         console.log(this.value);
@@ -280,9 +280,11 @@ export class CommonDrawerComponent implements OnInit {
           ecardName: new FormControl(this.value.ecardName, [
             Validators.required,
           ]),
-          html: new FormControl(this.value.html, [Validators.required]),
           openFor: new FormControl(this.value.openFor, [Validators.required]),
         });
+        //  html: new FormControl(this.value.html, [Validators.required]),
+
+        this.uploadedImage = this.value.html;
 
         if (this.value.isLive.toLowerCase() === 'no') {
           this.isLive = false;
@@ -323,6 +325,7 @@ export class CommonDrawerComponent implements OnInit {
       } else {
         console.log(this.value);
         this.multipleUploadImages = this.value.orderPhotos;
+        this.uploadedDoc = this.value.report;
         this.OrdersForm = new FormGroup({
           status: new FormControl(this.value.status, [Validators.required]),
         });
@@ -483,6 +486,7 @@ export class CommonDrawerComponent implements OnInit {
 
       if (this.value) {
         formData['_id'] = this.value['_id'];
+        formData['html'] = this.uploadedImage;
       }
       this.drawerRef.close(formData);
     } else {
@@ -521,6 +525,22 @@ export class CommonDrawerComponent implements OnInit {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append('image', file);
+    let filename = 'TreeImage' + '_' + moment() + '.png';
+    formData.append('fileName', 'tree/' + filename);
+    this.oneImageUploadFlag = true;
+    this.apiService.uploadPic(formData).subscribe((data) => {
+      console.log(data);
+      this.multipleUploadImages.push(data.data.url);
+    });
+    console.log(this.multipleUploadImages);
+    // alert()
+  }
+
+  onImagesSelectedOrder(event: any) {
+    console.log(event.target.files);
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
     let filename =
       'orderImage' + this.value.senderPhoneNumber + '_' + moment() + '.png';
     formData.append('fileName', 'orders/' + filename);
@@ -549,6 +569,20 @@ export class CommonDrawerComponent implements OnInit {
     });
   }
 
+  onOneImageSelectedEcard(event: any) {
+    console.log(event.target.files);
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+    let filename = 'Ecard' + moment() + '.png';
+    formData.append('fileName', 'ecard/' + filename);
+    this.oneImageUploadFlag = true;
+    this.apiService.uploadPic(formData).subscribe((data) => {
+      this.uploadedImage = data.data.url;
+      console.log(data);
+    });
+  }
+
   onOneFileSelected(event: any) {
     console.log(event.target.files);
     const file = event.target.files[0];
@@ -562,6 +596,21 @@ export class CommonDrawerComponent implements OnInit {
       moment() +
       '.pdf';
     formData.append('fileName', 'tress/' + filename);
+    this.oneImageUploadFlag = true;
+    this.apiService.uploadPDF(formData).subscribe((data) => {
+      this.uploadedDoc = data.data.url;
+      console.log(data);
+    });
+  }
+
+  onOneFileSelectedForOrder(event: any) {
+    console.log(event.target.files);
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+    let filename =
+      this.value.senderPhoneNumber + '-' + ' OrderReport ' + moment() + '.pdf';
+    formData.append('fileName', 'orderReports/' + filename);
     this.oneImageUploadFlag = true;
     this.apiService.uploadPDF(formData).subscribe((data) => {
       this.uploadedDoc = data.data.url;
@@ -655,6 +704,7 @@ export class CommonDrawerComponent implements OnInit {
       if (this.value) {
         formData['_id'] = this.value['_id'];
         formData['orderPhotos'] = this.multipleUploadImages;
+        formData['report'] = this.uploadedDoc;
       }
       this.drawerRef.close(formData);
     } else {

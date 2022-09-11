@@ -166,7 +166,10 @@
         <span *ngIf="value.isLive.toLowerCase() === 'yes'"> Status : <strong> Active ✅ </strong> </span> <span *ngIf="value.isLive.toLowerCase() === 'no'" > Status : <strong> Inactive 🚫</strong>  </span>
         <br>
         <br>
-         <strong> HTML link : </strong>  {{value.html}} <br>
+        <strong> HTML link : </strong> <br>
+        
+        <img [src]="value.html" style="width: 100px; height: 100px" alt="" />
+
          <br>
          <strong> Open for : <br>
          </strong>  
@@ -302,6 +305,11 @@
     <nz-divider nzType="vertical"></nz-divider>
 
 </ng-container>
+<br>
+<div class="inner-box" *ngIf="value.report">
+    <strong> Download report &nbsp;&nbsp; </strong> <a href={{value.report}} target="_blank"> <i class="trigger" nz-icon
+            nzType="download" nzTheme="outline"> </i> </a>
+</div>
     </div>
 
 </div>
