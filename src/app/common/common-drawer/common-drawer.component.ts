@@ -28,6 +28,7 @@ export class CommonDrawerComponent implements OnInit {
   EcardForm: FormGroup;
   OrdersForm: FormGroup;
   QueriesForm: FormGroup;
+  locationForm: FormGroup;
 
   isLive = false;
   oneImageUploadFlag = false;
@@ -308,6 +309,39 @@ export class CommonDrawerComponent implements OnInit {
             // this.commonService.showProcessingToastOff();
           }
         );
+      }
+    }
+    if (this.category === 'location') {
+      if (this.isNew === true) {
+        this.isLive = false;
+        this.locationForm = new FormGroup({
+          locationName: new FormControl(this.value.locationName, [
+            Validators.required,
+          ]),
+          pincode: new FormControl(this.value.pincode, [
+            Validators.required,
+          ]),
+        });
+      } else {
+        console.log(this.value);
+        this.locationForm = new FormGroup({
+          locationName: new FormControl(this.value.locationName, [
+            Validators.required,
+          ]),
+          pincode: new FormControl(this.value.pincode, [
+            Validators.required,
+          ]),
+        });
+        //  html: new FormControl(this.value.html, [Validators.required]),
+
+        if (this.value.isLive.toLowerCase() === 'no') {
+          this.isLive = false;
+        } else if (this.value.isLive.toLowerCase() === 'yes') {
+          this.isLive = true;
+        } else {
+          this.isLive = false;
+        }
+
       }
     }
 
@@ -716,6 +750,19 @@ export class CommonDrawerComponent implements OnInit {
     if (this.QueriesForm.valid) {
       console.log(this.QueriesForm.value);
       let formData = this.QueriesForm.value;
+      if (this.value) {
+        formData['_id'] = this.value['_id'];
+      }
+      this.drawerRef.close(formData);
+    } else {
+      alert('invalid data not able to proceed');
+    }
+  }
+  
+  locationSubmit() {
+    if (this.locationForm.valid) {
+      console.log(this.locationForm.value);
+      let formData = this.locationForm.value;
       if (this.value) {
         formData['_id'] = this.value['_id'];
       }

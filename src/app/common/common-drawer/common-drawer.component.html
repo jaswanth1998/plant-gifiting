@@ -724,6 +724,69 @@
 </div>
 <!-- ecard add form -->
 
+
+<!-- location add form -->
+<div class="form-min-width" *ngIf="category === 'location'">
+
+
+  <form [formGroup]="locationForm" (ngSubmit)="locationSubmit()">
+    <div class="login-form">
+      <div class="gutter-row">
+        <div class="inner-box">
+          <label> location name *</label>
+          <input
+            nz-input
+            placeholder="location name"
+            type="text"
+            class="form-control"
+            formControlName="locationName"
+            name="locationName"
+          />
+          <div class="validation-error">
+            <p>{{ showreqError(locationForm, "locationName") }}</p>
+          </div>
+        </div>
+        <div class="inner-box">
+          <label> Pincode *</label>
+          <input
+            nz-input
+            placeholder="Pincode"
+            type="number"
+            class="form-control"
+            formControlName="pincode"
+            name="pincode"
+          />
+          <div class="validation-error">
+            <p>{{ showreqError(locationForm, "pincode") }}</p>
+          </div>
+        </div>
+      </div>
+<!-- ## -->
+
+
+      <br />
+      <div class="gutter-row align-center">
+        <div class="inner-box">
+          <button
+            nz-button
+            nzType="primary"
+            nzBlock
+            type="submit"
+            [disabled]="!locationForm.valid"
+          >
+            {{ button }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- location add form -->
+
+
+
+
+
 <!-- orders  -->
 <div class="fullwidth-orders" *ngIf="category === 'orders'">
 

@@ -1,0 +1,32 @@
+<div class="breadcrumb">
+    <nz-breadcrumb>
+        <nz-breadcrumb-item>
+          <a routerLink="/lanch/dashboard"> <i nz-icon nzType="home"></i> Dashboard</a>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+          <a>
+            <i nz-icon nzType="outline"></i>
+            <span>Locations </span>
+          </a>
+        </nz-breadcrumb-item>
+      </nz-breadcrumb>
+  </div>
+  
+  <hr>
+  
+  <div *ngIf="dataTable" class="scroll">
+  
+  
+  <app-table  
+        [headerButtons]="HeaderButtons"
+        [headers]="tableHeaders"
+        [tableData]="tableData"
+        [defaultColumn]="'customer_name'"
+        [dir]="'asc'"
+        [page]="dataTablePage"
+        (actions)="dataTableActions($event)"
+        (headerActions)="dataTableHeaderActions($event)"
+  ></app-table>
+  </div>
+  
+  

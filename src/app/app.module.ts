@@ -30,6 +30,7 @@ import { VendorReportsComponent } from './vendor-pages/vendor-reports/vendor-rep
 import { OrdersComponent } from './pages/orders/orders.component';
 import { QueriesComponent } from './pages/queries/queries.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { LocationsComponent } from './pages/locations/locations.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -51,6 +52,7 @@ registerLocaleData(en);
     VendorReportsComponent,
     OrdersComponent,
     QueriesComponent,
+    LocationsComponent,
   
   ],
   imports: [
