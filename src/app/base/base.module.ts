@@ -74,6 +74,14 @@ const routes: Routes = [
            }),
         // canActivate: [RouterGuardService]
       },
+      {
+        path: 'locations',
+        loadChildren: () =>
+        import('../pages/locations/Ecard-routing.module').then((m)=>{
+          return m.LocationsRoutingModule
+           }),
+        // canActivate: [RouterGuardService]
+      },
       
       {
         path: 'vendor-projects',
