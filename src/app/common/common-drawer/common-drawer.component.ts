@@ -103,7 +103,7 @@ export class CommonDrawerComponent implements OnInit {
     private modal: NzModalService,
     private fb: FormBuilder,
     private apiService: ApiServiceService
-  ) {}
+  ) { }
 
   get secondaryTag() {
     return this.TreeForm.controls['secondaryTag'] as FormArray;
@@ -587,7 +587,7 @@ export class CommonDrawerComponent implements OnInit {
     // alert()
   }
 
-  uploadmultipleImages() {}
+  uploadmultipleImages() { }
 
   onOneImageSelected(event: any) {
     console.log(event.target.files);
@@ -758,7 +758,7 @@ export class CommonDrawerComponent implements OnInit {
       alert('invalid data not able to proceed');
     }
   }
-  
+
   locationSubmit() {
     if (this.locationForm.valid) {
       console.log(this.locationForm.value);
@@ -794,12 +794,26 @@ export class CommonDrawerComponent implements OnInit {
       date: moment().toString(),
     });
 
-    this.newMsg = '';
+    
 
     this.apiService
       .sendQueriesNewMsg(this.value._id, this.value)
-      .subscribe((data) => {
-        console.log(data);
+      .subscribe(async (data) => {
+        console.log(this.value);
+
+        const emailMsg = `Dear  User, <br>
+        We have received your Query and please find our response as below- <br>
+        Query- ${this.value.query} <br>
+        Response- ${this.newMsg}`;
+        const emailObj = {
+          "to": this.value['email'],
+          "subject": "Update on query",
+          "text": emailMsg,
+          "html": emailMsg
+        }
+        this.newMsg = '';
+
+        await (await this.apiService.sendEmail(emailObj)).toPromise()
       });
   }
 }

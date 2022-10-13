@@ -27,7 +27,9 @@ export class OrdersService extends ApiService {
   public deleteOrders(objId){ //NA
     console.log(objId);
     return this.get('orders/deleteOrdersDataByID/'+objId,{});
+  }
+  async sendEmail(obj){
+    return this.post('sms/sendEmail', obj);
 
   }
-
 }

@@ -16,4 +16,7 @@ export class ApiServiceService extends ApiService {
   sendQueriesNewMsg(id, obj) {
     return this.post('queries/updateQuery/' + id, obj);
   }
+  sendEmail(obj){
+    return this.post('sms/sendEmail',obj)
+  }
 }

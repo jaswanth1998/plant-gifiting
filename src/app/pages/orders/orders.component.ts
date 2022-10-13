@@ -130,7 +130,7 @@ export class OrdersComponent implements OnInit {
     private OrdersService: OrdersService,
     private modal: NzModalService,
     private commonService: CommonService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getOrdersTableData();
@@ -172,8 +172,119 @@ export class OrdersComponent implements OnInit {
 
         if (this.isUpdate) {
           // this.commonService.showProcessingToastOn();
+          console.log(data)
           this.OrdersService.updateOrders(data._id, data).subscribe(
-            (response: any) => {
+            async (response: any) => {
+              if (data['status'] === 'Planted') {
+                const orderData = await (await this.OrdersService.getOrdersListByID(data._id)).toPromise()
+                console.log('orderData', orderData)
+                const responseData = orderData['data'][0]
+
+
+                const sendEmail = `
+                Dear ${responseData['senderName']},
+                <br><br>
+                Greetings from MakeMyTrip Foundation.
+                <br><br>
+                We have received your generous contribution of ${responseData['amountReceived']} towards maintenance of ${responseData['projectName']} at ${responseData['location']}. Your orde ID is ${data._id}. An E Card with your wishes has been sent to ${responseData['receiverEmailId']}.
+                You can choose to view your order on the app by logging with your phone number. 
+                <br><br>
+                Thanks for your contribution towards making our earth healthier.
+                <br><br>
+                Team MakeMyTrip Foundation`
+                const emailObj = {
+                  "to": responseData['senderEmail'],
+                  "subject": "Your Order is confirmed | " + data._id,
+                  "text": sendEmail,
+                  "html": sendEmail
+
+                }
+                await (await this.OrdersService.sendEmail(emailObj)).toPromise()
+              }
+              if (data['status'] === 'Project concluded') {
+                const orderData = await (await this.OrdersService.getOrdersListByID(data._id)).toPromise()
+                console.log('orderData', orderData)
+                const responseData = orderData['data'][0]
+
+
+                const sendEmail = `                
+                Dear ${responseData['senderName']},
+                
+                Greetings from MakeMyTrip Foundation.
+                
+                It is with great pleasure that we wish to inform you that ${responseData['projectName']} at ${responseData['location']} has been completed. Your contribution has helped in making this possible and will further help in maintainance of this project.
+                
+                Thanks for your contribution towards making our earth healthier.
+                
+                Team MakeMyTrip Foundation`
+                const emailObj = {
+                  "to": responseData['senderEmail'],
+                  "subject": "Your Order is confirmed | " + data._id,
+                  "text": sendEmail,
+                  "html": sendEmail
+
+                }
+                await (await this.OrdersService.sendEmail(emailObj)).toPromise()
+              }
+              if (data['status'] === 'Project concluded') {
+                const orderData = await (await this.OrdersService.getOrdersListByID(data._id)).toPromise()
+                console.log('orderData', orderData)
+                const responseData = orderData['data'][0]
+
+
+                const sendEmail = `                
+                SUBJECT- Your order status has changed
+<br><br>
+Dear ${responseData},
+<br><br>
+Greetings from MakeMyTrip Foundation.
+<br><br>
+It is with great pleasure that we wish to inform you that (project name) at (project location) has been completed. 
+<br><br>
+Thanks for your contribution towards making our earth healthier.
+<br><br>
+Team MakeMyTrip Foundation`
+                const emailObj = {
+                  "to": responseData['senderEmail'],
+                  "subject": "Your order status has changed",
+                  "text": sendEmail,
+                  "html": sendEmail
+
+                }
+                await (await this.OrdersService.sendEmail(emailObj)).toPromise()
+              }
+
+              if (data['report']) {
+                const orderData = await (await this.OrdersService.getOrdersListByID(data._id)).toPromise()
+                console.log('orderData', orderData)
+                const responseData = orderData['data'][0]
+
+
+                const sendEmail = `                
+                
+
+                Dear ${responseData['receiverName']},
+                <br><br>
+                
+                Greetings from MakeMyTrip Foundaition.
+                <br><br>
+                On the occasion of your event, ${responseData['senderName']} has made a contribution on your behalf towards the maintenance of the ${responseData['projectName']} at ${responseData['location']} . We wish you loads of happiness. 
+                
+                An E card With message from ${responseData['senderName']} has been attached here.
+                
+                Team MakeMytrip Foundation 
+                
+                `
+                const emailObj = {
+                  "to": responseData['receiverEmailId'],
+                  "subject": "Warm wishes from " + responseData['senderName'],
+                  "text": sendEmail,
+                  "html": sendEmail
+
+                }
+                await (await this.OrdersService.sendEmail(emailObj)).toPromise()
+
+              }
               console.log(response);
               // this.commonService.showProcessingToastOff();
               this.commonService.successToast('Orders updated successfully');
