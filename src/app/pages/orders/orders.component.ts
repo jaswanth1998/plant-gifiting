@@ -226,33 +226,7 @@ export class OrdersComponent implements OnInit {
                 }
                 await (await this.OrdersService.sendEmail(emailObj)).toPromise()
               }
-              if (data['status'] === 'Project concluded') {
-                const orderData = await (await this.OrdersService.getOrdersListByID(data._id)).toPromise()
-                console.log('orderData', orderData)
-                const responseData = orderData['data'][0]
-
-
-                const sendEmail = `                
-                SUBJECT- Your order status has changed
-<br><br>
-Dear ${responseData},
-<br><br>
-Greetings from MakeMyTrip Foundation.
-<br><br>
-It is with great pleasure that we wish to inform you that (project name) at (project location) has been completed. 
-<br><br>
-Thanks for your contribution towards making our earth healthier.
-<br><br>
-Team MakeMyTrip Foundation`
-                const emailObj = {
-                  "to": responseData['senderEmail'],
-                  "subject": "Your order status has changed",
-                  "text": sendEmail,
-                  "html": sendEmail
-
-                }
-                await (await this.OrdersService.sendEmail(emailObj)).toPromise()
-              }
+          
 
               if (data['report']) {
                 const orderData = await (await this.OrdersService.getOrdersListByID(data._id)).toPromise()
