@@ -226,6 +226,10 @@ export class OrdersComponent implements OnInit {
 
                 }
                 await (await this.OrdersService.sendEmail(emailObj)).toPromise()
+                const smsMsg = 
+                `Dear ${responseData['senderName']},It is with great pleasure that we wish to inform you that ${responseData['projectName']} at ${responseData['location']} has been completed. Your contribution has helped in making this possible and will further help in maintainance of this project.- MakeMyTrip Foundation`
+                const smsQuery =  `phoneNumber=${responseData['senderPhoneNumber']}&smsText=${smsMsg}`
+                await (await this.OrdersService.SendSms(smsQuery)).toPromise()
               }
           
 

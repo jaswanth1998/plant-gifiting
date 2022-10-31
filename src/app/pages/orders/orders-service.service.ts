@@ -32,4 +32,7 @@ export class OrdersService extends ApiService {
     return this.post('sms/sendEmail', obj);
 
   }
+  async SendSms(queryString) {
+    return this.get('sms/sendSms?'+queryString,{})
+  }
 }
