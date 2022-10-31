@@ -166,6 +166,14 @@ export class VendorProjectsComponent implements OnInit {
               this.commonService.errorToast(error.message);
             }
           );
+          this.ProjectsService.updateVendorPrjCompleteStatus(
+            data.projectId,
+            data.prjCom
+          ).subscribe(
+            (data)=>{
+              console.log(data);
+            }
+          )
         }
         // else {
         //   // this.commonService.showProcessingToastOn();

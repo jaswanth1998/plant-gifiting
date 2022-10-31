@@ -45,6 +45,7 @@ export class CommonDrawerComponent implements OnInit {
   uploadedDoc: any;
   isLocLive: boolean;
   isPrjLive: boolean;
+  isPrjCompleted: boolean;
   newMsg: string;
 
   // orderStatus = [
@@ -411,6 +412,16 @@ export class CommonDrawerComponent implements OnInit {
           this.isPrjLive = false;
         }
 
+        if (this.value.projectDetails.isCompleted) {
+          if (this.value.projectDetails.isCompleted.toLowerCase() === 'no') {
+            this.isPrjCompleted = false;
+          } else if (this.value.projectDetails.isCompleted.toLowerCase() === 'yes') {
+            this.isPrjCompleted = true;
+          }
+        } else {
+          this.isPrjCompleted = false;
+        }
+
         console.log(this.value.projectDetails.ProjectLocationandTrees.live);
 
         if (this.value.projectDetails.ProjectLocationandTrees.live) {
@@ -531,10 +542,17 @@ export class CommonDrawerComponent implements OnInit {
   submitVendPrj() {
     let prj = '';
     let loc = '';
+    let prjCom = '';
     if (this.isPrjLive === true) {
       prj = 'Yes';
     } else {
       prj = 'No';
+    }
+
+    if (this.isPrjCompleted === true) {
+      prjCom = 'Yes';
+    } else {
+      prjCom = 'No';
     }
 
     if (this.isLocLive === true) {
@@ -548,6 +566,7 @@ export class CommonDrawerComponent implements OnInit {
       locationID: this.value.projectDetails.ProjectLocationandTrees._id,
       PrjLive: prj,
       locLive: loc,
+      prjCom:prjCom,
       report: this.uploadedDoc || this.value.projectDetails.report,
     };
 

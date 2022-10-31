@@ -43,6 +43,13 @@ export class VendorProjectsService extends ApiService {
     });
   }
 
+  public updateVendorPrjCompleteStatus(prjId,status){
+    return this.post('ngo/updateVendorProjectCompleteStatus', {
+      projectId: prjId,
+      isCompleted: status,
+    });
+  }
+
   public addVendorPrjReport(prjid, url) {
     return this.post('ngo/updateVendorProjectReport', {
       projectId: prjid,

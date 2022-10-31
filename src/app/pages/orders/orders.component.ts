@@ -209,13 +209,14 @@ export class OrdersComponent implements OnInit {
 
                 const sendEmail = `                
                 Dear ${responseData['senderName']},
+                <br><br>
                 
                 Greetings from MakeMyTrip Foundation.
-                
+                <br><br>
                 It is with great pleasure that we wish to inform you that ${responseData['projectName']} at ${responseData['location']} has been completed. Your contribution has helped in making this possible and will further help in maintainance of this project.
-                
+                <br><br>
                 Thanks for your contribution towards making our earth healthier.
-                
+                <br><br>
                 Team MakeMyTrip Foundation`
                 const emailObj = {
                   "to": responseData['senderEmail'],
