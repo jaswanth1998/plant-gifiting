@@ -29,10 +29,13 @@ export class OrdersService extends ApiService {
     return this.get('orders/deleteOrdersDataByID/'+objId,{});
   }
   async sendEmail(obj){
+    return (obj)
     return this.post('sms/sendEmail', obj);
 
   }
   async SendSms(queryString) {
+    return (queryString)
+    
     return this.get('sms/sendSms?'+queryString,{})
   }
 }

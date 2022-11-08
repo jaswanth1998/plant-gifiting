@@ -29,9 +29,13 @@ export class ApiService {
 
 
   public post(url, body, headers?){
-
+    const token = localStorage.getItem('token')
   //  api call
-  return this.http.post(`${this.API_ENDPOINT}${url}`, body).pipe(
+
+  return this.http.post(`${this.API_ENDPOINT}${url}`, body,{
+    headers  :{"Authorization": 'Bearer '+token}
+
+  }).pipe(
     map(this.extractData),
     catchError(error => {
       return  'Error while executing POST for route '
@@ -40,8 +44,11 @@ export class ApiService {
 
   }
  async get (url, body, headers?) {
-   
-    return this.http.get(`${this.API_ENDPOINT}${url}`, body).pipe(
+  const token = localStorage.getItem('token')
+    return this.http.get(`${this.API_ENDPOINT}${url}`,{
+      headers  :{"Authorization": 'Bearer '+token}
+  
+    }).pipe(
       map(this.extractData),
       catchError(error => {
         return  'Error while executing POST for route '
