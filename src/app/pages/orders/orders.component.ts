@@ -107,6 +107,14 @@ export class OrdersComponent implements OnInit {
     {
       label: 'Order id',
       key: '_id',
+      checked: false,
+      sortable: true,
+      sortDir: 'desc',
+      filter: true,
+    },{
+      // panNumber
+      label: 'Pan Number',
+      key: 'panNumber',
       checked: true,
       sortable: true,
       sortDir: 'desc',
