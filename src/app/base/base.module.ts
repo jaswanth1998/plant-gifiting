@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule  } from '@angular/router';
 import { BaseComponent } from './base.component';
-
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 
@@ -119,6 +119,7 @@ const routes: Routes = [
   imports: [
     CommonModule,    
     RouterModule.forChild(routes),
+    NzSelectModule
     
   ]
 })

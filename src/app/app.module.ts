@@ -31,6 +31,8 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { QueriesComponent } from './pages/queries/queries.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { LocationsComponent } from './pages/locations/locations.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+
 registerLocaleData(en);
 
 @NgModule({
@@ -53,7 +55,6 @@ registerLocaleData(en);
     OrdersComponent,
     QueriesComponent,
     LocationsComponent,
-  
   ],
   imports: [
     BrowserModule,
@@ -67,7 +68,8 @@ registerLocaleData(en);
     NzDropDownModule,
     NzCheckboxModule,
     NzButtonModule,
-    CKEditorModule
+    CKEditorModule,
+    NzSelectModule,
     
     
   ],

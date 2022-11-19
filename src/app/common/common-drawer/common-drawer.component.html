@@ -5,7 +5,7 @@
     <nz-switch class="" [(ngModel)]="isLive"></nz-switch>
   </div>
 
-  <form [formGroup]="TreeForm" >
+  <form [formGroup]="TreeForm">
     <div class="login-form">
       <div class="gutter-row">
         <div class="inner-box">
@@ -27,61 +27,90 @@
       <div class="gutter-row">
         <div class="inner-box">
           <label> Primary tag * </label>
-          <input
-            nz-input
-            placeholder="Primarytag"
-            type="text"
-            class="form-control"
-            formControlName="primaryTag"
-            name="primarytag"
-          />
+          <nz-select formControlName="primaryTag" >
+            <ng-container *ngFor="let item of relationsList">
+              <nz-option
+                [nzValue]="item['relation']"
+                [nzLabel]="item['relation']"
+              ></nz-option>
+            </ng-container>
+            
+          </nz-select>
           <div class="validation-error">
             <p>{{ showreqError(TreeForm, "primaryTag") }}</p>
           </div>
         </div>
       </div>
-<br>
+      <br />
       <div class="gutter-row">
         <div class="inner-box">
           <label> Secondary tag * </label>
-         
-          <button nz-button nzType="default" nzSize ="small" (click)="addsecondaryTag()"> + Secondary Tag</button>
+
+          <button
+            nz-button
+            nzType="default"
+            nzSize="small"
+            (click)="addsecondaryTag()"
+          >
+            + Secondary Tag
+          </button>
 
           <!-- --- -->
+          <nz-select formControlName="secondaryEventsTag"  nzMode="multiple" >
+            <ng-container *ngFor="let item of events">
+              <nz-option
+                [nzValue]="item"
+                [nzLabel]="item"
+              ></nz-option>
+            </ng-container>
+            
+          </nz-select>
 
-          <ng-container formArrayName="secondaryTag" class="smallpaddingtop">
-            <ng-container *ngFor="let stag of secondaryTag.controls; let i = index" >
-
-                <div  [formGroup]="stag" class="smallpaddingtop">
-
-                  <div nz-row >
-                    <div nz-col class="gutter-row" [nzSpan]="18"><div class="inner-box">
-                      <input  nz-input  [placeholder]=" 'secondary tag : ' + (i+1)" type="text"  class="form-control"  formControlName="tag" name="tag"  />
-
-                    </div></div>
-                    <div nz-col class="gutter-row" [nzSpan]="1"><div class="inner-box">
-
-                    </div></div>
-                    <div nz-col class="gutter-row" [nzSpan]="4"><div class="inner-box">
-                      <button nz-button nzType="default"  (click)="deletesecondaryTag(i)" nzDanger>Delete tag</button>
-
-                    </div></div>
-                    <div nz-col class="gutter-row" [nzSpan]="1"><div class="inner-box">
-
-                    </div></div>
-                  
+          <!-- <ng-container formArrayName="secondaryTag" class="smallpaddingtop">
+            <ng-container
+              *ngFor="let stag of secondaryTag.controls; let i = index"
+            >
+              <div [formGroup]="stag" class="smallpaddingtop">
+                <div nz-row>
+                  <div nz-col class="gutter-row" [nzSpan]="18">
+                    <div class="inner-box">
+                      <input
+                        nz-input
+                        [placeholder]="'secondary tag : ' + (i + 1)"
+                        type="text"
+                        class="form-control"
+                        formControlName="tag"
+                        name="tag"
+                      />
+                    </div>
+                  </div>
+                  <div nz-col class="gutter-row" [nzSpan]="1">
+                    <div class="inner-box"></div>
+                  </div>
+                  <div nz-col class="gutter-row" [nzSpan]="4">
+                    <div class="inner-box">
+                      <button
+                        nz-button
+                        nzType="default"
+                        (click)="deletesecondaryTag(i)"
+                        nzDanger
+                      >
+                        Delete tag
+                      </button>
+                    </div>
+                  </div>
+                  <div nz-col class="gutter-row" [nzSpan]="1">
+                    <div class="inner-box"></div>
                   </div>
                 </div>
+              </div>
             </ng-container>
-        </ng-container>
-
+          </ng-container> -->
 
           <!-- --- -->
-
-
         </div>
       </div>
-      <div class="gutter-row">
+      <!-- <div class="gutter-row">
         <div class="inner-box">
           <label> Price * </label>
           <input
@@ -92,9 +121,8 @@
             formControlName="price"
             name="price"
           />
-         
         </div>
-      </div>
+      </div> -->
 
       <div class="gutter-row">
         <div class="inner-box">
@@ -112,14 +140,16 @@
           <!-- <div  class="validation-error" > <p> {{ showreqError(TreeForm,'icon') }}</p></div> -->
         </div>
       </div>
-      <br>
+      <br />
       <div *ngIf="uploadedImage">
-        <img
-        [src]="uploadedImage"
-        style="width: 100px; height: 100px"
-        alt=""
-      />
-      <i class="trigger" nz-icon nzType="delete" nzTheme="outline"  (click)="deleteLogo()" ></i>
+        <img [src]="uploadedImage" style="width: 100px; height: 100px" alt="" />
+        <i
+          class="trigger"
+          nz-icon
+          nzType="delete"
+          nzTheme="outline"
+          (click)="deleteLogo()"
+        ></i>
       </div>
 
       <div class="gutter-row">
@@ -139,24 +169,34 @@
           <!-- <div  class="validation-error" > <p> {{ showreqError(TreeForm,'treeimage') }}</p></div> -->
         </div>
       </div>
-      <ng-container *ngFor="let item of multipleUploadImages; let i = index" class="smallpadding">
+      <ng-container
+        *ngFor="let item of multipleUploadImages; let i = index"
+        class="smallpadding"
+      >
         <img
           [src]="item"
           alt=""
           style="width: 100px; height: 100px; margin: 10px"
         />
 
-        <i class="trigger" nz-icon nzType="delete" nzTheme="outline"  (click)="deleteimageindex(i)" ></i>
+        <i
+          class="trigger"
+          nz-icon
+          nzType="delete"
+          nzTheme="outline"
+          (click)="deleteimageindex(i)"
+        ></i>
 
         <nz-divider nzType="vertical"></nz-divider>
-
       </ng-container>
 
       <div class="gutter-row">
         <div class="inner-box">
           <label> Tree introduction * </label>
-<ckeditor class="editor" [config]="{
-            toolbar: [
+          <ckeditor
+            class="editor"
+            [config]="{
+              toolbar: [
                 'heading',
                 '|',
                 'bold',
@@ -164,10 +204,13 @@
                 'link',
                 'bulletedList',
                 'numberedList'
-            ]
-        }" [editor]="Editor" formControlName="treeIntroduction"></ckeditor>
+              ]
+            }"
+            [editor]="Editor"
+            formControlName="treeIntroduction"
+          ></ckeditor>
 
-<!-- <textarea
+          <!-- <textarea
             nz-input
             placeholder="Tree introduction"
             class="form-control"
@@ -198,8 +241,6 @@
   </form>
 </div>
 <!-- tree add form -->
-
-
 
 <!-- ngo add form -->
 
@@ -309,8 +350,10 @@
       </div>
     </div>
     <label> NGO Description * </label>
-    <ckeditor class="editor" [config]="{
-      toolbar: [
+    <ckeditor
+      class="editor"
+      [config]="{
+        toolbar: [
           'heading',
           '|',
           'bold',
@@ -318,10 +361,13 @@
           'link',
           'bulletedList',
           'numberedList'
-      ]
-  }" [editor]="Editor" formControlName="description"></ckeditor>
+        ]
+      }"
+      [editor]="Editor"
+      formControlName="description"
+    ></ckeditor>
   </form>
-  <br>
+  <br />
   <!-- data {{NGO_projects | json}} -->
   <div *ngIf="isNew === false">
     <button nz-button nzType="primary" (click)="addNGOPrj()">
@@ -494,11 +540,23 @@
 
                   <br />
                   <label> Min no of plants* </label>
-                  <input nz-input placeholder="cost " type="number" name="min count" [(ngModel)]="tree.min" />
-                  
+                  <input
+                    nz-input
+                    placeholder="cost "
+                    type="number"
+                    name="min count"
+                    [(ngModel)]="tree.min"
+                  />
+
                   <br />
                   <label> Max no of plants* </label>
-                  <input nz-input placeholder="cost " type="number" name="max count" [(ngModel)]="tree.max" />
+                  <input
+                    nz-input
+                    placeholder="cost "
+                    type="number"
+                    name="max count"
+                    [(ngModel)]="tree.max"
+                  />
 
                   <button
                     nz-button
@@ -588,14 +646,16 @@
           <!-- <div  class="validation-error" > <p> {{ showreqError(EvetForm,'eventImage') }}</p></div> -->
         </div>
       </div>
-      <br>
+      <br />
       <div *ngIf="uploadedImage">
-        <img
-        [src]="uploadedImage"
-        style="width: 300px; height: 300px"
-        alt=""
-      />
-      <i class="trigger" nz-icon nzType="delete" nzTheme="outline"  (click)="deleteLogo()" ></i>
+        <img [src]="uploadedImage" style="width: 300px; height: 300px" alt="" />
+        <i
+          class="trigger"
+          nz-icon
+          nzType="delete"
+          nzTheme="outline"
+          (click)="deleteLogo()"
+        ></i>
       </div>
 
       <br />
@@ -642,27 +702,34 @@
           </div>
         </div>
       </div>
-<!-- ## -->
+      <!-- ## -->
 
-<div class="gutter-row">
-  <div class="inner-box">
-    <label> Ecard image * </label>
-    <br />
-    <input (change)="onOneImageSelectedEcard($event)" placeholder="Select image" type="file"
-      accept="image/png, image/gif, image/jpeg" />
-    <!-- <div  class="validation-error" > <p> {{ showreqError(TreeForm,'icon') }}</p></div> -->
-    </div>
-    </div>
-    <br>
-    <div *ngIf="uploadedImage">
-      <img [src]="uploadedImage" style="width: 100px; height: 100px" alt="" />
-      <i class="trigger" nz-icon nzType="delete" nzTheme="outline" (click)="deleteLogo()"></i>
-    </div>
-    
-    
-    
-    
-    <!-- <div class="gutter-row">
+      <div class="gutter-row">
+        <div class="inner-box">
+          <label> Ecard image * </label>
+          <br />
+          <input
+            (change)="onOneImageSelectedEcard($event)"
+            placeholder="Select image"
+            type="file"
+            accept="image/png, image/gif, image/jpeg"
+          />
+          <!-- <div  class="validation-error" > <p> {{ showreqError(TreeForm,'icon') }}</p></div> -->
+        </div>
+      </div>
+      <br />
+      <div *ngIf="uploadedImage">
+        <img [src]="uploadedImage" style="width: 100px; height: 100px" alt="" />
+        <i
+          class="trigger"
+          nz-icon
+          nzType="delete"
+          nzTheme="outline"
+          (click)="deleteLogo()"
+        ></i>
+      </div>
+
+      <!-- <div class="gutter-row">
                             <div class="inner-box">
                               <label> Ecard HTML link * </label>
           <textarea
@@ -724,11 +791,8 @@
 </div>
 <!-- ecard add form -->
 
-
 <!-- location add form -->
 <div class="form-min-width" *ngIf="category === 'location'">
-
-
   <form [formGroup]="locationForm" (ngSubmit)="locationSubmit()">
     <div class="login-form">
       <div class="gutter-row">
@@ -761,8 +825,7 @@
           </div>
         </div>
       </div>
-<!-- ## -->
-
+      <!-- ## -->
 
       <br />
       <div class="gutter-row align-center">
@@ -783,212 +846,236 @@
 </div>
 <!-- location add form -->
 
-
-
-
-
 <!-- orders  -->
 <div class="fullwidth-orders" *ngIf="category === 'orders'">
-
-
   <!-- view -->
 
-
-  <div nz-row    >
-    <div nz-col  class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Project Name : <b>{{value.projectName}}</b> 
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Tree Name / Count  : <b>{{value.treeNameOrdered}} / ( {{ value.numberOfSpeciesOrdered }} ) </b> 
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Location : <b>{{value.location}}</b> 
-        </div>
-    </div>
-       <!--  -->
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Sender Name : <b>{{value.senderName}}</b> 
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Phone number : <b>{{value.senderPhoneNumber}}</b> 
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Repetative user : <b >  {{ value.isSenderRepeatUser === 'true' ?  'Yes' : 'NO'}}</b> 
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-      <div class="inner-box" > 
-        Pan Number : <b >  {{ value.panNumber }}</b> 
+  <div nz-row>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Project Name : <b>{{ value.projectName }}</b>
       </div>
-  </div>
-        <!--  -->
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Receiver name  : <b>{{value.receiverName}}</b> 
-            
-        </div>
     </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Receiver number : <b>{{value.receiverPhoneNumber}}</b> 
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Receiver Email Id : <b>{{value.receiverEmailId}}</b> 
-        </div>
-    </div>
-        <!--  -->
-     <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            vendor name  : <b>{{value.vendorName}}</b> 
-        </div>
-     </div>
-     <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            vendor Email Id : <b>{{value.vendorEmailId}}</b> 
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-      <div class="inner-box" > 
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Tree Name / Count :
+        <b
+          >{{ value.treeNameOrdered }} / ( {{ value.numberOfSpeciesOrdered }} )
+        </b>
       </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Location : <b>{{ value.location }}</b>
+      </div>
+    </div>
+    <!--  -->
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Sender Name : <b>{{ value.senderName }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Phone number : <b>{{ value.senderPhoneNumber }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Repetative user :
+        <b> {{ value.isSenderRepeatUser === "true" ? "Yes" : "NO" }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Pan Number : <b> {{ value.panNumber }}</b>
+      </div>
+    </div>
+    <!--  -->
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Receiver name : <b>{{ value.receiverName }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Receiver number : <b>{{ value.receiverPhoneNumber }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Receiver Email Id : <b>{{ value.receiverEmailId }}</b>
+      </div>
+    </div>
+    <!--  -->
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        vendor name : <b>{{ value.vendorName }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        vendor Email Id : <b>{{ value.vendorEmailId }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box"></div>
+    </div>
+
+    <!--  -->
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Mode of Payment : <b>{{ value.modeOfPayment }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Amount Received : <b>{{ value.amountReceived }}</b>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" nzSpan="8">
+      <div class="inner-box">
+        Order Status: <b>{{ value.status }}</b>
+      </div>
+    </div>
   </div>
-
-        <!--  -->
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Mode of Payment   : <b>{{value.modeOfPayment}}</b> 
-        </div>
-    </div>
-    <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Amount Received : <b>{{value.amountReceived}}</b> 
-        </div>
-    </div>
-   <div nz-col class="gutter-row" nzSpan="8"  >
-        <div class="inner-box" > 
-            Order Status: <b>{{value.status}}</b> 
-        </div>
-    </div>
-
-</div>  
-<br><br>
+  <br /><br />
   <!-- view -->
 
   <!-- multiple image -->
-  
+
   <div class="gutter-row">
     <div class="inner-box">
       <label> Order images </label>
       <br />
-      <input (change)="onImagesSelectedOrder($event)" placeholder="Select image" type="file"
-        accept="image/png, image/gif, image/jpeg" class="form-control" name="treeimages" multiple />
+      <input
+        (change)="onImagesSelectedOrder($event)"
+        placeholder="Select image"
+        type="file"
+        accept="image/png, image/gif, image/jpeg"
+        class="form-control"
+        name="treeimages"
+        multiple
+      />
     </div>
   </div>
-  <ng-container *ngFor="let item of multipleUploadImages; let i = index" class="smallpadding">
-    <img [src]="item" alt="" style="width: 100px; height: 100px; margin: 10px" />
-  
-    <i class="trigger" nz-icon nzType="delete" nzTheme="outline" (click)="deleteimageindex(i)"></i>
-  
+  <ng-container
+    *ngFor="let item of multipleUploadImages; let i = index"
+    class="smallpadding"
+  >
+    <img
+      [src]="item"
+      alt=""
+      style="width: 100px; height: 100px; margin: 10px"
+    />
+
+    <i
+      class="trigger"
+      nz-icon
+      nzType="delete"
+      nzTheme="outline"
+      (click)="deleteimageindex(i)"
+    ></i>
+
     <nz-divider nzType="vertical"></nz-divider>
-  
   </ng-container>
-  
-  <br><br>
-<!-- @@ -->
-<div class="center-div">
 
-  <nz-divider nzText="Reports "></nz-divider>
+  <br /><br />
+  <!-- @@ -->
+  <div class="center-div">
+    <nz-divider nzText="Reports "></nz-divider>
 
-  <label> Order report * </label>
-  <br />
-  <input (change)="onOneFileSelectedForOrder($event)" placeholder="Select report" type="file" accept="application/pdf"
-    class="form-control" name="report" />
+    <label> Order report * </label>
+    <br />
+    <input
+      (change)="onOneFileSelectedForOrder($event)"
+      placeholder="Select report"
+      type="file"
+      accept="application/pdf"
+      class="form-control"
+      name="report"
+    />
 
-  <br>
-  <br>
-  <div *ngIf="uploadedDoc">
+    <br />
+    <br />
+    <div *ngIf="uploadedDoc">
+      link generated : {{ uploadedDoc }}
+      <br />
 
-    link generated : {{uploadedDoc}}
-    <br>
-
-    Download report <a href={{uploadedDoc}} target="_blank"> <i class="trigger" nz-icon nzType="download"
-        nzTheme="outline"> </i> </a>
-    <i class="trigger" nz-icon nzType="delete" nzTheme="outline" (click)="deleteDoc()"></i>
+      Download report
+      <a href="{{ uploadedDoc }}" target="_blank">
+        <i class="trigger" nz-icon nzType="download" nzTheme="outline"> </i>
+      </a>
+      <i
+        class="trigger"
+        nz-icon
+        nzType="delete"
+        nzTheme="outline"
+        (click)="deleteDoc()"
+      ></i>
+    </div>
   </div>
-</div>
-<br><br>
-  
-  
-  <!-- multiple image -->
+  <br /><br />
 
+  <!-- multiple image -->
 
   <form [formGroup]="OrdersForm" (ngSubmit)="orderEditSubmit()">
     <div class="login-form">
       <div class="gutter-row">
         <div class="inner-box">
           <label> Change the status *</label>
-         
-              <nz-select
-                nzShowSearch
-                nzAllowClear
-                nzPlaceHolder="Change the status"
-                formControlName="status"
-                name="status" >
-                <nz-option nzLabel = "open" nzValue = "open"></nz-option>
-                <nz-option nzLabel = "In progress" nzValue = "In progress"></nz-option>
-                <nz-option nzLabel = "Planted" nzValue = "Planted"></nz-option>
-                <nz-option nzLabel = "Project concluded" nzValue = "Project concluded"></nz-option>
-              </nz-select>
-            </div>
-          </div>
-        </div>
-   
-      <br />
-      <div class="gutter-row align-center">
-        <div class="inner-box">
-          <button
-            nz-button
-            nzType="primary"
-            nzBlock
-            type="submit"
-            [disabled]="!OrdersForm.valid"
+
+          <nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Change the status"
+            formControlName="status"
+            name="status"
           >
-            {{ button }}
-          </button>
+            <nz-option nzLabel="open" nzValue="open"></nz-option>
+            <nz-option nzLabel="In progress" nzValue="In progress"></nz-option>
+            <nz-option nzLabel="Planted" nzValue="Planted"></nz-option>
+            <nz-option
+              nzLabel="Project concluded"
+              nzValue="Project concluded"
+            ></nz-option>
+          </nz-select>
         </div>
       </div>
-  
+    </div>
+
+    <br />
+    <div class="gutter-row align-center">
+      <div class="inner-box">
+        <button
+          nz-button
+          nzType="primary"
+          nzBlock
+          type="submit"
+          [disabled]="!OrdersForm.valid"
+        >
+          {{ button }}
+        </button>
+      </div>
+    </div>
   </form>
 </div>
 
 <!-- QueriesForm -->
 
 <div class="form-min-width" *ngIf="category === 'queries'">
-
   <!-- view -->
 
-  Email : <strong> {{value.email}}  </strong>   <br>
-         
-  Phone No : <strong> {{value.phoneNo}} </strong>   <br>
+  Email : <strong> {{ value.email }} </strong> <br />
 
-  Status : <strong>   {{value.status}} </strong> <br>
+  Phone No : <strong> {{ value.phoneNo }} </strong> <br />
 
-  Query : <br> <strong>   {{value.query}} </strong> 
+  Status : <strong> {{ value.status }} </strong> <br />
 
+  Query : <br />
+  <strong> {{ value.query }} </strong>
 
-   <br><br><br>
-
+  <br /><br /><br />
 
   <!-- view -->
 
@@ -997,126 +1084,115 @@
       <div class="gutter-row">
         <div class="inner-box">
           <label> Change the status *</label>
-         
-              <nz-select
-                nzShowSearch
-                nzAllowClear
-                nzPlaceHolder="Change the status"
-                formControlName="status"
-                name="status" >
-                <nz-option nzLabel = "Open" nzValue = "Open"></nz-option>
-                <nz-option nzLabel = "In progress" nzValue = "In progress"></nz-option>
-                <nz-option nzLabel = "Closed" nzValue = "Closed"></nz-option>
-              </nz-select>
-            </div>
-          </div>
-        </div>
-   
-      <br />
-      <div class="gutter-row align-center">
-        <div class="inner-box">
-          <button
-            nz-button
-            nzType="primary"
-            nzBlock
-            type="submit"
-            [disabled]="!QueriesForm.valid"
+
+          <nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Change the status"
+            formControlName="status"
+            name="status"
           >
-            {{ button }}
-          </button>
+            <nz-option nzLabel="Open" nzValue="Open"></nz-option>
+            <nz-option nzLabel="In progress" nzValue="In progress"></nz-option>
+            <nz-option nzLabel="Closed" nzValue="Closed"></nz-option>
+          </nz-select>
         </div>
       </div>
-    </form>
-    
-    <br>
-      <div class="chat" *ngFor="let onemsg of value.chats">
+    </div>
 
-        <div class="user-msg" *ngIf="onemsg.type === 'user' ">
-          <nz-card style="width: 400px;margin-top: 5px">
-          <nz-card-meta
-            [nzAvatar]="userTemplate"
-            [nzTitle]=" 'User at '+  onemsg.date.substring(0,16) "
-            [nzDescription]="  onemsg.reply"
-          ></nz-card-meta>
-        </nz-card>
-        <ng-template #userTemplate>
-          <nz-avatar nzSrc="https://www.ipiindia.org/site_data/user_profiles/admin/default.jpg"></nz-avatar>
-        </ng-template>
+    <br />
+    <div class="gutter-row align-center">
+      <div class="inner-box">
+        <button
+          nz-button
+          nzType="primary"
+          nzBlock
+          type="submit"
+          [disabled]="!QueriesForm.valid"
+        >
+          {{ button }}
+        </button>
       </div>
+    </div>
+  </form>
 
+  <br />
+  <div class="chat" *ngFor="let onemsg of value.chats">
+    <div class="user-msg" *ngIf="onemsg.type === 'user'">
+      <nz-card style="width: 400px; margin-top: 5px">
+        <nz-card-meta
+          [nzAvatar]="userTemplate"
+          [nzTitle]="'User at ' + onemsg.date.substring(0, 16)"
+          [nzDescription]="onemsg.reply"
+        ></nz-card-meta>
+      </nz-card>
+      <ng-template #userTemplate>
+        <nz-avatar
+          nzSrc="https://www.ipiindia.org/site_data/user_profiles/admin/default.jpg"
+        ></nz-avatar>
+      </ng-template>
+    </div>
 
-      <div class="admin-msg" *ngIf="onemsg.type === 'admin' ">
+    <div class="admin-msg" *ngIf="onemsg.type === 'admin'">
+      <nz-card style="width: 400px; margin-top: 5px">
+        <nz-card-meta
+          [nzAvatar]="adminTemplate"
+          [nzTitle]="'Admin at ' + onemsg.date.substring(0, 16)"
+          [nzDescription]="onemsg.reply"
+        ></nz-card-meta>
+      </nz-card>
+      <ng-template #adminTemplate>
+        <nz-avatar
+          nzSrc="https://www.svgimages.com/svg-image/s2/admin-256x256.png"
+        ></nz-avatar>
+      </ng-template>
+    </div>
+  </div>
 
-        <nz-card style="width: 400px;margin-top: 5px">
-          <nz-card-meta
-            [nzAvatar]="adminTemplate"
-            [nzTitle]=" 'Admin at ' +  onemsg.date.substring(0,16) "
-            [nzDescription]="onemsg.reply"
-          ></nz-card-meta>
-        </nz-card>
-        <ng-template #adminTemplate>
-          <nz-avatar nzSrc="https://www.svgimages.com/svg-image/s2/admin-256x256.png"></nz-avatar>
-        </ng-template>
-        </div>
-
-      
-      </div>
-
-      <label> Send message *</label>
-      <input
-        nz-input
-        placeholder="Message"
-        type="text"
-        name="treename"
-        [(ngModel)]="newMsg"
-      />
-      <br>
-      <br>
-      <button
-      nz-button
-      nzType="primary"
-      nzBlock
-      (click)="sendNewChat()"
-    >
-      Send 
-    </button>
+  <label> Send message *</label>
+  <input
+    nz-input
+    placeholder="Message"
+    type="text"
+    name="treename"
+    [(ngModel)]="newMsg"
+  />
+  <br />
+  <br />
+  <button nz-button nzType="primary" nzBlock (click)="sendNewChat()">
+    Send
+  </button>
 </div>
 <div *ngIf="category === 'projects'">
-
-
   <div #queryView *ngIf="value">
-
     <!-- <strong> {{value.projectDetails | json }} </strong> <br> -->
 
     <nz-divider nzText="Project  Details"></nz-divider>
 
     <div class="center-div">
       Is Project Live :
-      <nz-switch class="" [(ngModel)]="isPrjLive"></nz-switch> &nbsp;&nbsp;
-      Is Completed:
+      <nz-switch class="" [(ngModel)]="isPrjLive"></nz-switch> &nbsp;&nbsp; Is
+      Completed:
       <nz-switch class="" [(ngModel)]="isPrjCompleted"></nz-switch>
     </div>
 
     <div nz-row>
       <div nz-col class="gutter-row" nzSpan="8">
         <div class="inner-box">
-          Project Name : <b>{{value.projectDetails.projectName}}</b>
+          Project Name : <b>{{ value.projectDetails.projectName }}</b>
         </div>
       </div>
       <div nz-col class="gutter-row" nzSpan="8">
         <div class="inner-box">
-          Is live : <b>{{value.projectDetails.live}} </b>
+          Is live : <b>{{ value.projectDetails.live }} </b>
         </div>
       </div>
       <div nz-col class="gutter-row" nzSpan="8">
         <div class="inner-box">
-          id : <b>{{value.projectDetails._id}}</b>
+          id : <b>{{ value.projectDetails._id }}</b>
         </div>
       </div>
-
     </div>
-
-
 
     <!-- -- locationDetails -- -->
     <nz-divider nzText="Location  Details"></nz-divider>
@@ -1125,94 +1201,108 @@
       Is Location Live :
       <nz-switch class="" [(ngModel)]="isLocLive"></nz-switch>
     </div>
-    <br>
+    <br />
 
     <div nz-row>
       <div nz-col class="gutter-row" nzSpan="8">
         <div class="inner-box">
-          Location name : <strong> {{ value.locationDetails.locationName}} </strong>
+          Location name :
+          <strong> {{ value.locationDetails.locationName }} </strong>
         </div>
       </div>
       <div nz-col class="gutter-row" nzSpan="8">
         <div class="inner-box">
-          Location live status : <strong> {{ value.projectDetails.live}} </strong>
+          Location live status :
+          <strong> {{ value.projectDetails.live }} </strong>
         </div>
       </div>
       <div nz-col class="gutter-row" nzSpan="8">
         <div class="inner-box" *ngIf="value.projectDetails.report">
-          <strong> Download report </strong> <a href={{value.projectDetails.report}} target="_blank"> <i class="trigger"
-              nz-icon nzType="download" nzTheme="outline"> </i> </a>
+          <strong> Download report </strong>
+          <a href="{{ value.projectDetails.report }}" target="_blank">
+            <i class="trigger" nz-icon nzType="download" nzTheme="outline"> </i>
+          </a>
         </div>
       </div>
-
     </div>
-<!-- <p>debug : {{value || json}}</p> -->
+    <!-- <p>debug : {{value || json}}</p> -->
     <nz-divider nzText="Tree  Details"></nz-divider>
 
-    <div nz-row *ngFor="let tree of value.projectDetails.ProjectLocationandTrees.trees">
+    <div
+      nz-row
+      *ngFor="let tree of value.projectDetails.ProjectLocationandTrees.trees"
+    >
       <div nz-col class="gutter-row" nzSpan="6">
         <div class="inner-box">
-          Name : <b>{{value.trees[0].treeName}}</b>
+          Name : <b>{{ value.trees[0].treeName }}</b>
         </div>
       </div>
       <div nz-col class="gutter-row" nzSpan="4">
         <div class="inner-box">
-          Invenory: <b>{{tree.invenoory}} </b>
+          Invenory: <b>{{ tree.invenoory }} </b>
         </div>
       </div>
       <div nz-col class="gutter-row" nzSpan="4">
         <div class="inner-box">
-          Slapping cost : <b>{{tree.cost}}</b>
+          Slapping cost : <b>{{ tree.cost }}</b>
         </div>
       </div>
-<div nz-col class="gutter-row" nzSpan="2">
-  <div class="inner-box">
-    Min : <b>{{tree.min}} </b>
-  </div>
-</div>
-<div nz-col class="gutter-row" nzSpan="2">
-  <div class="inner-box">
-    Max : <b>{{tree.max}}</b>
-  </div>
-</div>
+      <div nz-col class="gutter-row" nzSpan="2">
+        <div class="inner-box">
+          Min : <b>{{ tree.min }} </b>
+        </div>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="2">
+        <div class="inner-box">
+          Max : <b>{{ tree.max }}</b>
+        </div>
+      </div>
 
       <div nz-col class="gutter-row" nzSpan="6">
         <div class="inner-box">
-          id : <b>{{tree._id}}</b>
+          id : <b>{{ tree._id }}</b>
         </div>
       </div>
-
     </div>
 
-    <br>
+    <br />
 
     <div class="center-div">
-
       <nz-divider nzText="Reports "></nz-divider>
 
       <label> Project report * </label>
       <br />
-      <input (change)="onOneFileSelected($event)"
-       placeholder="Select report" type="file" accept="application/pdf"
-        class="form-control" name="report" />
+      <input
+        (change)="onOneFileSelected($event)"
+        placeholder="Select report"
+        type="file"
+        accept="application/pdf"
+        class="form-control"
+        name="report"
+      />
 
-      <br>
-      <br>
+      <br />
+      <br />
       <div *ngIf="uploadedDoc">
+        link generated : {{ uploadedDoc }}
+        <br />
 
-        link generated : {{uploadedDoc}}
-        <br>
-
-        Download report <a href={{uploadedDoc}} target="_blank"> <i class="trigger" nz-icon nzType="download"
-            nzTheme="outline"> </i> </a>
-        <i class="trigger" nz-icon nzType="delete" nzTheme="outline" (click)="deleteDoc()"></i>
+        Download report
+        <a href="{{ uploadedDoc }}" target="_blank">
+          <i class="trigger" nz-icon nzType="download" nzTheme="outline"> </i>
+        </a>
+        <i
+          class="trigger"
+          nz-icon
+          nzType="delete"
+          nzTheme="outline"
+          (click)="deleteDoc()"
+        ></i>
       </div>
     </div>
-
   </div>
 
-  <button nz-button nzType="primary" (click)="submitVendPrj()" nzBlock> Submit </button>
-
-
-
+  <button nz-button nzType="primary" (click)="submitVendPrj()" nzBlock>
+    Submit
+  </button>
 </div>

@@ -20,6 +20,57 @@ export class CommonDrawerComponent implements OnInit {
   @Input() isNew = true;
   public Editor = ClassicEditor;
 
+  relationsList = [
+    {
+      relation: 'Mother',
+      class: '',
+    },
+    {
+      relation: 'Father',
+      class: '',
+    },
+    {
+      relation: 'Parents',
+      class: '',
+    },
+    {
+      relation: 'Spouse',
+      class: '',
+    },
+    {
+      relation: 'Sister',
+      class: '',
+    },
+    {
+      relation: 'Brother',
+      class: '',
+    },
+    {
+      relation: 'Children',
+      class: '',
+    },
+    {
+      relation: 'Grandparents',
+      class: '',
+    },
+    {
+      relation: 'Friend',
+      class: '',
+    },
+    {
+      relation: 'Colleagues',
+      class: '',
+    },
+    {
+      relation: 'Myself',
+      class: '',
+    },
+    {
+      relation: 'Others',
+      class: '',
+    },
+  ];
+
   confirmModal?: NzModalRef;
 
   TreeForm: FormGroup;
@@ -121,19 +172,24 @@ export class CommonDrawerComponent implements OnInit {
   deletesecondaryTag(tagIndex: number) {
     this.secondaryTag.removeAt(tagIndex);
   }
-
+  events = []
   async ngOnInit(): Promise<void> {
     console.log(this.value, this.category, this.button);
 
     if (this.category === 'tree') {
+      
+       
+       
+      
       this.uploadedImage = this.value.icon ? this.value.icon : null;
       this.multipleUploadImages = this.value.images ? this.value.images : [];
       this.TreeForm = new FormGroup({
         treeName: new FormControl(this.value.treeName, [Validators.required]),
-        primaryTag: new FormControl(this.value.primaryTag, [
+        primaryTag: new FormControl(this.value.primaryTag[0], [
           Validators.required,
         ]),
         secondaryTag: this.fb.array([]),
+        secondaryEventsTag: new FormControl(this.value.secondaryTag, [Validators.required]),
         //  new FormControl(this.value.secondaryTag, []),
         icon: new FormControl(null, [
           // Validators.required,
@@ -146,7 +202,11 @@ export class CommonDrawerComponent implements OnInit {
           Validators.required,
         ]),
       });
-
+      const apiEventsData =  await (await this.apiService.get('events/getEventDetails', {})).toPromise()
+      console.log(apiEventsData);
+      if(apiEventsData.data){
+        apiEventsData.data.forEach((e)=>this.events.push(e['eventName']))
+      }
       if (!this.isNew) {
         if (
           this.value.isLive.toLowerCase() === 'false' ||
@@ -452,6 +512,8 @@ export class CommonDrawerComponent implements OnInit {
         alert('Upload Tree image to proceed');
       } else {
         let formData = this.TreeForm.value;
+        debugger;
+        formData['primaryTag'] = this.TreeForm.get('primaryTag').value
         formData['isLive'] = this.isLive;
         formData['icon'] = this.uploadedImage;
         formData['images'] = this.multipleUploadImages;
@@ -465,6 +527,7 @@ export class CommonDrawerComponent implements OnInit {
         if (this.value || !this.isNew) {
           formData['_id'] = this.value['_id'];
         }
+        formData['secondaryTag'] = formData['secondaryEventsTag']
         console.log(formData);
         this.drawerRef.close(formData);
       }
