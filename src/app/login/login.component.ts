@@ -89,6 +89,7 @@ export class LoginComponent implements OnInit {
         ) {
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('user', JSON.stringify(response.data));
+          localStorage.setItem('loginTime',new Date().toUTCString())
           this.router.navigateByUrl('/lanch');
         } else {
           this.error = 'Try login with Admin / Vendor credentials';

@@ -56,4 +56,11 @@ export class VendorProjectsService extends ApiService {
       report: url,
     });
   }
+
+  public updateVendorProjectDesc(prjid, projectDesc) {
+    return this.post('ngo/updateVendorProjectDesc', {
+      projectId: prjid,
+      projectDesc: projectDesc,
+    });
+  }
 }

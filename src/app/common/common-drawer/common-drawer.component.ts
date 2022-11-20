@@ -19,6 +19,7 @@ export class CommonDrawerComponent implements OnInit {
   @Input() category = '';
   @Input() isNew = true;
   public Editor = ClassicEditor;
+  projectDesc = "";
 
   relationsList = [
     {
@@ -177,10 +178,10 @@ export class CommonDrawerComponent implements OnInit {
     console.log(this.value, this.category, this.button);
 
     if (this.category === 'tree') {
-      
-       
-       
-      
+
+
+
+
       this.uploadedImage = this.value.icon ? this.value.icon : null;
       this.multipleUploadImages = this.value.images ? this.value.images : [];
       this.TreeForm = new FormGroup({
@@ -202,10 +203,10 @@ export class CommonDrawerComponent implements OnInit {
           Validators.required,
         ]),
       });
-      const apiEventsData =  await (await this.apiService.get('events/getEventDetails', {})).toPromise()
+      const apiEventsData = await (await this.apiService.get('events/getEventDetails', {})).toPromise()
       console.log(apiEventsData);
-      if(apiEventsData.data){
-        apiEventsData.data.forEach((e)=>this.events.push(e['eventName']))
+      if (apiEventsData.data) {
+        apiEventsData.data.forEach((e) => this.events.push(e['eventName']))
       }
       if (!this.isNew) {
         if (
@@ -471,6 +472,11 @@ export class CommonDrawerComponent implements OnInit {
         } else {
           this.isPrjLive = false;
         }
+        if (this.value.projectDetails.projectDesc) {
+          this.projectDesc = this.value.projectDetails.projectDesc
+
+
+        }
 
         if (this.value.projectDetails.isCompleted) {
           if (this.value.projectDetails.isCompleted.toLowerCase() === 'no') {
@@ -629,8 +635,9 @@ export class CommonDrawerComponent implements OnInit {
       locationID: this.value.projectDetails.ProjectLocationandTrees._id,
       PrjLive: prj,
       locLive: loc,
-      prjCom:prjCom,
+      prjCom: prjCom,
       report: this.uploadedDoc || this.value.projectDetails.report,
+      projectDesc: this.projectDesc
     };
 
     this.drawerRef.close(data);
@@ -876,7 +883,7 @@ export class CommonDrawerComponent implements OnInit {
       date: moment().toString(),
     });
 
-    
+
 
     this.apiService
       .sendQueriesNewMsg(this.value._id, this.value)

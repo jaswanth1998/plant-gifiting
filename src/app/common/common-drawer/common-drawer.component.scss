@@ -51,6 +51,9 @@ nz-select {
 .editor{
   height: 250px;
 }
+:host ::ng-deep .ck-editor__editable_inline {
+  min-height: 150px !important;
+}
 .chat{
   // overflow-y: scroll; 
 }

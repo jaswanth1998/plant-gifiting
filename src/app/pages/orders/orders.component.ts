@@ -95,6 +95,24 @@ export class OrdersComponent implements OnInit {
       sortDir: 'desc',
       filter: true,
     },
+    {
+      label: 'Sender Email',
+      key: 'senderEmail',
+      checked: true,
+      sortable: true,
+      sortDir: 'desc',
+      filter: true,
+    },
+
+    {
+      label: 'Receiver Email',
+      key: 'receiverEmailId',
+      checked: true,
+      sortable: true,
+      sortDir: 'desc',
+      filter: true,
+    },
+
 
     {
       label: 'Receiver PH',

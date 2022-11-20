@@ -131,6 +131,15 @@ export class VendorProjectsComponent implements OnInit {
 
                   //  reports API  inside success of above
 
+                  this.ProjectsService.updateVendorProjectDesc(
+                    data.projectId,
+                    data.projectDesc
+                  ).subscribe(
+                    (data)=>{
+                      console.log(data)
+                    }
+                  )
+
                   this.ProjectsService.addVendorPrjReport(
                     data.projectId,
                     data.report

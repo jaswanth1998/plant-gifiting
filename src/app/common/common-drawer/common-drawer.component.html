@@ -1175,6 +1175,27 @@
       Completed:
       <nz-switch class="" [(ngModel)]="isPrjCompleted"></nz-switch>
     </div>
+    <!-- #TODO Right the ckeditor -->
+    <br>
+    <ckeditor
+    class="editor"
+    [config]="{
+      toolbar: [
+        'heading',
+        '|',
+        'bold',
+        'italic',
+        'link',
+        'bulletedList',
+        'numberedList'
+      ]
+    }"
+    [editor]="Editor"
+    style="height: 150px;"
+    [(ngModel)]="projectDesc"
+    
+  ></ckeditor>
+  <br>
 
     <div nz-row>
       <div nz-col class="gutter-row" nzSpan="8">
