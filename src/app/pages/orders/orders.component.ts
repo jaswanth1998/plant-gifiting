@@ -419,7 +419,7 @@ export class OrdersComponent implements OnInit {
     (await this.OrdersService.getOrdersList()).subscribe(
       (response: any) => {
         console.log(response);
-        this.tableData = response.data;
+        this.tableData = response.data.filter((e)=>e.paymentStatus == 'success');
 
         this.commonService.showProcessingToastOff();
         this.refreshDatatable();
