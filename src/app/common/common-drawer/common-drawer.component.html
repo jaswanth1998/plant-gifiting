@@ -28,10 +28,10 @@
         <div class="inner-box">
           <label> Primary tag * </label>
           <nz-select formControlName="primaryTag" >
-            <ng-container *ngFor="let item of relationsList">
+            <ng-container *ngFor="let item of events">
               <nz-option
-                [nzValue]="item['relation']"
-                [nzLabel]="item['relation']"
+                [nzValue]="item"
+                [nzLabel]="item"
               ></nz-option>
             </ng-container>
             
