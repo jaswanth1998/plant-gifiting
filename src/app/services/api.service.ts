@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class ApiService {
   appEnvironment = environment;
   private TOKEN_API_ENDPOINT = this.appEnvironment.API_ENDPOINT;
-  private API_ENDPOINT = `${this.appEnvironment.API_ENDPOINT }${'/api/v1/'}`;
+  private API_ENDPOINT = `${this.appEnvironment.API_ENDPOINT }${'/csr/api/v1/'}`;
 
   private extractData(res) {
     try {
