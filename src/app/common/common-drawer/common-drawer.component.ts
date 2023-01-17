@@ -186,11 +186,12 @@ export class CommonDrawerComponent implements OnInit {
       this.multipleUploadImages = this.value.images ? this.value.images : [];
       this.TreeForm = new FormGroup({
         treeName: new FormControl(this.value.treeName, [Validators.required]),
-        primaryTag: new FormControl(this.value.primaryTag[0], [
+        primaryTag: new FormControl(
+          this.value.primaryTag ? this.value.primaryTag[0]:[], [
           Validators.required,
         ]),
         secondaryTag: this.fb.array([]),
-        secondaryEventsTag: new FormControl(this.value.secondaryTag, [Validators.required]),
+        secondaryEventsTag: new FormControl(this.value.secondaryTag? this.value.secondaryTag:[], [Validators.required]),
         //  new FormControl(this.value.secondaryTag, []),
         icon: new FormControl(null, [
           // Validators.required,
